@@ -326,5 +326,165 @@
     "url": "https://wantrich.chinatimes.com/news/20260618900675-420101",
     "asOf": "2026-06",
     "type": "媒體"
+  },
+  {
+    "id": "nvda-10k-2026",
+    "publisher": "輝達 NVIDIA",
+    "title": "2026 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "amd-10k-2025",
+    "publisher": "超微 AMD",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "smci-10k-2026",
+    "publisher": "美超微 Supermicro",
+    "title": "2026 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000022/smci-20260630.htm",
+    "asOf": "2026-08",
+    "type": "官方"
+  },
+  {
+    "id": "vrt-10k-2025",
+    "publisher": "維諦技術 Vertiv",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1674101/000167410126000008/vrt-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "eqix-10k-2025",
+    "publisher": "Equinix",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1101239/000110123926000032/eqix-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "iea-energy-ai",
+    "publisher": "國際能源總署 IEA",
+    "title": "Energy and AI（能源與 AI）報告摘要",
+    "url": "https://www.iea.org/reports/energy-and-ai/executive-summary",
+    "asOf": "2025-04",
+    "type": "官方"
+  },
+  {
+    "id": "technews-ai-server-share",
+    "publisher": "科技新報",
+    "title": "AI 伺服器出貨鴻海領先廣達、緯創",
+    "url": "https://finance.technews.tw/2026/05/12/foxconn-leads-quanta-and-wistron-in-ai-server-shipments/",
+    "asOf": "2026-05",
+    "type": "媒體"
+  },
+  {
+    "id": "uanalyze-ai-server-top5",
+    "publisher": "優分析（引述 DIGITIMES 研究）",
+    "title": "全球 AI 伺服器將突破 250 萬台，廣達、鴻海、緯穎擠進前五",
+    "url": "https://uanalyze.com.tw/articles/2840357961",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "udn-odm-calls",
+    "publisher": "經濟日報",
+    "title": "AI 基礎設施布建加速，法人點名代工廠（含鴻海、廣達、緯創法說內容）",
+    "url": "https://money.udn.com/money/story/5607/9137730",
+    "asOf": "2025-11",
+    "type": "媒體"
+  },
+  {
+    "id": "ctee-odm-2025",
+    "publisher": "工商時報",
+    "title": "代工廠法說與第三季財報報導",
+    "url": "https://www.ctee.com.tw/news/20251027700070-430502",
+    "asOf": "2025-10",
+    "type": "媒體"
+  },
+  {
+    "id": "yahoo-gb300",
+    "publisher": "Yahoo 奇摩股市",
+    "title": "輝達 GTC 大會 GB300 成亮點，鴻海、廣達受惠",
+    "url": "https://tw.stock.yahoo.com/news/%E8%BC%9D%E9%81%94%E7%9B%9B%E6%9C%83gtc%E5%A4%A7%E6%9C%83%E7%99%BB%E5%A0%B4-gb300%E6%88%90%E4%BA%AE%E9%BB%9E-%E5%A4%A7%E6%91%A9%E5%96%8A%E7%87%92-%E9%B4%BB%E6%B5%B7-%E5%BB%A3%E9%81%94-004509542.html",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "ltn-alchip-call",
+    "publisher": "自由時報",
+    "title": "世芯法說會：下半年營收逐季創高",
+    "url": "https://ec.ltn.com.tw/article/breakingnews/5539932",
+    "asOf": "2026-08",
+    "type": "媒體"
+  },
+  {
+    "id": "pocket-alchip",
+    "publisher": "口袋學堂",
+    "title": "世芯-KY 做什麼的？Q1 毛利破 5 成、N3 放量",
+    "url": "https://www.pocket.tw/school/articles/6426/",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "uanalyze-guc",
+    "publisher": "優分析",
+    "title": "創意法說：明年產能取得很樂觀",
+    "url": "https://uanalyze.com.tw/articles/1626552582",
+    "asOf": "2026-08",
+    "type": "媒體"
+  },
+  {
+    "id": "technews-guc",
+    "publisher": "科技新報",
+    "title": "創意受惠自研 ASIC 市場加速",
+    "url": "https://finance.technews.tw/2026/09/22/creative-electronics-benefits-from-accelerated-market-for-self-developed-asics/",
+    "asOf": "2026-09",
+    "type": "媒體"
+  },
+  {
+    "id": "technews-wiwynn-202609",
+    "publisher": "科技新報",
+    "title": "緯穎 9 月營收年增 100%",
+    "url": "https://finance.technews.tw/2026/10/08/wiwynn-6669-202609-financial-report/",
+    "asOf": "2026-10",
+    "type": "媒體"
+  },
+  {
+    "id": "ltn-delta",
+    "publisher": "自由時報",
+    "title": "台達電：AI 資料中心不再有淡旺季",
+    "url": "https://ec.ltn.com.tw/article/breakingnews/5352446",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "reccessary-delta-q2",
+    "publisher": "Reccessary",
+    "title": "台達電 2026 年第二季法說會",
+    "url": "https://www.reccessary.com/zh-tw/news/delta-2026-q2-earnings-call",
+    "asOf": "2026-07",
+    "type": "媒體"
+  },
+  {
+    "id": "uanalyze-auras",
+    "publisher": "優分析",
+    "title": "奇鋐 2025 年 EPS 創新高，資本支出上看 150 億元",
+    "url": "https://uanalyze.com.tw/articles/1131748834",
+    "asOf": "2026-03",
+    "type": "媒體"
+  },
+  {
+    "id": "udn-auras",
+    "publisher": "經濟日報",
+    "title": "ASIC 水冷產品助威，法人調升奇鋐獲利預估",
+    "url": "https://money.udn.com/money/amp/story/5607/9762915",
+    "asOf": "2026-08",
+    "type": "媒體"
   }
 ]
