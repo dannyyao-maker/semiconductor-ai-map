@@ -654,5 +654,13 @@
     "url": "https://simonwillison.net/2026/May/29/anthropic/",
     "asOf": "2026-05",
     "type": "媒體"
+  },
+  {
+    "id": "tsmc-3q26-call",
+    "publisher": "台積電 TSMC",
+    "title": "2026 年第三季法說會逐字稿（LSEG 製作，刊於台積電投資人網站）",
+    "url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-10/eba4fac72873bf546b669bd2b5d973df5c93215d/TSMC%203Q26%20Transcript.pdf",
+    "asOf": "2026-10",
+    "type": "官方"
   }
 ]
