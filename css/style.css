@@ -1,22 +1,194 @@
-/* 階段 0：最簡外觀。正式設計在階段 1 完成。 */
+/* 半導體 × AI 產業鏈地圖：外觀 */
 :root {
-  --bg: #fafaf7;
-  --text: #1d1d1b;
-  --muted: #6b6b66;
-  --semi: #2f6f9f;
-  --ai-hw: #b5651d;
-  --ai-sw: #5b8a3a;
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --text: #1c1c1a;
+  --muted: #6a6a64;
+  --line: #dedcd4;
+  --semi: #2d5f8b;
+  --semi-tint: #e8eff6;
+  --ai-hw: #a95f1c;
+  --ai-hw-tint: #f7ede2;
+  --ai-sw: #4b7a36;
+  --ai-sw-tint: #eaf2e4;
+  --focus: #1c1c1a;
+  --card-w: 440px;
+  --radius: 12px;
 }
+
 * { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); }
-.site-header { padding: 16px; }
-.site-header h1 { margin: 0; font-size: 1.4rem; }
-.subtitle { margin: 4px 0 0; color: var(--muted); }
-main { padding: 0 16px 32px; }
-.zone h2 { font-size: 1.05rem; margin: 20px 0 8px; }
-.zone ol { margin: 0; padding-left: 1.4em; }
-.zone li { margin: 4px 0; }
-.en { color: var(--muted); font-size: .9em; }
-.zone-semi h2 { color: var(--semi); }
-.zone-ai-hw h2 { color: var(--ai-hw); }
-.zone-ai-sw h2 { color: var(--ai-sw); }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+button { font: inherit; color: inherit; }
+.en { color: var(--muted); font-weight: 400; font-size: .82em; margin-left: .35em; }
+
+/* 頁首 */
+.site-header {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: 8px 24px; padding: 20px 24px 8px;
+}
+.site-header h1 { margin: 0; font-size: 1.5rem; letter-spacing: .02em; }
+.subtitle { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
+.legend { margin: 0; display: flex; gap: 16px; color: var(--muted); font-size: .85rem; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.swatch { width: 22px; height: 14px; border-radius: 4px; background: var(--surface); border: 2px solid var(--muted); }
+.swatch.dashed { border-style: dashed; border-color: #b9b7ae; }
+
+/* 主版面：地圖＋右側卡片 */
+.layout { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 8px 24px 16px; align-items: start; }
+body.card-open .layout { grid-template-columns: minmax(0, 1fr) var(--card-w); }
+.map { min-width: 0; }
+.map-svg { display: block; width: 100%; height: auto; max-height: calc(100vh - 150px); }
+.loading, .error { color: var(--muted); }
+
+.site-footer { padding: 8px 24px 24px; color: var(--muted); font-size: .8rem; }
+
+/* 地圖：區塊 */
+.map-bg { fill: transparent; }
+.zone-bg { stroke: none; }
+.zone-semi .zone-bg { fill: var(--semi-tint); }
+.zone-ai-hw .zone-bg { fill: var(--ai-hw-tint); }
+.zone-ai-sw .zone-bg { fill: var(--ai-sw-tint); }
+.zone-title { font-size: 15px; font-weight: 700; }
+.zone-semi .zone-title { fill: var(--semi); }
+.zone-ai-hw .zone-title { fill: var(--ai-hw); }
+.zone-ai-sw .zone-title { fill: var(--ai-sw); }
+.zone-title-en { font-size: 11px; font-weight: 400; fill: var(--muted); }
+
+/* 地圖：連線 */
+.edge { fill: none; stroke: #a9a79f; stroke-width: 1.6; transition: stroke .2s, opacity .2s; }
+.arrow-head { fill: #a9a79f; }
+.edge.is-active { stroke: var(--text); stroke-width: 2.2; }
+
+/* 地圖：節點 */
+.node { cursor: pointer; outline: none; transition: opacity .2s; }
+.node-box {
+  fill: var(--surface); stroke: #b9b7ae; stroke-width: 1.5; stroke-dasharray: 5 4;
+  transition: stroke .2s, stroke-width .2s, fill .2s;
+}
+.node.has-content .node-box { stroke-dasharray: none; stroke-width: 2; }
+.node.zone-semi.has-content .node-box { stroke: var(--semi); }
+.node.zone-ai-hw.has-content .node-box { stroke: var(--ai-hw); }
+.node.zone-ai-sw.has-content .node-box { stroke: var(--ai-sw); }
+.node-name { font-size: 16px; font-weight: 700; text-anchor: middle; fill: var(--text); pointer-events: none; }
+.node-en { font-size: 10.5px; text-anchor: middle; fill: var(--muted); pointer-events: none; }
+.node:not(.has-content) .node-name { fill: #55554f; font-weight: 600; }
+.node:hover .node-box { stroke-width: 3; }
+.node:focus-visible .node-box { stroke: var(--focus); stroke-width: 3; stroke-dasharray: none; }
+
+/* 選到的環節：實心底色 */
+.node.is-selected .node-box { stroke-dasharray: none; stroke-width: 3; }
+.node.zone-semi.is-selected .node-box { fill: var(--semi); stroke: var(--semi); }
+.node.zone-ai-hw.is-selected .node-box { fill: var(--ai-hw); stroke: var(--ai-hw); }
+.node.zone-ai-sw.is-selected .node-box { fill: var(--ai-sw); stroke: var(--ai-sw); }
+.node.is-selected .node-name, .node.is-selected .node-en { fill: #fff; }
+
+/* 公司小卡打開時：公司參與的環節加亮，其他變淡 */
+.has-company .node:not(.is-company) { opacity: .28; }
+.has-company .edge { opacity: .25; }
+.node.is-company .node-box { stroke: var(--text); stroke-width: 3.5; stroke-dasharray: none; }
+.node.is-company.is-selected .node-box { stroke: var(--text); }
+
+/* 卡片 */
+.card {
+  position: sticky; top: 12px;
+  max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .06);
+}
+.card[hidden] { display: none; }
+.card-header {
+  position: sticky; top: 0; z-index: 1; background: var(--surface);
+  padding: 18px 52px 12px 20px; border-bottom: 1px solid var(--line);
+}
+.card-header h2 { margin: 2px 0 6px; font-size: 1.35rem; line-height: 1.3; outline: none; }
+.card-kicker { font-size: .78rem; font-weight: 700; letter-spacing: .04em; }
+.card-kicker.zone-semi { color: var(--semi); }
+.card-kicker.zone-ai-hw { color: var(--ai-hw); }
+.card-kicker.zone-ai-sw { color: var(--ai-sw); }
+.close {
+  position: absolute; top: 12px; right: 12px; width: 36px; height: 36px;
+  border: 0; border-radius: 50%; background: transparent; font-size: 1.5rem; line-height: 1; cursor: pointer; color: var(--muted);
+}
+.close:hover { background: var(--bg); color: var(--text); }
+.back { display: block; margin-bottom: 8px; font-size: .85rem; }
+
+.card-body { padding: 16px 20px 24px; }
+.lead { font-size: 1.05rem; font-weight: 600; margin: 0 0 14px; }
+.analogy { background: var(--bg); border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
+.analogy-label { display: block; font-size: .75rem; font-weight: 700; color: var(--muted); margin-bottom: 2px; }
+.card-section { margin-top: 22px; }
+.card-section h3 { font-size: 1rem; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.card-section h4 { font-size: .85rem; color: var(--muted); margin: 0 0 4px; }
+.card-section p { margin: 0 0 6px; }
+.flow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.flow-list, .claim-list { margin: 0; padding-left: 1.1em; }
+.flow-list li, .claim-list li { margin: 4px 0; font-size: .93rem; }
+.claim-list li { margin-bottom: 10px; }
+.claim-meta { display: flex; gap: 8px; align-items: center; margin-top: 2px; }
+.biz { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: .93rem; }
+.biz dt { font-weight: 700; color: var(--muted); white-space: nowrap; }
+.biz dd { margin: 0; }
+.empty, .hint, .asof { color: var(--muted); font-size: .82rem; }
+.hint { margin-top: 8px !important; }
+.company-country { color: var(--muted); font-size: .85rem; margin: 0 0 4px; }
+
+/* 狀態標籤 */
+.status { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.status-待查證 { background: #fbe9e7; color: #a23b2a; }
+.status-待審核 { background: #fff4d6; color: #8a6100; }
+.status-已審核 { background: #e3f1e0; color: #2f6b2a; }
+
+/* 按鈕與標籤 */
+.link { border: 0; background: none; padding: 0; color: var(--semi); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.chip-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
+.chip-label { font-size: .78rem; color: var(--muted); width: 2.6em; }
+.chip {
+  display: inline-flex; align-items: baseline; border: 1px solid var(--line); background: var(--surface);
+  border-radius: 999px; padding: 4px 12px; margin: 2px 4px 2px 0; cursor: pointer; font-size: .9rem;
+}
+.chip:hover { border-color: var(--text); }
+.chip .en { font-size: .75em; }
+.chip-node.zone-semi { border-color: var(--semi); color: var(--semi); }
+.chip-node.zone-ai-hw { border-color: var(--ai-hw); color: var(--ai-hw); }
+.chip-node.zone-ai-sw { border-color: var(--ai-sw); color: var(--ai-sw); }
+.placeholder { color: var(--muted); }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* 中等寬度：卡片蓋在地圖右側，避免地圖被擠太小 */
+@media (max-width: 1100px) and (min-width: 721px) {
+  body.card-open .layout { grid-template-columns: 1fr; }
+  .card {
+    position: fixed; top: 12px; right: 12px; bottom: 12px; width: min(var(--card-w), 60vw);
+    max-height: none; z-index: 10; box-shadow: 0 10px 40px rgba(0, 0, 0, .18);
+  }
+}
+
+/* 手機：三大區塊直排，卡片從下方滑出 */
+@media (max-width: 720px) {
+  .site-header { padding: 16px 16px 4px; }
+  .site-header h1 { font-size: 1.25rem; }
+  .layout, body.card-open .layout { grid-template-columns: 1fr; padding: 8px 16px 16px; }
+  .map-svg { max-height: none; }
+  .site-footer { padding: 8px 16px 24px; }
+  .card {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 10;
+    max-height: 78vh; border-radius: 18px 18px 0 0; border-bottom: 0;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, .18);
+    animation: sheet-up .22s ease-out;
+  }
+  .card-header { padding-top: 22px; }
+  .card-header::before {
+    content: ""; position: absolute; top: 8px; left: 50%; width: 40px; height: 4px;
+    margin-left: -20px; border-radius: 2px; background: var(--line);
+  }
+  .flow { grid-template-columns: 1fr; gap: 8px; }
+}
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

@@ -1,1 +1,232 @@
-[]
+[
+  {
+    "id": "mediatek",
+    "name": "聯發科",
+    "nameEn": "MediaTek",
+    "country": "TW",
+    "segments": [
+      "ic-design",
+      "ai-chip"
+    ],
+    "oneLiner": "全球主要的手機晶片供應商之一，產品也涵蓋電視、網通、車用晶片。",
+    "moat": "產品線廣、出貨規模大，能用相對有競爭力的價格提供完整解決方案。",
+    "risks": "手機市場成長放緩；在高階市場與高通競爭；新事業（AI ASIC、車用）需要時間證明。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "realtek",
+    "name": "瑞昱",
+    "nameEn": "Realtek",
+    "country": "TW",
+    "segments": [
+      "ic-design"
+    ],
+    "oneLiner": "網通、音訊、電腦周邊晶片的大廠，產品藏在大量電子產品裡。",
+    "moat": "產品種類多、客戶分散，長期累積的成本控制能力。",
+    "risks": "消費性電子需求波動大；中低階晶片面臨中國廠商價格競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "novatek",
+    "name": "聯詠",
+    "nameEn": "Novatek",
+    "country": "TW",
+    "segments": [
+      "ic-design"
+    ],
+    "oneLiner": "面板驅動 IC 的領導廠商，負責讓螢幕顯示畫面的晶片。",
+    "moat": "與面板廠合作關係深，在驅動 IC 市場規模大。",
+    "risks": "面板產業景氣循環明顯；中國供應鏈在地化帶來競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "qualcomm",
+    "name": "高通",
+    "nameEn": "Qualcomm",
+    "country": "US",
+    "segments": [
+      "ic-design"
+    ],
+    "oneLiner": "高階手機晶片龍頭，同時靠通訊專利授權賺錢。",
+    "moat": "通訊技術與大量專利，授權業務利潤很高。",
+    "risks": "大客戶自研晶片可能減少訂單；向 PC、車用擴張面臨強勁對手。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "broadcom",
+    "name": "博通",
+    "nameEn": "Broadcom",
+    "country": "US",
+    "segments": [
+      "ic-design",
+      "ai-chip"
+    ],
+    "oneLiner": "網通晶片大廠，也替大型雲端業者設計客製化 AI 晶片（ASIC），並經營企業軟體。",
+    "moat": "高速網路晶片技術領先，與雲端大客戶長期合作。",
+    "risks": "AI ASIC 營收集中在少數客戶；靠併購擴張的整合風險。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "tsmc",
+    "name": "台積電",
+    "nameEn": "TSMC",
+    "country": "TW",
+    "segments": [
+      "foundry",
+      "packaging"
+    ],
+    "oneLiner": "全球最大的晶圓代工廠，最先進製程與先進封裝的主要供應者。",
+    "moat": "技術領先、良率穩定、產能規模大，加上「不與客戶競爭」的信任關係。",
+    "risks": "地緣政治；海外建廠成本稀釋毛利；營收越來越集中在 AI 相關客戶。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "umc",
+    "name": "聯電",
+    "nameEn": "UMC",
+    "country": "TW",
+    "segments": [
+      "foundry"
+    ],
+    "oneLiner": "以成熟製程為主的晶圓代工廠，生產車用、工業、消費性電子用晶片。",
+    "moat": "成熟製程產能與長期客戶關係，專注特殊製程。",
+    "risks": "中國成熟製程擴產帶來價格壓力；沒有跟進最先進製程，成長動能有限。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "samsung",
+    "name": "三星電子",
+    "nameEn": "Samsung Electronics",
+    "country": "KR",
+    "segments": [
+      "foundry",
+      "memory"
+    ],
+    "oneLiner": "同時做記憶體、晶圓代工、手機的綜合型公司，記憶體是全球龍頭之一。",
+    "moat": "記憶體規模與垂直整合能力，從晶片做到終端產品。",
+    "risks": "晶圓代工良率與客戶信任追趕台積電；既是客戶的供應商也是競爭者。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "intel",
+    "name": "英特爾",
+    "nameEn": "Intel",
+    "country": "US",
+    "segments": [
+      "foundry",
+      "ic-design"
+    ],
+    "oneLiner": "傳統的電腦處理器龍頭，近年開放晶圓代工業務，想重回製造領先地位。",
+    "moat": "PC 與伺服器處理器的品牌和生態系，以及美國本土製造的政策支持。",
+    "risks": "製程追趕需要龐大資金；代工業務能否爭取到外部大客戶仍待觀察。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "smic",
+    "name": "中芯國際",
+    "nameEn": "SMIC",
+    "country": "CN",
+    "segments": [
+      "foundry"
+    ],
+    "oneLiner": "中國最大的晶圓代工廠，受惠中國晶片自主化政策。",
+    "moat": "中國政策支持與龐大的本土需求。",
+    "risks": "美國出口管制限制取得先進設備；成熟製程價格競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "foxconn",
+    "name": "鴻海",
+    "nameEn": "Foxconn (Hon Hai)",
+    "country": "TW",
+    "segments": [
+      "ai-server"
+    ],
+    "oneLiner": "全球最大的電子代工廠，AI 伺服器已成為重要成長來源。",
+    "moat": "全球化生產布局、垂直整合零組件，以及與 NVIDIA 等大廠的合作關係。",
+    "risks": "代工毛利低；客戶集中；各國關稅與地緣政治影響生產布局。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "quanta",
+    "name": "廣達",
+    "nameEn": "Quanta Computer",
+    "country": "TW",
+    "segments": [
+      "ai-server"
+    ],
+    "oneLiner": "筆電代工大廠，也是雲端業者的主要伺服器供應商之一。",
+    "moat": "長期服務大型雲端客戶，伺服器設計與整合能力強。",
+    "risks": "毛利率低；雲端客戶資本支出變動直接影響訂單。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "wistron",
+    "name": "緯創",
+    "nameEn": "Wistron",
+    "country": "TW",
+    "segments": [
+      "ai-server"
+    ],
+    "oneLiner": "電子代工廠，在 AI 伺服器供應鏈中負責 GPU 運算板等關鍵環節。",
+    "moat": "與 AI 晶片龍頭的合作經驗與製造能力。",
+    "risks": "訂單集中在少數客戶與產品；毛利率低。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "wiwynn",
+    "name": "緯穎",
+    "nameEn": "Wiwynn",
+    "country": "TW",
+    "segments": [
+      "ai-server"
+    ],
+    "oneLiner": "專做雲端資料中心伺服器的廠商，直接服務大型雲端業者。",
+    "moat": "深度客製化能力，與雲端大客戶長期合作。",
+    "risks": "前幾大客戶占營收比重高；客戶轉向不同 AI 晶片方案時的訂單變化。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "supermicro",
+    "name": "美超微",
+    "nameEn": "Supermicro",
+    "country": "US",
+    "segments": [
+      "ai-server"
+    ],
+    "oneLiner": "美國伺服器品牌，以快速推出新款 AI 伺服器和液冷方案著稱。",
+    "moat": "產品上市速度快，模組化設計能快速支援新晶片。",
+    "risks": "毛利率受價格競爭壓縮；公司治理與財報相關疑慮曾影響市場信心。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  }
+]
