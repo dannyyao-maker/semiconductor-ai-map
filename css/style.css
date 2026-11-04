@@ -35,7 +35,7 @@ button { font: inherit; color: inherit; }
 }
 .site-header h1 { margin: 0; font-size: 1.5rem; letter-spacing: .02em; }
 .subtitle { margin: 2px 0 0; color: var(--muted); font-size: .92rem; }
-.legend { margin: 0; display: flex; gap: 16px; color: var(--muted); font-size: .85rem; }
+.legend { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--muted); font-size: .85rem; }
 .legend-item { display: inline-flex; align-items: center; gap: 6px; }
 .swatch { width: 22px; height: 14px; border-radius: 4px; background: var(--surface); border: 2px solid var(--muted); }
 .swatch.dashed { border-style: dashed; border-color: #b9b7ae; }

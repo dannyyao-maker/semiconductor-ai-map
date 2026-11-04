@@ -228,5 +228,402 @@
     "sources": [],
     "asOf": "2026-11",
     "status": "待查證"
+  },
+  {
+    "id": "asml",
+    "name": "艾司摩爾",
+    "nameEn": "ASML",
+    "country": "NL",
+    "segments": [
+      "equipment"
+    ],
+    "oneLiner": "生產晶片製造最關鍵的曝光機，最先進的機種全球只有它做得出來。",
+    "moat": "在最先進曝光機市場幾乎獨占，技術和供應鏈門檻極高。",
+    "risks": "出口管制限制對中國銷售；營收依賴少數大客戶的擴產計畫。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "amat",
+    "name": "應用材料",
+    "nameEn": "Applied Materials",
+    "country": "US",
+    "segments": [
+      "equipment"
+    ],
+    "oneLiner": "全球最大的半導體設備商之一，產品線涵蓋晶片製造的多個步驟。",
+    "moat": "產品線廣、客戶基礎大，維修服務帶來穩定收入。",
+    "risks": "中國市場受出口管制影響；設備需求隨客戶資本支出起伏。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "tel",
+    "name": "東京威力科創",
+    "nameEn": "Tokyo Electron",
+    "country": "JP",
+    "segments": [
+      "equipment"
+    ],
+    "oneLiner": "日本最大的半導體設備商，在多項製程設備具領先地位。",
+    "moat": "與主要晶圓廠長期合作，在特定設備領域市佔高。",
+    "risks": "出口管制與中國市場變化；日圓匯率波動。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "globalwafers",
+    "name": "環球晶",
+    "nameEn": "GlobalWafers",
+    "country": "TW",
+    "segments": [
+      "equipment"
+    ],
+    "oneLiner": "全球前幾大的矽晶圓供應商，矽晶圓是製造晶片的「原料底板」。",
+    "moat": "全球多地設廠、與客戶簽訂長期合約，規模大。",
+    "risks": "矽晶圓需求隨景氣循環；海外新廠的成本與產能利用率。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "gudeng",
+    "name": "家登",
+    "nameEn": "Gudeng Precision",
+    "country": "TW",
+    "segments": [
+      "equipment"
+    ],
+    "oneLiner": "生產晶圓與光罩的傳送盒，是先進製程需要的關鍵耗材。",
+    "moat": "打進先進製程客戶供應鏈，認證門檻高。",
+    "risks": "客戶集中；營運跟著晶圓廠擴產節奏起伏。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "skhynix",
+    "name": "SK 海力士",
+    "nameEn": "SK hynix",
+    "country": "KR",
+    "segments": [
+      "memory"
+    ],
+    "oneLiner": "韓國記憶體大廠，在 AI 晶片使用的 HBM 市場居領先地位。",
+    "moat": "HBM 技術與量產經驗領先，與 AI 晶片龍頭合作密切。",
+    "risks": "記憶體景氣循環；HBM 競爭者追趕。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "micron",
+    "name": "美光",
+    "nameEn": "Micron Technology",
+    "country": "US",
+    "segments": [
+      "memory"
+    ],
+    "oneLiner": "美國最大的記憶體廠，DRAM 與 NAND 都有生產，在台灣也有重要產能。",
+    "moat": "美國本土記憶體廠的戰略地位，產品線完整。",
+    "risks": "記憶體價格波動大；HBM 市佔仍在追趕。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "nanya",
+    "name": "南亞科",
+    "nameEn": "Nanya Technology",
+    "country": "TW",
+    "segments": [
+      "memory"
+    ],
+    "oneLiner": "台塑集團旗下的 DRAM 廠，主攻利基型與消費性記憶體。",
+    "moat": "集團資源支持，在利基型市場有穩定客戶。",
+    "risks": "規模小於國際大廠，獲利受記憶體價格影響大。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "winbond",
+    "name": "華邦電",
+    "nameEn": "Winbond",
+    "country": "TW",
+    "segments": [
+      "memory"
+    ],
+    "oneLiner": "台灣記憶體廠，產品用在車用、工業、消費電子等利基市場。",
+    "moat": "專注利基型記憶體，客戶分散、產品種類多。",
+    "risks": "中國廠商在利基市場的價格競爭；景氣循環。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "ase",
+    "name": "日月光投控",
+    "nameEn": "ASE Technology",
+    "country": "TW",
+    "segments": [
+      "packaging"
+    ],
+    "oneLiner": "全球最大的半導體封裝測試集團。",
+    "moat": "規模最大、客戶最廣，也積極發展先進封裝。",
+    "risks": "傳統封測受消費電子景氣影響；先進封裝與晶圓代工廠競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "kyec",
+    "name": "京元電子",
+    "nameEn": "KYEC",
+    "country": "TW",
+    "segments": [
+      "packaging"
+    ],
+    "oneLiner": "專業的晶片測試廠，AI 晶片測試需求帶動成長。",
+    "moat": "測試技術與產能，與 AI 晶片客戶的合作關係。",
+    "risks": "營收集中在少數大客戶；測試需求隨產品世代變化。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "amkor",
+    "name": "艾克爾",
+    "nameEn": "Amkor Technology",
+    "country": "US",
+    "segments": [
+      "packaging"
+    ],
+    "oneLiner": "美國最大的封測廠，在美國亞利桑那州規劃先進封裝廠。",
+    "moat": "全球布局，並受惠美國本土化封裝的政策支持。",
+    "risks": "海外設廠成本；與亞洲封測廠和晶圓代工廠的競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "nvidia",
+    "name": "輝達",
+    "nameEn": "NVIDIA",
+    "country": "US",
+    "segments": [
+      "ai-chip"
+    ],
+    "oneLiner": "AI 晶片龍頭，GPU 與整櫃系統是 AI 訓練和推論的主流選擇。",
+    "moat": "CUDA 軟體生態系讓開發者難以轉換，加上產品迭代速度快。",
+    "risks": "雲端客戶自研 ASIC；出口管制影響中國營收；市場對 AI 投資是否過熱的疑慮。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "amd",
+    "name": "超微",
+    "nameEn": "AMD",
+    "country": "US",
+    "segments": [
+      "ai-chip",
+      "ic-design"
+    ],
+    "oneLiner": "電腦處理器大廠，也推出 AI GPU 挑戰 NVIDIA。",
+    "moat": "處理器與 GPU 都有產品，能提供另一個 AI 晶片選擇。",
+    "risks": "AI 軟體生態系落後 NVIDIA；需要爭取大客戶長期採用。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "alchip",
+    "name": "世芯-KY",
+    "nameEn": "Alchip",
+    "country": "TW",
+    "segments": [
+      "ai-chip"
+    ],
+    "oneLiner": "ASIC 設計服務公司，替雲端業者等客戶打造客製化 AI 晶片。",
+    "moat": "先進製程設計經驗，與台積電合作密切。",
+    "risks": "營收高度集中在少數客戶與專案，專案世代交替時營收波動大。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "guc",
+    "name": "創意電子",
+    "nameEn": "Global Unichip (GUC)",
+    "country": "TW",
+    "segments": [
+      "ai-chip"
+    ],
+    "oneLiner": "台積電轉投資的 ASIC 設計服務公司。",
+    "moat": "與台積電關係緊密，能優先運用先進製程與封裝。",
+    "risks": "專案型收入波動；與其他設計服務公司競爭客戶。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "delta",
+    "name": "台達電",
+    "nameEn": "Delta Electronics",
+    "country": "TW",
+    "segments": [
+      "datacenter"
+    ],
+    "oneLiner": "全球電源供應器龍頭，提供資料中心的電源、散熱與能源管理方案。",
+    "moat": "電源技術與品牌，能提供資料中心整體解決方案。",
+    "risks": "AI 電源規格快速變化，需持續投資研發；匯率與景氣影響。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "auras",
+    "name": "奇鋐",
+    "nameEn": "Asia Vital Components (AVC)",
+    "country": "TW",
+    "segments": [
+      "datacenter",
+      "ai-server"
+    ],
+    "oneLiner": "散熱模組大廠，受惠 AI 伺服器從風冷轉向液冷。",
+    "moat": "散熱技術與量產能力，打進 AI 伺服器供應鏈。",
+    "risks": "液冷技術競爭者多；訂單受 AI 伺服器出貨節奏影響。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "vertiv",
+    "name": "維諦技術",
+    "nameEn": "Vertiv",
+    "country": "US",
+    "segments": [
+      "datacenter"
+    ],
+    "oneLiner": "資料中心電源與散熱設備大廠，提供不斷電系統與液冷方案。",
+    "moat": "資料中心基礎設施產品線完整，客戶基礎大。",
+    "risks": "訂單依賴資料中心投資熱度；供應鏈與交期管理。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "equinix",
+    "name": "Equinix",
+    "nameEn": "Equinix",
+    "country": "US",
+    "segments": [
+      "datacenter"
+    ],
+    "oneLiner": "全球最大的資料中心出租營運商之一，在全球多個城市有機房。",
+    "moat": "全球據點與網路互連生態系，客戶轉換成本高。",
+    "risks": "電力取得困難；興建成本高、利率影響資金成本。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "amazon",
+    "name": "亞馬遜（AWS）",
+    "nameEn": "Amazon Web Services",
+    "country": "US",
+    "segments": [
+      "cloud"
+    ],
+    "oneLiner": "全球最大的雲端平台，也自行設計 AI 晶片（Trainium）。",
+    "moat": "雲端市佔領先、服務種類最多、企業客戶基礎大。",
+    "risks": "AI 資本支出龐大；與微軟、Google 在 AI 服務的競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "microsoft",
+    "name": "微軟",
+    "nameEn": "Microsoft",
+    "country": "US",
+    "segments": [
+      "cloud",
+      "model",
+      "ai-app"
+    ],
+    "oneLiner": "經營 Azure 雲端，是 OpenAI 的重要投資方與合作夥伴，並把 AI 助理（Copilot）加進 Office 等產品。",
+    "moat": "龐大的企業客戶與辦公軟體用戶，能快速推廣 AI 功能。",
+    "risks": "AI 資本支出能否回收；與 OpenAI 合作關係的變化。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "google",
+    "name": "Google（Alphabet）",
+    "nameEn": "Google (Alphabet)",
+    "country": "US",
+    "segments": [
+      "cloud",
+      "model",
+      "ai-app"
+    ],
+    "oneLiner": "同時經營雲端、自研 AI 模型（Gemini）和 AI 晶片（TPU），並把 AI 加進搜尋等產品。",
+    "moat": "從晶片、模型到用戶的垂直整合，加上搜尋與 Android 的龐大用戶。",
+    "risks": "AI 聊天服務可能衝擊搜尋廣告收入；反壟斷監管。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "nameEn": "OpenAI",
+    "country": "US",
+    "segments": [
+      "model",
+      "ai-app"
+    ],
+    "oneLiner": "開發 GPT 系列模型和 ChatGPT 的公司，帶動這波生成式 AI 熱潮。",
+    "moat": "品牌知名度高、用戶規模大。",
+    "risks": "算力成本與龐大資金需求；競爭激烈；公司治理與組織結構變化。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "nameEn": "Anthropic",
+    "country": "US",
+    "segments": [
+      "model"
+    ],
+    "oneLiner": "開發 Claude 系列模型的 AI 公司，以 AI 安全研究為重點，主攻企業與開發者市場。",
+    "moat": "在企業與程式開發應用累積客戶，與大型雲端業者合作。",
+    "risks": "需要大量資金與算力；與規模更大的對手競爭。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
+  },
+  {
+    "id": "salesforce",
+    "name": "Salesforce",
+    "nameEn": "Salesforce",
+    "country": "US",
+    "segments": [
+      "ai-app"
+    ],
+    "oneLiner": "全球最大的客戶關係管理（CRM）軟體公司，推出 AI 代理服務。",
+    "moat": "大量企業客戶資料與既有系統，轉換成本高。",
+    "risks": "AI 可能改變按人頭收費的軟體模式；成長放緩。",
+    "sources": [],
+    "asOf": "2026-11",
+    "status": "待查證"
   }
 ]

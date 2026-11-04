@@ -24,18 +24,79 @@
       "zone": "semi",
       "order": 1,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "賣「鏟子」給晶圓廠和記憶體廠：提供製造晶片需要的機台、矽晶圓和各種材料。",
+      "analogy": "像淘金熱時賣鏟子和牛仔褲的人：不管哪家礦工挖到金子，只要大家搶著開挖，賣工具的就有生意。",
+      "upstream": [
+        {
+          "text": "精密零組件、光學元件、特用化學品等更上游的供應商"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "foundry",
+          "text": "最大買家，蓋新廠時大量採購機台"
+        },
+        {
+          "node": "memory",
+          "text": "記憶體廠擴產時也大量採購"
+        },
+        {
+          "node": "packaging",
+          "text": "先進封裝需要的專用設備與材料"
+        }
+      ],
+      "companies": [
+        "asml",
+        "amat",
+        "tel",
+        "globalwafers",
+        "gudeng"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "賣機台賺一次性的設備收入，之後再靠維修、零件、升級服務賺長期收入；材料商則隨客戶產量持續出貨。",
+        "margin": "技術獨占的關鍵設備（例如 ASML 的先進曝光機）毛利很高；一般零組件與材料毛利較低、競爭較多。",
+        "bargainingPower": "少數關鍵設備幾乎沒有替代品，議價能力極強；但客戶也很集中（台積電、三星、英特爾等），大客戶延後擴產就會直接影響訂單。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "營收跟著客戶的資本支出走，晶圓廠一縮減擴產計畫，設備訂單就明顯下滑。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "美國出口管制限制先進設備賣到中國，而中國曾是設備商的重要市場。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "台灣供應商想打進國際設備大廠的供應鏈，需要長時間認證。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "AI 帶動先進製程與先進封裝擴產，相關設備需求強勁。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "「設備國產化」：台灣、日本、中國都在推本土設備與材料供應鏈。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "全球各地新建晶圓廠，帶動設備商的海外服務與在地化需求。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -74,7 +135,9 @@
         "realtek",
         "novatek",
         "qualcomm",
-        "broadcom"
+        "broadcom",
+        "intel",
+        "amd"
       ],
       "business": {
         "model": "賣晶片賺錢。不用蓋工廠，資本支出低；主要成本是研發人才、晶圓代工費和光罩費。",
@@ -213,18 +276,79 @@
       "zone": "semi",
       "order": 4,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "生產負責「存資料」的晶片，例如電腦用的 DRAM、手機與硬碟用的 NAND Flash，以及 AI 晶片旁邊的高頻寬記憶體（HBM）。",
+      "analogy": "像農產品市場：產品規格比較標準化，價格隨供需大幅波動，豐收時（供過於求）價格崩跌，歉收時大賺。",
+      "upstream": [
+        {
+          "node": "equipment",
+          "text": "向設備商買機台、向材料商買矽晶圓"
+        }
+      ],
+      "downstream": [
+        {
+          "text": "手機、PC、伺服器品牌與系統廠"
+        },
+        {
+          "node": "packaging",
+          "text": "HBM 要和 AI 晶片封裝在一起"
+        },
+        {
+          "node": "ai-server",
+          "text": "AI 伺服器需要大量記憶體"
+        }
+      ],
+      "companies": [
+        "samsung",
+        "skhynix",
+        "micron",
+        "nanya",
+        "winbond"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "自己設計、自己製造、自己賣（整合元件製造，IDM）。產品標準化程度高，賺錢多寡主要看市場價格和成本。",
+        "margin": "景氣循環非常明顯：缺貨時毛利很高，供過於求時可能虧損。HBM 等高階產品利潤較高也較穩定。",
+        "bargainingPower": "市場由少數大廠寡占，但產品可以互相替代，價格主要由整體供需決定；高階 HBM 因為能做的廠商少，議價能力較強。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "景氣循環難預測：擴產太多會讓價格崩跌，擴產太少又會錯失訂單。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "產能優先轉去做 HBM，可能讓一般記憶體的供給變緊、價格波動。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "中國記憶體廠擴產，在中低階產品帶來價格競爭。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "HBM 成為 AI 晶片的關鍵零件，各家廠商的技術與市佔競爭。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "AI 帶動記憶體需求，市場討論這波景氣是否和過去的循環不同。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "台灣記憶體廠在利基型產品的定位，以及受大廠產能調整的連動影響。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -234,18 +358,83 @@
       "zone": "semi",
       "order": 5,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "把做好的晶片切割、包裝、測試，確保能裝進產品裡使用；「先進封裝」更進一步把多顆晶片緊密組在一起。",
+      "analogy": "傳統封裝像替商品裝盒、品管；先進封裝則像把多個房間打通成一間大套房，讓 AI 晶片和記憶體之間傳資料更快。",
+      "upstream": [
+        {
+          "node": "foundry",
+          "text": "接收晶圓代工廠做好的晶圓"
+        },
+        {
+          "node": "memory",
+          "text": "HBM 記憶體"
+        },
+        {
+          "node": "equipment",
+          "text": "封裝與測試設備、載板等材料"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "ic-design",
+          "text": "受 IC 設計公司委託封裝測試"
+        },
+        {
+          "node": "ai-chip",
+          "text": "AI 晶片高度依賴先進封裝"
+        }
+      ],
+      "companies": [
+        "ase",
+        "kyec",
+        "amkor",
+        "tsmc"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "按顆或按片收取封裝與測試費用。傳統封測偏向「量大」的代工服務；先進封裝技術門檻高，單價也高。",
+        "margin": "傳統封測毛利中等、受景氣影響；先進封裝因為產能吃緊、技術門檻高，利潤明顯較好。",
+        "bargainingPower": "傳統封測競爭者多，議價能力普通；先進封裝產能集中在少數廠商（台積電最關鍵），議價能力強。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "先進封裝產能一度成為 AI 晶片出貨的瓶頸，擴產速度跟不上需求。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "傳統封測需求跟著手機、PC 等消費性電子起伏。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "客戶要求分散生產地點，封測廠需要評估在東南亞、美國等地設廠。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "先進封裝（例如台積電 CoWoS）成為 AI 供應鏈最受關注的產能之一。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "晶圓代工廠與封測廠在先進封裝的分工與競爭。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "測試需求隨 AI 晶片變複雜而增加，測試廠受惠。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -255,18 +444,85 @@
       "zone": "ai-hw",
       "order": 6,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "設計專門用來訓練和執行 AI 模型的晶片，包括通用的 GPU，以及替特定客戶量身打造的客製化晶片（ASIC）。",
+      "analogy": "GPU 像什麼路都能開的高性能跑車，誰都能買；ASIC 像替特定車隊量身打造的賽車，只跑自家賽道，但效率更高、成本更低。",
+      "upstream": [
+        {
+          "node": "foundry",
+          "text": "委託晶圓代工廠用最先進製程製造"
+        },
+        {
+          "node": "packaging",
+          "text": "需要先進封裝把晶片和 HBM 組在一起"
+        },
+        {
+          "node": "memory",
+          "text": "HBM 高頻寬記憶體"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "ai-server",
+          "text": "晶片交給伺服器廠組成整台／整櫃系統"
+        },
+        {
+          "node": "cloud",
+          "text": "最終買家主要是大型雲端業者"
+        }
+      ],
+      "companies": [
+        "nvidia",
+        "amd",
+        "broadcom",
+        "mediatek",
+        "alchip",
+        "guc"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "GPU 廠商賣晶片與整套系統，並用軟體生態系綁住開發者；ASIC 設計服務公司則向雲端業者收取設計費（NRE）和量產後的晶片銷售收入。",
+        "margin": "領先的 GPU 廠商毛利率非常高；ASIC 設計服務毛利較低，但客戶黏著度高。",
+        "bargainingPower": "NVIDIA 憑藉產品與軟體生態系（CUDA），議價能力極強；雲端業者自研 ASIC，部分原因就是想降低對單一供應商的依賴。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "產能受限於先進製程、先進封裝和 HBM 的供應。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "美國出口管制限制高階 AI 晶片賣到中國，影響營收與產品規劃。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "客戶集中在少數雲端業者，客戶的資本支出計畫直接決定需求。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "GPU 與雲端業者自研 ASIC（例如 Google TPU、Amazon Trainium）的競爭與分工。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "AI 需求從「訓練」模型逐漸轉向「推論」（實際使用模型），對晶片的要求跟著改變。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "市場討論 AI 投資是否過熱，以及晶片需求能否延續。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -309,7 +565,8 @@
         "quanta",
         "wistron",
         "wiwynn",
-        "supermicro"
+        "supermicro",
+        "auras"
       ],
       "business": {
         "model": "台灣廠商多以 ODM（替客戶設計加製造）模式接單，賺組裝與系統整合的費用。產品從單台伺服器走向整櫃出貨，附加價值提高。",
@@ -365,18 +622,80 @@
       "zone": "ai-hw",
       "order": 8,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "放伺服器的大型機房，提供電力、散熱、網路和空間，讓成千上萬台 AI 伺服器 24 小時運轉。",
+      "analogy": "像替伺服器蓋的超大型公寓：房東負責水電、空調和保全，房客（雲端業者、企業）只要把伺服器搬進來。",
+      "upstream": [
+        {
+          "node": "ai-server",
+          "text": "AI 伺服器與網路設備"
+        },
+        {
+          "text": "電源設備、散熱與液冷系統、不斷電系統、電網與發電業者"
+        },
+        {
+          "text": "土地、建設與營運商"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "cloud",
+          "text": "雲端業者自建或承租資料中心"
+        },
+        {
+          "text": "企業、政府、AI 新創租用機房空間或算力"
+        }
+      ],
+      "companies": [
+        "delta",
+        "auras",
+        "vertiv",
+        "equinix"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "設備供應商賣電源、散熱等設備；資料中心營運商出租機房空間與電力，賺長期、穩定的租金。",
+        "margin": "營運商像不動產業，前期投資大、回收期長，但現金流穩定；電源與散熱設備商因 AI 需求升溫，高階產品利潤較好。",
+        "bargainingPower": "電力和可用土地愈來愈稀缺，擁有電力與好地點的營運商議價能力提升；設備商則看技術能力，液冷等新技術的領先者較有優勢。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "電力不足：AI 資料中心非常耗電，許多地區的電網跟不上需求。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "散熱：AI 伺服器發熱量大，傳統風冷不夠用，需要改裝液冷。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "興建成本高、時程長，還要面對環保與在地居民的反對。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "「電力是 AI 的瓶頸」：核能、再生能源、儲能和資料中心的結合。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "液冷散熱商機，台灣散熱與電源廠商受惠。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "雲端業者與 AI 公司宣布大型資料中心投資計畫，以及市場對投資規模的討論。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -386,18 +705,82 @@
       "zone": "ai-sw",
       "order": 9,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "把大量伺服器和 AI 算力用「租」的方式提供給企業和開發者，按使用量收費。",
+      "analogy": "像水電公司：企業不用自己蓋發電廠（機房），打開開關就能用電（算力），用多少付多少。",
+      "upstream": [
+        {
+          "node": "datacenter",
+          "text": "自建或承租資料中心"
+        },
+        {
+          "node": "ai-server",
+          "text": "大量採購 AI 伺服器"
+        },
+        {
+          "node": "ai-chip",
+          "text": "採購 GPU，也自己設計 ASIC"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "model",
+          "text": "提供模型公司訓練和執行模型需要的算力"
+        },
+        {
+          "node": "ai-app",
+          "text": "企業與開發者在雲端上開發 AI 應用"
+        }
+      ],
+      "companies": [
+        "amazon",
+        "microsoft",
+        "google"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "訂閱與按量計費：出租運算、儲存、資料庫等服務。AI 時代多了「出租 GPU 算力」和「提供 AI 模型 API」兩種收入。",
+        "margin": "規模經濟明顯，成熟後利潤率高；但 AI 需要先投入龐大資本支出，短期會壓低利潤，也拉長回收時間。",
+        "bargainingPower": "市場由三大業者寡占，企業把系統搬上某家雲端後很難轉換，議價能力強；但在採購 AI 晶片時，對 NVIDIA 的議價能力有限。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "AI 資本支出規模龐大，投資人關注何時能轉成足夠的營收和獲利。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "算力供應吃緊：晶片、電力、資料中心空間都可能成為擴張的限制。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "各國的資料主權與監管要求，需要在當地設立機房。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "雲端業者自研 AI 晶片，降低成本與對 NVIDIA 的依賴。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "新興的「GPU 雲端」業者（專門出租 AI 算力）挑戰傳統雲端業者。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "雲端業者與大型模型公司的策略合作與投資關係。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -407,18 +790,81 @@
       "zone": "ai-sw",
       "order": 10,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "花大量算力和資料訓練出大型 AI 模型（例如 GPT、Claude、Gemini），再把模型賣給消費者和企業使用。",
+      "analogy": "像花巨資培養頂尖顧問的顧問公司：前期訓練成本很高，之後靠把顧問的能力「出租」給大量客戶回收。",
+      "upstream": [
+        {
+          "node": "cloud",
+          "text": "向雲端業者租用（或合作取得）大量算力"
+        },
+        {
+          "node": "ai-chip",
+          "text": "部分公司直接採購或合作開發晶片"
+        },
+        {
+          "text": "訓練資料、研究人才"
+        }
+      ],
+      "downstream": [
+        {
+          "node": "ai-app",
+          "text": "自己做產品，或讓其他公司透過 API 把模型做成應用"
+        },
+        {
+          "text": "企業客戶、一般消費者"
+        }
+      ],
+      "companies": [
+        "openai",
+        "anthropic",
+        "google",
+        "microsoft"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "三種主要收入：消費者訂閱（聊天機器人月費）、企業方案、開發者用 API 按使用量付費。",
+        "margin": "訓練和執行模型的算力成本極高，獲利模式還在發展中；多數公司仍在大量投資，靠募資或母公司支撐。",
+        "bargainingPower": "頂尖模型只有少數公司做得出來，有一定議價能力；但競爭激烈、模型價格持續下降，開源模型也帶來壓力。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "訓練與執行成本高，商業模式能否長期獲利仍待證明。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "競爭激烈、模型價格快速下降，差異化愈來愈難。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "著作權、資料使用、AI 安全與各國監管的不確定性。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "AI 代理（AI Agent）：讓 AI 自己完成多步驟的工作，被視為下一個商業化重點。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "開源模型（含中國模型）與封閉模型的競爭。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "模型公司的大型募資、估值，以及和雲端業者的合作關係。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     },
     {
@@ -428,18 +874,77 @@
       "zone": "ai-sw",
       "order": 11,
       "status": "待查證",
-      "oneLiner": "",
-      "analogy": "",
-      "upstream": [],
-      "downstream": [],
-      "companies": [],
+      "oneLiner": "把 AI 模型變成實際可用、能收費的產品或服務，例如寫程式助理、辦公室助理、客服機器人。",
+      "analogy": "模型像電力，AI 應用就像各種家電：真正讓消費者願意掏錢的，是好用的電器，而不是電本身。",
+      "upstream": [
+        {
+          "node": "model",
+          "text": "使用模型公司的 API，或自己訓練、調整模型"
+        },
+        {
+          "node": "cloud",
+          "text": "在雲端上部署和執行服務"
+        }
+      ],
+      "downstream": [
+        {
+          "text": "企業（提升效率、降低人力成本）"
+        },
+        {
+          "text": "一般消費者（訂閱、內建在手機與電腦）"
+        }
+      ],
+      "companies": [
+        "microsoft",
+        "google",
+        "openai",
+        "salesforce"
+      ],
       "business": {
-        "model": "",
-        "margin": "",
-        "bargainingPower": ""
+        "model": "主要是訂閱制（按人頭或按月收費），也有按使用量收費；大型軟體公司把 AI 功能加進既有產品，藉此漲價或提高續約率。",
+        "margin": "軟體本身利潤高，但每次使用 AI 都要付算力成本，毛利比傳統軟體低；規模和定價能力決定能否賺錢。",
+        "bargainingPower": "已經擁有大量用戶的平台（例如辦公軟體、作業系統）把 AI 加進去最有優勢；新創公司則容易被模型公司或大平台的新功能取代。"
       },
-      "issues": [],
-      "topics": [],
+      "issues": [
+        {
+          "text": "企業試用很多，但真正大規模付費、證明投資報酬率的案例仍在累積。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "應用新創的護城河不明顯，容易被模型公司的新功能取代。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "AI 出錯（幻覺）、資料隱私、責任歸屬等導入風險。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
+      "topics": [
+        {
+          "text": "AI 寫程式工具快速普及，改變軟體開發的工作方式。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "AI 對傳統軟體公司（SaaS）商業模式的衝擊：按人頭收費是否會被取代。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        },
+        {
+          "text": "台灣企業導入 AI 的情況，以及 AI 對就業與工作內容的影響。",
+          "status": "待查證",
+          "asOf": "2026-11",
+          "sources": []
+        }
+      ],
       "reading": []
     }
   ]
