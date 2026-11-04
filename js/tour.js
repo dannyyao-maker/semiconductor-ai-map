@@ -23,7 +23,8 @@ const STEPS = [
 
 export function setupTour(button) {
   button.addEventListener("click", () => openTour(0));
-  if (!store.get(KEY, false)) openTour(0);
+  // 網址加上 ?notour 可以不顯示導覽（拍截圖用）
+  if (!store.get(KEY, false) && !location.search.includes("notour")) openTour(0);
 }
 
 function openTour(i) {

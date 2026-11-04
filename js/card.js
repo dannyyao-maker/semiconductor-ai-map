@@ -31,8 +31,20 @@ function flowList(items, ctx, T) {
 function sourceLinks(ids, ctx) {
   const list = (ids || []).map((id) => ctx.sourceById[id]).filter(Boolean);
   if (!list.length) return "";
-  return `<span class="src-links">來源：${list.map((s) =>
-    `<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.title)}（${esc(s.asOf)}）">${esc(s.publisher)}${s.type === "官方" ? "" : `<small>·${esc(s.type)}</small>`}</a>`).join("、")}</span>`;
+  // 同一個發布者有好幾份文件時，合併成「台積電 TSMC ①②③」，避免名字重複出現
+  const groups = [];
+  for (const s of list) {
+    const g = groups.find((x) => x.publisher === s.publisher);
+    if (g) g.items.push(s); else groups.push({ publisher: s.publisher, type: s.type, items: [s] });
+  }
+  const num = (i) => "①②③④⑤⑥⑦⑧⑨"[i] || `(${i + 1})`;
+  const link = (s, text) => `<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.title)}（${esc(s.asOf)}）">${text}</a>`;
+  return `<span class="src-links">來源：${groups.map((g) => {
+    const tag = g.type === "官方" ? "" : `<small>·${esc(g.type)}</small>`;
+    return g.items.length === 1
+      ? link(g.items[0], esc(g.publisher) + tag)
+      : `${esc(g.publisher)}${tag} ${g.items.map((s, i) => link(s, num(i))).join("")}`;
+  }).join("、")}</span>`;
 }
 
 function claimList(items, ctx, T) {
