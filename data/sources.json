@@ -1,1 +1,330 @@
-[]
+[
+  {
+    "id": "tsmc-20f-2025",
+    "publisher": "台積電 TSMC",
+    "title": "2025 年度報告（Form 20-F）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm",
+    "asOf": "2026-04",
+    "type": "官方"
+  },
+  {
+    "id": "tsmc-3q26",
+    "publisher": "台積電 TSMC",
+    "title": "2026 年第三季營運結果新聞稿",
+    "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000726/a3q26e_withguidancexfinal.htm",
+    "asOf": "2026-10",
+    "type": "官方"
+  },
+  {
+    "id": "asml-20f-2025",
+    "publisher": "ASML",
+    "title": "2025 年度報告（Form 20-F）",
+    "url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026011378/asml-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "asml-q4-2025",
+    "publisher": "ASML",
+    "title": "2025 年第四季與全年財報新聞稿",
+    "url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026003701/pressreleasefinancialresul.htm",
+    "asOf": "2026-01",
+    "type": "官方"
+  },
+  {
+    "id": "amat-10k-2025",
+    "publisher": "應用材料 Applied Materials",
+    "title": "2025 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/6951/000162828025056742/amat-20251026.htm",
+    "asOf": "2025-12",
+    "type": "官方"
+  },
+  {
+    "id": "mu-10k-2025",
+    "publisher": "美光 Micron",
+    "title": "2025 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312525000028/mu-20250828.htm",
+    "asOf": "2025-10",
+    "type": "官方"
+  },
+  {
+    "id": "mu-10k-2026",
+    "publisher": "美光 Micron",
+    "title": "2026 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm",
+    "asOf": "2026-10",
+    "type": "官方"
+  },
+  {
+    "id": "skh-f1-2026",
+    "publisher": "SK 海力士 SK hynix",
+    "title": "美國上市公開說明書（Form F-1）",
+    "url": "https://www.sec.gov/Archives/edgar/data/0002120882/000119312526280172/d32785df1.htm",
+    "asOf": "2026-06",
+    "type": "官方"
+  },
+  {
+    "id": "qcom-10k-2025",
+    "publisher": "高通 Qualcomm",
+    "title": "2025 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+    "asOf": "2025-11",
+    "type": "官方"
+  },
+  {
+    "id": "avgo-10k-2025",
+    "publisher": "博通 Broadcom",
+    "title": "2025 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016825000121/avgo-20251102.htm",
+    "asOf": "2025-12",
+    "type": "官方"
+  },
+  {
+    "id": "intc-10k-2025",
+    "publisher": "英特爾 Intel",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+    "asOf": "2026-01",
+    "type": "官方"
+  },
+  {
+    "id": "amkr-10k-2025",
+    "publisher": "艾克爾 Amkor",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1047127/000104712726000014/amkr-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "ase-20f-2025",
+    "publisher": "日月光投控 ASE",
+    "title": "2025 年度報告（Form 20-F）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1122411/000119312526135585/d50802d20f.htm",
+    "asOf": "2026-04",
+    "type": "官方"
+  },
+  {
+    "id": "ase-careers",
+    "publisher": "日月光投控 ASE",
+    "title": "官方網站：公司介紹",
+    "url": "https://ase.aseglobal.com/?p=127",
+    "asOf": "2026-11",
+    "type": "官方"
+  },
+  {
+    "id": "umc-20f-2025",
+    "publisher": "聯電 UMC",
+    "title": "2025 年度報告（Form 20-F）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1033767/000119312526193757/d91630d20f.htm",
+    "asOf": "2026-04",
+    "type": "官方"
+  },
+  {
+    "id": "iek-2026-ltn",
+    "publisher": "自由時報（引述工研院產科國際所 IEK）",
+    "title": "工研院：台灣 IC 產值今年估破 6 兆",
+    "url": "https://ec.ltn.com.tw/article/paper/1692207",
+    "asOf": "2026",
+    "type": "研究機構"
+  },
+  {
+    "id": "trendforce-mature-2023",
+    "publisher": "TrendForce 集邦科技",
+    "title": "中美推動半導體自主，台灣晶圓代工產能占比 2027 年降至 41%",
+    "url": "https://www.trendforce.com/presscenter/news/20231214-11959.html",
+    "asOf": "2023-12",
+    "type": "研究機構"
+  },
+  {
+    "id": "digitimes-cowos-2025",
+    "publisher": "DIGITIMES",
+    "title": "台積電設備、ASIC、AI GPU 與 CoWoS 產能報導",
+    "url": "https://www.digitimes.com/news/a20251222PD213.html",
+    "asOf": "2025-12",
+    "type": "媒體"
+  },
+  {
+    "id": "odaily-tsmc-call",
+    "publisher": "Odaily",
+    "title": "台積電法說會內容整理（AI 需求高於供給、CoWoS）",
+    "url": "https://www.odaily.news/en/post/5213431",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "toms-samsung-fab",
+    "publisher": "Tom's Hardware",
+    "title": "三星晶圓廠藍圖與 165 億美元特斯拉訂單",
+    "url": "https://www.tomshardware.com/tech-industry/samsungs-fab-roadmap-examined",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "joongang-samsung-tesla",
+    "publisher": "Korea JoongAng Daily",
+    "title": "三星晶圓代工取得特斯拉 165 億美元合約",
+    "url": "https://www.koreajoongangdaily.com/news/2025-07-28/business/economy/Samsung-Foundry-bags-165B-contract-with-Tesla/2362805",
+    "asOf": "2025-07",
+    "type": "媒體"
+  },
+  {
+    "id": "scmp-smic",
+    "publisher": "南華早報 SCMP",
+    "title": "美國收緊對中國最大晶片製造商中芯的出口",
+    "url": "https://amp.scmp.com/news/world/united-states-canada/article/3103196/us-tightens-exports-chinas-biggest-chip-maker-smic",
+    "asOf": "2020-12",
+    "type": "媒體"
+  },
+  {
+    "id": "cnbc-china-chips-2026",
+    "publisher": "CNBC",
+    "title": "中國晶片廠在 AI 熱潮與美國管制下營收創新高",
+    "url": "https://www.cnbc.com/2026/04/03/chinese-chip-firms-record-revenue-ai-boom-us-curbs.html",
+    "asOf": "2026-04",
+    "type": "媒體"
+  },
+  {
+    "id": "sharedresearch-tel",
+    "publisher": "Shared Research",
+    "title": "東京威力科創公司研究報告",
+    "url": "https://sharedresearch.jp/en/companies/8035/report/6a55ddd098e91022dd71a1ee",
+    "asOf": "2026",
+    "type": "研究機構"
+  },
+  {
+    "id": "macrotrends-tel",
+    "publisher": "Macrotrends",
+    "title": "東京威力科創營收與公司簡介",
+    "url": "https://www.macrotrends.net/stocks/charts/TOELY/tokyo-electron/revenue",
+    "asOf": "2025",
+    "type": "媒體"
+  },
+  {
+    "id": "technews-gwa-texas",
+    "publisher": "科技新報",
+    "title": "環球晶德州新廠落成，美國首座量產 12 吋矽晶圓廠",
+    "url": "https://technews.tw/?p=1382626",
+    "asOf": "2025-05",
+    "type": "媒體"
+  },
+  {
+    "id": "udn-globalwafers",
+    "publisher": "經濟日報",
+    "title": "環球晶相關報導（全球前三大矽晶圓廠）",
+    "url": "https://money.udn.com/money/story/5607/9622936",
+    "asOf": "2025",
+    "type": "媒體"
+  },
+  {
+    "id": "technews-gudeng-2026",
+    "publisher": "科技新報",
+    "title": "家登 2026 年 1 月營收年增 63%",
+    "url": "https://finance.technews.tw/2026/02/10/jiadeng-precisions-january-revenue-grew-63-year-on-year/",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "cmoney-gudeng",
+    "publisher": "CMoney 研究筆記",
+    "title": "家登：EUV 光罩盒與主要客戶",
+    "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=779260",
+    "asOf": "2024",
+    "type": "媒體"
+  },
+  {
+    "id": "technews-mtk-asic",
+    "publisher": "科技新報",
+    "title": "聯發科：2026 年 ASIC 營收上看 25 億美元",
+    "url": "https://finance.technews.tw/2026/10/30/mediateks-asic-revenue-will-reach-2-5-billion-in-2026/",
+    "asOf": "2026-10",
+    "type": "媒體"
+  },
+  {
+    "id": "uanalyze-mtk-asic",
+    "publisher": "優分析",
+    "title": "聯發科法說：首顆 AI ASIC 開始出貨",
+    "url": "https://uanalyze.com.tw/articles/6233958069",
+    "asOf": "2026-10",
+    "type": "媒體"
+  },
+  {
+    "id": "morningstar-mtk",
+    "publisher": "Morningstar",
+    "title": "聯發科公司概況",
+    "url": "https://www.morningstar.com.au/investments/security/TPE/2454/summary",
+    "asOf": "2026",
+    "type": "研究機構"
+  },
+  {
+    "id": "techinsights-mtk",
+    "publisher": "TechInsights",
+    "title": "聯發科公司簡介",
+    "url": "https://www.techinsights.com/ko/node/57509",
+    "asOf": "2025",
+    "type": "研究機構"
+  },
+  {
+    "id": "cnyes-realtek-3q26",
+    "publisher": "鉅亨網",
+    "title": "瑞昱 2026 年第三季法說會報導",
+    "url": "https://news.cnyes.com/news/id/4757147",
+    "asOf": "2026-10",
+    "type": "媒體"
+  },
+  {
+    "id": "uanalyze-realtek",
+    "publisher": "優分析",
+    "title": "瑞昱法說：第三季獲利報導",
+    "url": "https://uanalyze.com.tw/articles/2069557984",
+    "asOf": "2026-10",
+    "type": "媒體"
+  },
+  {
+    "id": "ctee-ddi-2026",
+    "publisher": "工商時報",
+    "title": "驅動 IC 產業 2025 年「量穩利弱」，2026 年展望",
+    "url": "https://www.ctee.com.tw/news/20260115700218-430501",
+    "asOf": "2026-01",
+    "type": "媒體"
+  },
+  {
+    "id": "wantrich-novatek",
+    "publisher": "旺得富（中時）",
+    "title": "聯詠法說後外資看法",
+    "url": "https://wantrich.chinatimes.com/news/20251107900317-420101",
+    "asOf": "2025-11",
+    "type": "媒體"
+  },
+  {
+    "id": "statementdog-nanya",
+    "publisher": "財報狗",
+    "title": "南亞科基本資料與競爭對手",
+    "url": "https://statementdog.com/stock/basic_info/2408",
+    "asOf": "2025",
+    "type": "媒體"
+  },
+  {
+    "id": "cmoney-nanya",
+    "publisher": "CMoney 研究筆記",
+    "title": "南亞科：台塑集團 DRAM 廠",
+    "url": "https://www.cmoney.tw/notes/note-detail.aspx?nid=804746",
+    "asOf": "2025",
+    "type": "媒體"
+  },
+  {
+    "id": "moneyweekly-kyec",
+    "publisher": "理財周刊",
+    "title": "京元電 AI 測試業務與資本支出",
+    "url": "https://www.moneyweekly.com.tw/_Article?AID=251167",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "wantrich-kyec",
+    "publisher": "旺得富（中時）",
+    "title": "京元電相關報導",
+    "url": "https://wantrich.chinatimes.com/news/20260618900675-420101",
+    "asOf": "2026-06",
+    "type": "媒體"
+  }
+]

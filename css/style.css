@@ -192,3 +192,9 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline
 }
 @keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* 來源連結 */
+.claim-meta { flex-wrap: wrap; }
+.src-links { font-size: .78rem; color: var(--muted); }
+.src-links a { color: var(--semi); }
+.src-links small { color: var(--muted); }

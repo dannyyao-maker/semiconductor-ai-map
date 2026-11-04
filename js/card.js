@@ -25,11 +25,19 @@ function flowList(items, ctx) {
 }
 
 // 當前問題、熱門話題：每條附狀態與資料時間點
-function claimList(items) {
+// 來源連結：每個來源顯示成一個小連結，滑過去看完整標題
+function sourceLinks(ids, ctx) {
+  const list = (ids || []).map((id) => ctx.sourceById[id]).filter(Boolean);
+  if (!list.length) return "";
+  return `<span class="src-links">來源：${list.map((s) =>
+    `<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.title)}（${esc(s.asOf)}）">${esc(s.publisher)}${s.type === "官方" ? "" : `<small>·${esc(s.type)}</small>`}</a>`).join("、")}</span>`;
+}
+
+function claimList(items, ctx) {
   if (!items?.length) return `<p class="empty">尚未填寫</p>`;
   return `<ul class="claim-list">${items.map((it) => `
     <li><span class="claim-text">${esc(it.text)}</span>
-      <span class="claim-meta">${statusTag(it.status)}${it.asOf ? `<span class="asof">asOf ${esc(it.asOf)}</span>` : ""}</span></li>`).join("")}</ul>`;
+      <span class="claim-meta">${statusTag(it.status)}${it.asOf ? `<span class="asof">asOf ${esc(it.asOf)}</span>` : ""}${sourceLinks(it.sources, ctx)}</span></li>`).join("")}</ul>`;
 }
 
 function companyChips(ids, ctx) {
@@ -82,8 +90,8 @@ export function nodeCardHTML(node, ctx) {
           <dt>利潤高低</dt><dd>${esc(b.margin || "尚未填寫")}</dd>
           <dt>議價能力</dt><dd>${esc(b.bargainingPower || "尚未填寫")}</dd>
         </dl>`)}
-      ${section("當前問題", "Current Challenges", claimList(node.issues))}
-      ${section("熱門話題", "Hot Topics", claimList(node.topics))}
+      ${section("當前問題", "Current Challenges", claimList(node.issues, ctx))}
+      ${section("熱門話題", "Hot Topics", claimList(node.topics, ctx))}
       ${section("延伸閱讀", "Further Reading", node.reading?.length
         ? `<ul>${node.reading.map((id) => ctx.sourceById[id]).filter(Boolean).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>（${esc(s.publisher)}，${esc(s.asOf)}）</li>`).join("")}</ul>`
         : `<p class="empty">階段 3 用法說會、產業報告查證後補上來源連結。</p>`)}
@@ -105,6 +113,7 @@ export function companyCardHTML(company, fromNode, ctx) {
         <p class="hint">地圖上加亮的就是這家公司參與的環節</p>`)}
       ${section("護城河", "Moat", `<p>${esc(company.moat)}</p>`)}
       ${section("主要風險", "Key Risks", `<p>${esc(company.risks)}</p>`)}
+      ${company.sources?.length ? `<p class="claim-meta">${sourceLinks(company.sources, ctx)}</p>` : ""}
       ${company.asOf ? `<p class="asof">asOf ${esc(company.asOf)}</p>` : ""}
     </div>`;
 }
