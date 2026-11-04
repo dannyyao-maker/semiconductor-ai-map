@@ -161,13 +161,16 @@ body.card-open .layout { grid-template-columns: minmax(0, 1fr) var(--card-w); }
 .placeholder { color: var(--muted); }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-/* 中等寬度：卡片蓋在地圖右側，避免地圖被擠太小 */
+/* 中等寬度（平板、小筆電）：卡片從下方滑出，地圖留在上半部，加亮的環節不會被擋住 */
 @media (max-width: 1100px) and (min-width: 721px) {
-  body.card-open .layout { grid-template-columns: 1fr; }
+  body.card-open .layout { grid-template-columns: 1fr; padding-bottom: 56vh; }
   .card {
-    position: fixed; top: 12px; right: 12px; bottom: 12px; width: min(var(--card-w), 60vw);
-    max-height: none; z-index: 10; box-shadow: 0 10px 40px rgba(0, 0, 0, .18);
+    position: fixed; left: 12px; right: 12px; bottom: 0; top: auto; z-index: 10;
+    max-height: 50vh; border-radius: 18px 18px 0 0; border-bottom: 0;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, .18);
+    animation: sheet-up .22s ease-out;
   }
+  body.card-open .map-svg { max-height: calc(50vh - 150px); min-height: 200px; }
 }
 
 /* 手機：三大區塊直排，卡片從下方滑出 */
@@ -198,3 +201,90 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--focus); outline
 .src-links { font-size: .78rem; color: var(--muted); }
 .src-links a { color: var(--semi); }
 .src-links small { color: var(--muted); }
+
+/* ===== 階段 4：搜尋、術語、已讀、導覽 ===== */
+
+/* 頁首工具列 */
+.tools { display: flex; gap: 8px; align-items: center; flex: 1 1 420px; max-width: 560px; }
+.legend { flex-basis: 100%; }
+.search-box { position: relative; flex: 1; min-width: 0; }
+#search {
+  width: 100%; font: inherit; font-size: .92rem; padding: 8px 12px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text);
+}
+#search:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
+.search-results {
+  position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px;
+  list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .12); max-height: 60vh; overflow-y: auto;
+}
+.search-item { display: flex; align-items: baseline; gap: 8px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.search-item.is-active, .search-item:hover { background: var(--bg); }
+.search-kind { font-size: .72rem; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 0 6px; flex: none; }
+.search-label { font-weight: 600; }
+.search-empty { padding: 8px 10px; color: var(--muted); font-size: .9rem; }
+.tool-btn {
+  flex: none; font-size: .88rem; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); cursor: pointer; white-space: nowrap; min-height: 40px;
+}
+.tool-btn:hover { border-color: var(--text); }
+
+/* 卡片裡的術語：虛線底線，點了看解釋 */
+.term {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help;
+  text-decoration: underline dotted var(--muted); text-underline-offset: 3px; text-decoration-thickness: 1.5px;
+}
+.term:hover { text-decoration-color: var(--text); background: var(--bg); }
+.term-pop {
+  position: fixed; z-index: 40; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .18); padding: 14px 40px 12px 16px; font-size: .92rem;
+}
+.term-pop p { margin: 0 0 6px; }
+.term-pop .close { top: 6px; right: 6px; width: 32px; height: 32px; font-size: 1.2rem; }
+.term-title { font-weight: 700; }
+.term-node { font-size: .85rem; }
+
+/* 已讀 */
+.read-row { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); }
+.read-btn {
+  font-size: .95rem; font-weight: 700; padding: 10px 18px; border-radius: 999px; cursor: pointer;
+  border: 2px solid var(--text); background: var(--surface); min-height: 44px;
+}
+.read-btn.is-read { background: var(--text); color: #fff; }
+.node-check { display: none; pointer-events: none; }
+.node.is-read .node-check { display: inline; }
+.node-check circle { fill: #2f6b2a; stroke: #fff; stroke-width: 2; }
+.node-check text { fill: #fff; font-size: 12px; font-weight: 700; text-anchor: middle; }
+
+/* 提示訊息 */
+#toast {
+  position: fixed; z-index: 50; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0;
+  max-width: calc(100vw - 32px); background: var(--text); color: #fff; padding: 10px 16px; border-radius: 10px;
+  font-size: .9rem; transition: opacity .2s, transform .2s; pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* 導覽 */
+.tour-backdrop {
+  position: fixed; inset: 0; z-index: 60; background: rgba(20, 20, 18, .45);
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.tour-box { background: var(--surface); border-radius: 16px; padding: 22px 22px 16px; width: min(440px, 100%); box-shadow: 0 20px 60px rgba(0, 0, 0, .25); }
+.tour-box h2 { margin: 4px 0 8px; font-size: 1.2rem; }
+.tour-box p { margin: 0 0 12px; }
+.tour-step { color: var(--muted); font-size: .8rem; margin: 0 !important; }
+.tour-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; }
+.tour-actions span { display: flex; gap: 8px; }
+.tour-skip { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 8px 0; }
+.tour-btn { border: 0; border-radius: 10px; padding: 10px 16px; background: var(--text); color: #fff; font-weight: 700; cursor: pointer; min-height: 44px; }
+.tour-btn.ghost { background: var(--bg); color: var(--text); }
+
+/* 手機：工具列換行，按鈕放大好點 */
+@media (max-width: 720px) {
+  .tools { flex-basis: 100%; max-width: none; flex-wrap: wrap; }
+  .search-box { flex-basis: 100%; }
+  #search { font-size: 16px; padding: 10px 12px; } /* 16px 以上，iPhone 才不會自動放大畫面 */
+  .tool-btn { flex: 1; }
+  .close { width: 44px; height: 44px; }
+  .chip { padding: 6px 12px; }
+}

@@ -1,9 +1,11 @@
 // 環節卡與公司小卡：把 data/ 的內容排成卡片。
+// 內容文字會經過 T()：先跳脫 HTML，再把專有名詞標成可點的術語。
+import { esc } from "./util.js";
 
 const COUNTRY = { TW: "台灣", US: "美國", KR: "韓國", CN: "中國", JP: "日本", NL: "荷蘭" };
 
-const esc = (s = "") =>
-  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+// 每次畫一張卡時建立：同一張卡裡，每個術語只標第一次出現的地方
+const makeT = (ctx) => { const used = new Set(); return (text) => ctx.glossify(esc(text || ""), used); };
 
 const statusTag = (status) =>
   status ? `<span class="status status-${esc(status)}" title="內容狀態">${esc(status)}</span>` : "";
@@ -13,14 +15,14 @@ function section(title, en, body) {
 }
 
 // 上下游：有對應環節的項目做成可點的連結
-function flowList(items, ctx) {
+function flowList(items, ctx, T) {
   if (!items?.length) return `<p class="empty">尚未填寫</p>`;
   return `<ul class="flow-list">${items.map((it) => {
     const node = it.node && ctx.nodeById[it.node];
     const label = node
       ? `<button class="link" data-goto-node="${esc(node.id)}">${esc(node.name)}</button>`
       : "";
-    return `<li>${label}${label && it.text ? "：" : ""}${esc(it.text || "")}</li>`;
+    return `<li>${label}${label && it.text ? "：" : ""}${T(it.text)}</li>`;
   }).join("")}</ul>`;
 }
 
@@ -33,10 +35,10 @@ function sourceLinks(ids, ctx) {
     `<a href="${esc(s.url)}" target="_blank" rel="noopener" title="${esc(s.title)}（${esc(s.asOf)}）">${esc(s.publisher)}${s.type === "官方" ? "" : `<small>·${esc(s.type)}</small>`}</a>`).join("、")}</span>`;
 }
 
-function claimList(items, ctx) {
+function claimList(items, ctx, T) {
   if (!items?.length) return `<p class="empty">尚未填寫</p>`;
   return `<ul class="claim-list">${items.map((it) => `
-    <li><span class="claim-text">${esc(it.text)}</span>
+    <li><span class="claim-text">${T(it.text)}</span>
       <span class="claim-meta">${statusTag(it.status)}${it.asOf ? `<span class="asof">asOf ${esc(it.asOf)}</span>` : ""}${sourceLinks(it.sources, ctx)}</span></li>`).join("")}</ul>`;
 }
 
@@ -76,25 +78,31 @@ export function nodeCardHTML(node, ctx) {
       </div></div>`;
   }
   const b = node.business || {};
+  const T = makeT(ctx);
+  const read = ctx.isRead(node.id);
   return header(zone, node.name, node.nameEn, node.status) + `
     <div class="card-body">
-      <p class="lead">${esc(node.oneLiner)}</p>
-      ${node.analogy ? `<div class="analogy"><span class="analogy-label">白話比喻</span>${esc(node.analogy)}</div>` : ""}
+      <p class="lead">${T(node.oneLiner)}</p>
+      ${node.analogy ? `<div class="analogy"><span class="analogy-label">白話比喻</span>${T(node.analogy)}</div>` : ""}
       ${section("上游與下游", "Upstream & Downstream", `
-        <div class="flow"><div><h4>跟誰買（上游）</h4>${flowList(node.upstream, ctx)}</div>
-        <div><h4>賣給誰（下游）</h4>${flowList(node.downstream, ctx)}</div></div>`)}
+        <div class="flow"><div><h4>跟誰買（上游）</h4>${flowList(node.upstream, ctx, T)}</div>
+        <div><h4>賣給誰（下游）</h4>${flowList(node.downstream, ctx, T)}</div></div>`)}
       ${section("代表公司", "Key Players", companyChips(node.companies, ctx) + `<p class="hint">點公司名稱，看它橫跨哪些環節</p>`)}
       ${section("怎麼賺錢", "Business Model", `
         <dl class="biz">
-          <dt>商業模式</dt><dd>${esc(b.model || "尚未填寫")}</dd>
-          <dt>利潤高低</dt><dd>${esc(b.margin || "尚未填寫")}</dd>
-          <dt>議價能力</dt><dd>${esc(b.bargainingPower || "尚未填寫")}</dd>
+          <dt>商業模式</dt><dd>${T(b.model || "尚未填寫")}</dd>
+          <dt>利潤高低</dt><dd>${T(b.margin || "尚未填寫")}</dd>
+          <dt>議價能力</dt><dd>${T(b.bargainingPower || "尚未填寫")}</dd>
         </dl>`)}
-      ${section("當前問題", "Current Challenges", claimList(node.issues, ctx))}
-      ${section("熱門話題", "Hot Topics", claimList(node.topics, ctx))}
+      ${section("當前問題", "Current Challenges", claimList(node.issues, ctx, T))}
+      ${section("熱門話題", "Hot Topics", claimList(node.topics, ctx, T))}
       ${section("延伸閱讀", "Further Reading", node.reading?.length
         ? `<ul>${node.reading.map((id) => ctx.sourceById[id]).filter(Boolean).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>（${esc(s.publisher)}，${esc(s.asOf)}）</li>`).join("")}</ul>`
-        : `<p class="empty">階段 3 用法說會、產業報告查證後補上來源連結。</p>`)}
+        : `<p class="empty">尚未填寫</p>`)}
+      <div class="read-row">
+        <button class="read-btn${read ? " is-read" : ""}" data-read="${esc(node.id)}" aria-pressed="${read}">${read ? "✓ 已讀懂（再按一次取消）" : "我讀懂了"}</button>
+        <p class="hint">讀完、看得懂就按一下；地圖上會打勾，進度存在你的瀏覽器。看不懂的地方，可以把句子貼給 Claude Code 問。</p>
+      </div>
     </div>`;
 }
 
@@ -104,15 +112,16 @@ export function companyCardHTML(company, fromNode, ctx) {
   const back = fromNode
     ? `<button class="back link" data-goto-node="${esc(fromNode.id)}">← 回到「${esc(fromNode.name)}」</button>`
     : "";
+  const T = makeT(ctx);
   return header(zone, company.name, company.nameEn, company.status, back) + `
     <div class="card-body">
       <p class="company-country">${esc(COUNTRY[company.country] || company.country)}</p>
-      <p class="lead">${esc(company.oneLiner)}</p>
+      <p class="lead">${T(company.oneLiner)}</p>
       ${section("橫跨的環節", "Segments", `<p>${company.segments.map((id) => ctx.nodeById[id]).filter(Boolean)
         .map((n) => `<button class="chip chip-node zone-${esc(n.zone)}" data-goto-node="${esc(n.id)}">${esc(n.name)}</button>`).join("")}</p>
         <p class="hint">地圖上加亮的就是這家公司參與的環節</p>`)}
-      ${section("護城河", "Moat", `<p>${esc(company.moat)}</p>`)}
-      ${section("主要風險", "Key Risks", `<p>${esc(company.risks)}</p>`)}
+      ${section("護城河", "Moat", `<p>${T(company.moat)}</p>`)}
+      ${section("主要風險", "Key Risks", `<p>${T(company.risks)}</p>`)}
       ${company.sources?.length ? `<p class="claim-meta">${sourceLinks(company.sources, ctx)}</p>` : ""}
       ${company.asOf ? `<p class="asof">asOf ${esc(company.asOf)}</p>` : ""}
     </div>`;

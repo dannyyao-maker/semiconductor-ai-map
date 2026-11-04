@@ -133,6 +133,11 @@ export function renderMap(container, { zones, nodes }, { mobile, onSelect, onBac
     t1.textContent = n.name;
     const t2 = el("text", { x: w / 2, y: 45, class: "node-en" }, g);
     t2.textContent = n.nameEn;
+    // 已讀標記（讀懂了就顯示）
+    const chk = el("g", { class: "node-check", transform: `translate(${w - 4},4)` }, g);
+    el("circle", { r: 10 }, chk);
+    const ct = el("text", { y: 4 }, chk);
+    ct.textContent = "✓";
     const pick = (e) => { e.stopPropagation(); onSelect(n.id); };
     g.addEventListener("click", pick);
     g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(e); } });
@@ -154,5 +159,15 @@ export function highlightMap(container, { selected, companySegments }) {
   svg.querySelectorAll(".edge[data-from]").forEach((p) => {
     const on = selected && !companySegments && (p.dataset.from === selected || p.dataset.to === selected);
     p.classList.toggle("is-active", Boolean(on));
+  });
+}
+
+/** 在讀懂的環節上打勾 */
+export function markRead(container, readIds) {
+  container.querySelectorAll(".node").forEach((g) => {
+    const read = readIds.includes(g.dataset.id);
+    g.classList.toggle("is-read", read);
+    const label = g.getAttribute("aria-label").replace(/（已讀懂）$/, "");
+    g.setAttribute("aria-label", read ? `${label}（已讀懂）` : label);
   });
 }

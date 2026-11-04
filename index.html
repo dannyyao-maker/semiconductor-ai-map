@@ -13,6 +13,15 @@
       <h1>半導體 × AI 產業鏈地圖</h1>
       <p class="subtitle">Semiconductor × AI Value Chain Map · 從晶片到 AI 服務，價值由左往右流動</p>
     </div>
+    <div class="tools">
+      <div class="search-box">
+        <input id="search" type="search" placeholder="搜尋環節、公司、術語（例：台積、HBM）" autocomplete="off"
+          role="combobox" aria-label="搜尋環節、公司或術語" aria-controls="search-results" aria-expanded="false" aria-autocomplete="list">
+        <ul id="search-results" class="search-results" role="listbox" aria-label="搜尋結果" hidden></ul>
+      </div>
+      <button id="progress" class="tool-btn" type="button">已讀 0／11</button>
+      <button id="tour-btn" class="tool-btn" type="button">導覽</button>
+    </div>
     <p class="legend" aria-label="內容狀態說明">
       <span class="legend-item"><span class="status status-待查證">待查證</span>底稿，尚未對照來源</span>
       <span class="legend-item"><span class="status status-待審核">待審核</span>已附來源</span>
@@ -24,7 +33,7 @@
     <aside id="card" class="card" aria-labelledby="card-title" hidden></aside>
   </main>
   <footer class="site-footer">
-    內容為學習用途整理，標示「待查證」的內容尚未對照來源，請勿直接引用。
+    內容為學習用途整理，只談商業面。每條內容附來源連結與資料時間點（asOf）；「待查證」表示尚未對照來源，請勿直接引用。
   </footer>
   <script type="module" src="js/app.js"></script>
 </body>

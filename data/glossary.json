@@ -1,0 +1,401 @@
+[
+  {
+    "id": "fabless",
+    "term": "無晶圓廠",
+    "en": "Fabless",
+    "aliases": [
+      "Fabless",
+      "無晶圓廠"
+    ],
+    "short": "只設計晶片、不自己蓋工廠的公司，製造全部外包給晶圓代工廠。好處是不用負擔蓋廠的巨額投資。",
+    "node": "ic-design",
+    "sources": [
+      "tsmc-20f-2025"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "idm",
+    "term": "整合元件製造",
+    "en": "IDM（Integrated Device Manufacturer）",
+    "aliases": [
+      "IDM",
+      "整合元件製造"
+    ],
+    "short": "從設計、製造到銷售都自己來的晶片公司，例如美光、英特爾、三星。和 Fabless 相反，要自己承擔工廠的成本和風險。",
+    "node": "memory",
+    "sources": [
+      "tsmc-20f-2025",
+      "mu-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "wafer",
+    "term": "晶圓",
+    "en": "Wafer",
+    "aliases": [
+      "矽晶圓",
+      "晶圓營收"
+    ],
+    "short": "製造晶片用的圓形矽片，一片晶圓上可以切出很多顆晶片。晶圓代工廠通常按「做了多少片晶圓」向客戶收費。",
+    "node": "foundry",
+    "sources": [
+      "tsmc-3q26"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "nm",
+    "term": "製程節點（奈米）",
+    "en": "Process Node（nm）",
+    "aliases": [
+      "奈米",
+      "先進製程",
+      "成熟製程"
+    ],
+    "short": "代表製程技術的世代，數字越小越先進（例如 2 奈米比 7 奈米先進）。商業上的意義是：越先進的製程，能做的公司越少、價格越高。台積電把 7 奈米以下稱為先進製程。",
+    "node": "foundry",
+    "sources": [
+      "tsmc-3q26"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "euv",
+    "term": "極紫外光曝光機",
+    "en": "EUV Lithography",
+    "aliases": [
+      "EUV"
+    ],
+    "short": "製造最先進晶片必備的關鍵機台，能在晶片上印出最細的線路。全球只有 ASML 做得出來，所以 ASML 的議價能力極強。",
+    "node": "equipment",
+    "sources": [
+      "asml-20f-2025"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "dram",
+    "term": "動態隨機存取記憶體",
+    "en": "DRAM",
+    "aliases": [
+      "DRAM"
+    ],
+    "short": "電腦和伺服器的「工作記憶體」，速度快但斷電後資料會消失。產品規格標準化，價格隨供需大幅波動。",
+    "node": "memory",
+    "sources": [
+      "mu-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "nand",
+    "term": "快閃記憶體",
+    "en": "NAND Flash",
+    "aliases": [
+      "NAND"
+    ],
+    "short": "用來長期儲存資料的記憶體，斷電後資料還在，例如手機儲存空間和固態硬碟（SSD）。",
+    "node": "memory",
+    "sources": [
+      "mu-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "hbm",
+    "term": "高頻寬記憶體",
+    "en": "HBM（High Bandwidth Memory）",
+    "aliases": [
+      "HBM"
+    ],
+    "short": "疊在 AI 晶片旁邊的高速記憶體，是 AI 晶片的關鍵零件。做同樣容量需要更多晶圓和廠房，能量產的廠商很少，所以議價能力比一般記憶體強。",
+    "node": "memory",
+    "sources": [
+      "mu-10k-2025",
+      "skh-f1-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "adv-pkg",
+    "term": "先進封裝",
+    "en": "Advanced Packaging",
+    "aliases": [
+      "先進封裝"
+    ],
+    "short": "把多顆晶片（例如 AI 晶片和 HBM）緊密組在一起的技術，讓它們之間傳資料更快。AI 晶片高度依賴它，產能一度成為出貨瓶頸。",
+    "node": "packaging",
+    "sources": [
+      "tsmc-20f-2025",
+      "tsmc-3q26-call"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "cowos",
+    "term": "CoWoS",
+    "en": "Chip-on-Wafer-on-Substrate",
+    "aliases": [
+      "CoWoS"
+    ],
+    "short": "台積電的先進封裝服務名稱，主流 AI 晶片（例如 NVIDIA 的 GPU）都用它把晶片和 HBM 封在一起。",
+    "node": "packaging",
+    "sources": [
+      "tsmc-20f-2025",
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "osat",
+    "term": "委外封測",
+    "en": "OSAT",
+    "aliases": [
+      "OSAT",
+      "封測廠"
+    ],
+    "short": "專門接單幫別人封裝、測試晶片的公司，例如日月光、Amkor。和晶圓代工一樣是「代工」模式。",
+    "node": "packaging",
+    "sources": [
+      "amkr-10k-2025"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "gpu",
+    "term": "圖形處理器",
+    "en": "GPU",
+    "aliases": [
+      "GPU"
+    ],
+    "short": "原本用來處理遊戲畫面，因為擅長同時做大量運算，成為訓練和執行 AI 模型的主流晶片。NVIDIA 是龍頭。",
+    "node": "ai-chip",
+    "sources": [
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "asic",
+    "term": "客製化晶片",
+    "en": "ASIC／XPU",
+    "aliases": [
+      "ASIC",
+      "XPU"
+    ],
+    "short": "替特定客戶、特定用途量身設計的晶片。雲端業者自己設計 AI 用的 ASIC，目的是降低成本和對 NVIDIA 的依賴。博通、聯發科、世芯、創意都做這門生意。",
+    "node": "ai-chip",
+    "sources": [
+      "avgo-10k-2025",
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "nre",
+    "term": "委託設計費",
+    "en": "NRE（Non-Recurring Engineering）",
+    "aliases": [
+      "NRE"
+    ],
+    "short": "ASIC 設計服務公司幫客戶設計晶片時收的一次性設計費，和之後量產賣晶片的收入分開算。例如世芯 2026 年第一季毛利率創新高，主要就是因為 NRE 的比重提高。",
+    "node": "ai-chip",
+    "sources": [
+      "pocket-alchip",
+      "ltn-alchip-call"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "cuda",
+    "term": "CUDA",
+    "en": "CUDA",
+    "aliases": [
+      "CUDA"
+    ],
+    "short": "NVIDIA 的軟體開發平台，只能在 NVIDIA 的 GPU 上執行。開發者用習慣後很難換到別家晶片，是 NVIDIA 最重要的護城河之一。",
+    "node": "ai-chip",
+    "sources": [
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "odm",
+    "term": "原廠委託設計代工",
+    "en": "ODM",
+    "aliases": [
+      "ODM"
+    ],
+    "short": "不只照圖生產，還會幫客戶設計產品的代工廠，例如台灣的鴻海、廣達、緯創。NVIDIA 透過這些廠商把晶片做成伺服器賣出去。",
+    "node": "ai-server",
+    "sources": [
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "hyperscaler",
+    "term": "大型雲端業者",
+    "en": "Hyperscaler／CSP",
+    "aliases": [
+      "雲端業者",
+      "CSP"
+    ],
+    "short": "亞馬遜、微軟、Google 這類經營超大規模資料中心的雲端公司。它們是 AI 晶片和 AI 伺服器最大的買家。",
+    "node": "cloud",
+    "sources": [
+      "nvda-10k-2026",
+      "crn-cloud-share-1q26"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "liquid-cooling",
+    "term": "液冷",
+    "en": "Liquid Cooling",
+    "aliases": [
+      "液冷",
+      "水冷板"
+    ],
+    "short": "用液體帶走伺服器熱量的散熱方式。AI 伺服器發熱量太大，傳統風扇不夠用，帶動台達電、奇鋐等散熱廠商成長。",
+    "node": "datacenter",
+    "sources": [
+      "vrt-10k-2025",
+      "smci-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "reit",
+    "term": "不動產投資信託",
+    "en": "REIT",
+    "aliases": [
+      "REIT"
+    ],
+    "short": "一種把收租型不動產（例如機房）包裝成投資標的的公司形式，在美國有稅務上的特殊規定。美國很多資料中心營運商（例如 Equinix）都是 REIT。",
+    "node": "datacenter",
+    "sources": [
+      "eqix-10k-2025"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "capex",
+    "term": "資本支出",
+    "en": "CapEx",
+    "aliases": [
+      "資本支出"
+    ],
+    "short": "公司花在蓋廠房、買設備等長期資產上的錢。晶圓廠和雲端業者的資本支出，直接決定設備商和伺服器廠的訂單。",
+    "node": "equipment",
+    "sources": [
+      "tsmc-3q26-call",
+      "msft-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "export-control",
+    "term": "出口管制",
+    "en": "Export Controls",
+    "aliases": [
+      "出口管制"
+    ],
+    "short": "政府限制特定產品或技術賣到特定國家。美國限制先進晶片和設備賣到中國，直接影響 NVIDIA、ASML 等公司的營收。",
+    "node": "ai-chip",
+    "sources": [
+      "nvda-10k-2026",
+      "asml-20f-2025"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "inference",
+    "term": "訓練與推論",
+    "en": "Training／Inference",
+    "aliases": [
+      "推論"
+    ],
+    "short": "「訓練」是用大量資料把 AI 模型做出來；「推論」是實際使用模型來回答問題或完成工作。使用的人越多，推論需要的算力就越多。",
+    "node": "ai-chip",
+    "sources": [
+      "nvda-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "api",
+    "term": "API",
+    "en": "Application Programming Interface",
+    "aliases": [
+      "API"
+    ],
+    "short": "讓其他公司的程式直接呼叫 AI 模型的接口，通常按使用量計費。這是模型公司向企業和開發者收費的主要方式之一。",
+    "node": "model",
+    "sources": [
+      "builtin-anthropic-g"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "agent",
+    "term": "AI 代理",
+    "en": "AI Agent",
+    "aliases": [
+      "AI 代理",
+      "Agentforce"
+    ],
+    "short": "不只回答問題，還能自己規劃並完成多步驟工作的 AI。微軟、Salesforce 都把它當成產品主軸。",
+    "node": "ai-app",
+    "sources": [
+      "msft-10k-2026",
+      "crm-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "open-weight",
+    "term": "開放權重模型",
+    "en": "Open-weight Model",
+    "aliases": [
+      "開放權重",
+      "開源"
+    ],
+    "short": "公開模型參數、讓任何人都能下載使用的 AI 模型。它和封閉模型的差距快速縮小，讓模型的價格競爭更激烈。",
+    "node": "model",
+    "sources": [
+      "aiindex-2025-toms"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "saas",
+    "term": "軟體即服務",
+    "en": "SaaS",
+    "aliases": [
+      "SaaS"
+    ],
+    "short": "用訂閱方式在網路上提供軟體，通常按使用者人數收費，例如 Salesforce。AI 可能改變這種收費方式。",
+    "node": "ai-app",
+    "sources": [
+      "crm-10k-2026"
+    ],
+    "status": "待審核"
+  },
+  {
+    "id": "10k",
+    "term": "年報（10-K／20-F）",
+    "en": "Form 10-K／20-F",
+    "aliases": [
+      "10-K",
+      "20-F"
+    ],
+    "short": "公司向美國證券交易委員會（SEC）申報的官方年度報告，10-K 是美國公司、20-F 是外國公司。內容經過法律審查，是最可靠的一手資料。",
+    "node": null,
+    "sources": [],
+    "status": "待審核"
+  }
+]
