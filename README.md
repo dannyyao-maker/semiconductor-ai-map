@@ -23,6 +23,7 @@
 | `data/` | 網站內容（環節、公司、來源），欄位說明見 `data/README.md` |
 | `sources/` | 手動下載的來源原檔，不上傳 GitHub |
 | `tools/serve.mjs` | 本機預覽用的小伺服器 |
+| `tools/review-list.mjs`、`審核清單.md` | 從 data/ 產生可打勾的審核清單 |
 | `提案.md`、`決策紀錄.md`、`來源清單.md` | 專案規劃文件 |
 
 ## 技術選擇
