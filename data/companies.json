@@ -636,12 +636,16 @@
     "segments": [
       "cloud"
     ],
-    "oneLiner": "全球最大的雲端平台，也自行設計 AI 晶片（Trainium）。",
-    "moat": "雲端市佔領先、服務種類最多、企業客戶基礎大。",
-    "risks": "AI 資本支出龐大；與微軟、Google 在 AI 服務的競爭。",
-    "sources": [],
+    "oneLiner": "旗下 AWS 是全球最大的雲端平台（2026 年第一季市佔約 28%），也自行設計 AI 晶片 Trainium。",
+    "moat": "雲端市佔領先，服務涵蓋運算、儲存、資料庫等，客戶包括新創、企業和政府。",
+    "risks": "市佔從 29% 小幅下滑，微軟、Google 成長較快；AI 資本支出龐大。",
+    "sources": [
+      "amzn-10k-2025",
+      "crn-cloud-share-1q26",
+      "aws-trainium"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   },
   {
     "id": "microsoft",
@@ -653,12 +657,14 @@
       "model",
       "ai-app"
     ],
-    "oneLiner": "經營 Azure 雲端，是 OpenAI 的重要投資方與合作夥伴，並把 AI 助理（Copilot）加進 Office 等產品。",
-    "moat": "龐大的企業客戶與辦公軟體用戶，能快速推廣 AI 功能。",
-    "risks": "AI 資本支出能否回收；與 OpenAI 合作關係的變化。",
-    "sources": [],
+    "oneLiner": "經營 Azure 雲端，是 OpenAI 的長期策略夥伴與投資方，並把 AI 助理 Copilot 加進 Microsoft 365。",
+    "moat": "龐大的企業客戶與辦公軟體用戶，能快速推廣 AI 功能；Azure 等雲端服務營收成長 41%。",
+    "risks": "AI 基礎設施投資在營收成熟之前就要先投入，回收時間不確定；與 OpenAI 合作關係的變化。",
+    "sources": [
+      "msft-10k-2026"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   },
   {
     "id": "google",
@@ -671,11 +677,13 @@
       "ai-app"
     ],
     "oneLiner": "同時經營雲端、自研 AI 模型（Gemini）和 AI 晶片（TPU），並把 AI 加進搜尋等產品。",
-    "moat": "從晶片、模型到用戶的垂直整合，加上搜尋與 Android 的龐大用戶。",
-    "risks": "AI 聊天服務可能衝擊搜尋廣告收入；反壟斷監管。",
-    "sources": [],
+    "moat": "從晶片、模型到產品的垂直整合，加上搜尋與 YouTube 的龐大用戶。",
+    "risks": "AI 可能改變使用者行為與變現方式；美國司法部等提起多起反壟斷訴訟。",
+    "sources": [
+      "googl-10k-2025"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   },
   {
     "id": "openai",
@@ -686,12 +694,18 @@
       "model",
       "ai-app"
     ],
-    "oneLiner": "開發 GPT 系列模型和 ChatGPT 的公司，帶動這波生成式 AI 熱潮。",
-    "moat": "品牌知名度高、用戶規模大。",
-    "risks": "算力成本與龐大資金需求；競爭激烈；公司治理與組織結構變化。",
-    "sources": [],
+    "oneLiner": "開發 GPT 系列模型和 ChatGPT 的公司，2026 年 2 月 ChatGPT 每週活躍用戶超過 9 億。",
+    "moat": "品牌知名度高、用戶規模大，付費訂閱約 5,000 萬。",
+    "risks": "算力承諾龐大（到 2030 年約 6,000 億美元），遠高於目前營收；2025 年完成組織重整（微軟年報稱為 OpenAI Recapitalization），治理結構仍在變化。",
+    "sources": [
+      "propakistani-chatgpt",
+      "creati-openai-funding",
+      "convergedigest-openai",
+      "valueadd-openai",
+      "msft-10k-2026"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   },
   {
     "id": "anthropic",
@@ -701,12 +715,18 @@
     "segments": [
       "model"
     ],
-    "oneLiner": "開發 Claude 系列模型的 AI 公司，以 AI 安全研究為重點，主攻企業與開發者市場。",
-    "moat": "在企業與程式開發應用累積客戶，與大型雲端業者合作。",
-    "risks": "需要大量資金與算力；與規模更大的對手競爭。",
-    "sources": [],
+    "oneLiner": "開發 Claude 系列模型的 AI 公司，主攻企業與程式開發市場（本專案使用的 Claude Code 就是它的產品）。",
+    "moat": "企業客戶成長快：年化營收從 2026 年 2 月約 140 億美元，增加到 2026 年 5 月超過 470 億美元；亞馬遜是主要投資方之一（2025 年投資 27 億美元）。",
+    "risks": "需要大量資金與算力；與 OpenAI、Google 等規模更大或資源更多的對手競爭。",
+    "sources": [
+      "builtin-anthropic-g",
+      "businesstoday-anthropic",
+      "builtin-anthropic-h",
+      "willison-anthropic-h",
+      "amzn-10k-2025"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   },
   {
     "id": "salesforce",
@@ -716,11 +736,13 @@
     "segments": [
       "ai-app"
     ],
-    "oneLiner": "全球最大的客戶關係管理（CRM）軟體公司，推出 AI 代理服務。",
-    "moat": "大量企業客戶資料與既有系統，轉換成本高。",
-    "risks": "AI 可能改變按人頭收費的軟體模式；成長放緩。",
-    "sources": [],
+    "oneLiner": "全球主要的客戶關係管理（CRM）軟體公司，推出 AI 代理平台 Agentforce。",
+    "moat": "大量企業客戶資料與既有系統，產品涵蓋銷售、客服、行銷等。",
+    "risks": "AI 產品的定價和銷售策略不一定被客戶接受；收費方式從訂閱轉向按使用量，營收較難預測。",
+    "sources": [
+      "crm-10k-2026"
+    ],
     "asOf": "2026-11",
-    "status": "待查證"
+    "status": "待審核"
   }
 ]

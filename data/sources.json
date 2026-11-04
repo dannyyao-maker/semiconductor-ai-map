@@ -486,5 +486,173 @@
     "url": "https://money.udn.com/money/amp/story/5607/9762915",
     "asOf": "2026-08",
     "type": "媒體"
+  },
+  {
+    "id": "amzn-10k-2025",
+    "publisher": "亞馬遜 Amazon",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "msft-10k-2026",
+    "publisher": "微軟 Microsoft",
+    "title": "2026 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+    "asOf": "2026-07",
+    "type": "官方"
+  },
+  {
+    "id": "googl-10k-2025",
+    "publisher": "Alphabet（Google）",
+    "title": "2025 年度報告（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm",
+    "asOf": "2026-02",
+    "type": "官方"
+  },
+  {
+    "id": "crm-10k-2026",
+    "publisher": "Salesforce",
+    "title": "2026 會計年度年報（Form 10-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1108524/000110852426000060/crm-20260131.htm",
+    "asOf": "2026-03",
+    "type": "官方"
+  },
+  {
+    "id": "aws-trainium",
+    "publisher": "Amazon Web Services",
+    "title": "官方網站：AWS Trainium",
+    "url": "https://aws.amazon.com/es/ai/machine-learning/trainium/?nc1=h_ls",
+    "asOf": "2026",
+    "type": "官方"
+  },
+  {
+    "id": "techcrunch-trainium3",
+    "publisher": "TechCrunch",
+    "title": "亞馬遜推出新一代 AI 晶片 Trainium3",
+    "url": "https://techcrunch.com/2025/12/02/amazon-releases-an-impressive-new-ai-chip-and-teases-a-nvidia-friendly-roadmap",
+    "asOf": "2025-12",
+    "type": "媒體"
+  },
+  {
+    "id": "crn-cloud-share-1q26",
+    "publisher": "CRN（引述 Synergy Research）",
+    "title": "2026 年第一季雲端市佔",
+    "url": "https://www.crnasia.com/news-network/2026/cloud-market-share-q1-2026-aws-microsoft-google-battling-in-ai-era",
+    "asOf": "2026-05",
+    "type": "媒體"
+  },
+  {
+    "id": "dcd-synergy-1q26",
+    "publisher": "DatacenterDynamics（引述 Synergy Research）",
+    "title": "2026 年第一季雲端支出達 1,290 億美元",
+    "url": "https://www.datacenterdynamics.com/en/news/synergy-research-cloud-spending-hits-129bn-in-q1-2026-ninth-consecutive-quarter-of-growth",
+    "asOf": "2026-05",
+    "type": "媒體"
+  },
+  {
+    "id": "aiindex-2025-toms",
+    "publisher": "Tom's Hardware（引述 Stanford AI Index 2025）",
+    "title": "AI 成本下降 280 倍",
+    "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-costs-drop-280-fold-but-harmful-incidents-rise-56-percent-in-last-year-stanford-2025-ai-report-highlights-china-us-competition",
+    "asOf": "2025-04",
+    "type": "媒體"
+  },
+  {
+    "id": "aiindex-2025-wisdomtree",
+    "publisher": "WisdomTree（引述 Stanford AI Index 2025）",
+    "title": "便宜 280 倍：AI 真正的革命是普及",
+    "url": "https://www.wisdomtree.com/us/insights/blog/280x-cheaper-the-real-ai-revolution-is-accessibility",
+    "asOf": "2025",
+    "type": "研究機構"
+  },
+  {
+    "id": "aiindex-2026",
+    "publisher": "Stanford HAI",
+    "title": "AI Index 2026 報告",
+    "url": "https://hai.stanford.edu/ai-index",
+    "asOf": "2026-04",
+    "type": "研究機構"
+  },
+  {
+    "id": "aiindex-2026-stark",
+    "publisher": "Stark Insider（引述 AI Index 2026）",
+    "title": "Stanford 2026 AI Index 重點",
+    "url": "https://starkinsider.com/2026/04/stanford-2026-ai-index-report.html",
+    "asOf": "2026-04",
+    "type": "媒體"
+  },
+  {
+    "id": "aiindex-2026-digit",
+    "publisher": "Digit（引述 AI Index 2026）",
+    "title": "AI Index 2026 五大重點：導入與能力",
+    "url": "https://www.digit.in/features/general/stanford-ai-index-2026-report-5-key-insights-on-ai-adoption-and-competency.html",
+    "asOf": "2026-04",
+    "type": "媒體"
+  },
+  {
+    "id": "convergedigest-openai",
+    "publisher": "Converge Digest",
+    "title": "OpenAI 完成 1,220 億美元募資，擴大跨雲端與晶片的算力布局",
+    "url": "https://convergedigest.com/openai-closes-122b-scales-compute-strategy-across-clouds-and-chips/?amp=1",
+    "asOf": "2026-03",
+    "type": "媒體"
+  },
+  {
+    "id": "valueadd-openai",
+    "publisher": "ValueAdd VC",
+    "title": "OpenAI 2026 年營收與獲利路徑分析",
+    "url": "https://valueaddvc.com/blog/openai-revenue-2026-20b-arr-4b-month-path-to-profitability",
+    "asOf": "2026",
+    "type": "媒體"
+  },
+  {
+    "id": "propakistani-chatgpt",
+    "publisher": "ProPakistani",
+    "title": "ChatGPT 週活躍用戶接近 10 億",
+    "url": "https://propakistani.pk/2026/02/28/chatgpt-nears-1-billion-weekly-active-users/amp/",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "creati-openai-funding",
+    "publisher": "Creati.ai",
+    "title": "Altman：ChatGPT 成長率超過 10%，OpenAI 募資 1,000 億美元",
+    "url": "https://creati.ai/ai-news/2026-02-10/sam-altman-chatgpt-growth-exceeds-10-percent-openai-100b-funding",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "builtin-anthropic-g",
+    "publisher": "Built In",
+    "title": "Anthropic 以 3,800 億美元估值募得 300 億美元",
+    "url": "https://builtin.com/articles/anthropic-raises-30b-series-g-380b-valuation-20260212",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "businesstoday-anthropic",
+    "publisher": "Business Today",
+    "title": "Anthropic 募資 300 億美元，企業 AI 需求上升",
+    "url": "https://www.businesstoday.in/technology/news/story/anthropic-raises-30-billion-at-usd-380-billion-valuation-as-enterprise-ai-demand-rises-515974-2026-02-13",
+    "asOf": "2026-02",
+    "type": "媒體"
+  },
+  {
+    "id": "builtin-anthropic-h",
+    "publisher": "Built In",
+    "title": "Anthropic 完成 650 億美元 H 輪募資",
+    "url": "https://builtin.com/articles/anthropic-raises-65b-series-h-965b-valuation-20260601",
+    "asOf": "2026-06",
+    "type": "媒體"
+  },
+  {
+    "id": "willison-anthropic-h",
+    "publisher": "Simon Willison（引述 Anthropic 官方公告）",
+    "title": "Anthropic H 輪募資公告摘錄",
+    "url": "https://simonwillison.net/2026/May/29/anthropic/",
+    "asOf": "2026-05",
+    "type": "媒體"
   }
 ]

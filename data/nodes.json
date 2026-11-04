@@ -860,7 +860,7 @@
       "nameEn": "Cloud Platforms",
       "zone": "ai-sw",
       "order": 9,
-      "status": "待查證",
+      "status": "待審核",
       "oneLiner": "把大量伺服器和 AI 算力用「租」的方式提供給企業和開發者，按使用量收費。",
       "analogy": "像水電公司：企業不用自己蓋發電廠（機房），打開開關就能用電（算力），用多少付多少。",
       "upstream": [
@@ -893,51 +893,71 @@
         "google"
       ],
       "business": {
-        "model": "訂閱與按量計費：出租運算、儲存、資料庫等服務。AI 時代多了「出租 GPU 算力」和「提供 AI 模型 API」兩種收入。",
-        "margin": "規模經濟明顯，成熟後利潤率高；但 AI 需要先投入龐大資本支出，短期會壓低利潤，也拉長回收時間。",
-        "bargainingPower": "市場由三大業者寡占，企業把系統搬上某家雲端後很難轉換，議價能力強；但在採購 AI 晶片時，對 NVIDIA 的議價能力有限。"
+        "model": "按使用量收費：出租運算、儲存、資料庫等服務。AI 時代多了「出租 AI 算力」和「提供 AI 模型服務」兩種收入；例如微軟 Azure 等雲端服務營收在 2026 會計年度成長 41%。",
+        "margin": "規模經濟明顯，成熟後利潤率高；但微軟年報指出，AI 基礎設施的投資規模龐大、速度很快，而且發生在營收模式成熟之前，回收時間可能不如預期。",
+        "bargainingPower": "市場由三大業者主導：2026 年第一季亞馬遜約占 28%、微軟 21%、Google 14%，三家合計約三分之二。但在採購 AI 晶片時，對 NVIDIA 的議價能力有限。"
       },
       "issues": [
         {
-          "text": "AI 資本支出規模龐大，投資人關注何時能轉成足夠的營收和獲利。",
-          "status": "待查證",
+          "text": "AI 資本支出規模龐大：微軟年報指出，這些投資要持續增加，而且在營收模式成熟之前就要先投入，相關營收可能無法如期實現。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "msft-10k-2026"
+          ]
         },
         {
-          "text": "算力供應吃緊：晶片、電力、資料中心空間都可能成為擴張的限制。",
-          "status": "待查證",
+          "text": "算力擴張受限：除了晶片，取得零組件和能源也是限制；IEA 預估資料中心用電到 2030 年會增加一倍以上。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "msft-10k-2026",
+            "iea-energy-ai"
+          ]
         },
         {
-          "text": "各國的資料主權與監管要求，需要在當地設立機房。",
-          "status": "待查證",
+          "text": "資料主權：各國對資料存放位置、安全和延遲的要求增加，雲端與資料中心業者需要在當地設立機房。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "eqix-10k-2025"
+          ]
         }
       ],
       "topics": [
         {
-          "text": "雲端業者自研 AI 晶片，降低成本與對 NVIDIA 的依賴。",
-          "status": "待查證",
+          "text": "雲端業者自研 AI 晶片：Google 有自家的 TPU（第七代 Ironwood），亞馬遜推出 3 奈米的 Trainium3。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "googl-10k-2025",
+            "aws-trainium",
+            "techcrunch-trainium3"
+          ]
         },
         {
-          "text": "新興的「GPU 雲端」業者（專門出租 AI 算力）挑戰傳統雲端業者。",
-          "status": "待查證",
+          "text": "新興的「GPU 雲端」（Neocloud，專門出租 AI 算力）已占整體雲端市場約 5%。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "dcd-synergy-1q26"
+          ]
         },
         {
-          "text": "雲端業者與大型模型公司的策略合作與投資關係。",
-          "status": "待查證",
+          "text": "雲端業者投資模型公司：微軟與 OpenAI 有長期策略合作，亞馬遜 2025 年投資 Anthropic 27 億美元。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "msft-10k-2026",
+            "amzn-10k-2025"
+          ]
         }
       ],
-      "reading": []
+      "reading": [
+        "msft-10k-2026",
+        "amzn-10k-2025"
+      ],
+      "asOf": "2026-11"
     },
     {
       "id": "model",
@@ -945,7 +965,7 @@
       "nameEn": "Foundation Models",
       "zone": "ai-sw",
       "order": 10,
-      "status": "待查證",
+      "status": "待審核",
       "oneLiner": "花大量算力和資料訓練出大型 AI 模型（例如 GPT、Claude、Gemini），再把模型賣給消費者和企業使用。",
       "analogy": "像花巨資培養頂尖顧問的顧問公司：前期訓練成本很高，之後靠把顧問的能力「出租」給大量客戶回收。",
       "upstream": [
@@ -977,51 +997,75 @@
         "microsoft"
       ],
       "business": {
-        "model": "三種主要收入：消費者訂閱（聊天機器人月費）、企業方案、開發者用 API 按使用量付費。",
-        "margin": "訓練和執行模型的算力成本極高，獲利模式還在發展中；多數公司仍在大量投資，靠募資或母公司支撐。",
-        "bargainingPower": "頂尖模型只有少數公司做得出來，有一定議價能力；但競爭激烈、模型價格持續下降，開源模型也帶來壓力。"
+        "model": "三種主要收入：消費者訂閱（例如 ChatGPT 付費方案，2026 年 2 月約 5,000 萬付費訂閱）、企業方案、開發者用 API 按使用量付費。",
+        "margin": "訓練和執行模型的算力成本極高，主要公司都靠大規模募資支撐：例如 Anthropic 2026 年 2 月募資 300 億美元，OpenAI 2026 年完成 1,220 億美元募資。",
+        "bargainingPower": "頂尖模型只有少數公司做得出來，但差距越來越小：AI Index 2025 指出，開源（開放權重）模型和封閉模型的差距從 8% 縮小到 1.7%；同等能力模型的使用成本在兩年內降了約 280 倍。"
       },
       "issues": [
         {
-          "text": "訓練與執行成本高，商業模式能否長期獲利仍待證明。",
-          "status": "待查證",
+          "text": "算力成本與承諾龐大：OpenAI 表示到 2030 年的算力支出約 6,000 億美元，遠高於目前的營收規模，商業模式能否長期獲利仍待證明。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "convergedigest-openai",
+            "valueadd-openai"
+          ]
         },
         {
-          "text": "競爭激烈、模型價格快速下降，差異化愈來愈難。",
-          "status": "待查證",
+          "text": "價格快速下降、差異化越來越難：同等能力模型的使用成本兩年內下降約 280 倍，頂尖模型之間的差距也在縮小。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "aiindex-2025-toms",
+            "aiindex-2025-wisdomtree"
+          ]
         },
         {
-          "text": "著作權、資料使用、AI 安全與各國監管的不確定性。",
-          "status": "待查證",
+          "text": "法規不確定：Google 年報指出，AI、智慧財產權、隱私等相關法規還在演變，適用範圍仍不明確。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "googl-10k-2025"
+          ]
         }
       ],
       "topics": [
         {
-          "text": "AI 代理（AI Agent）：讓 AI 自己完成多步驟的工作，被視為下一個商業化重點。",
-          "status": "待查證",
+          "text": "AI 代理（AI Agent）：讓 AI 自己完成多步驟工作，微軟、Salesforce 都把它當成產品主軸；Anthropic 的寫程式工具 Claude Code 年化營收在 2026 年初超過 25 億美元。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "msft-10k-2026",
+            "crm-10k-2026",
+            "builtin-anthropic-g"
+          ]
         },
         {
-          "text": "開源模型（含中國模型）與封閉模型的競爭。",
-          "status": "待查證",
+          "text": "開源與封閉模型、美國與中國的競爭：AI Index 2026 指出，2026 年 3 月美國最好的模型只領先中國約 2.7%。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "aiindex-2026",
+            "aiindex-2026-stark",
+            "aiindex-2026-digit"
+          ]
         },
         {
-          "text": "模型公司的大型募資、估值，以及和雲端業者的合作關係。",
-          "status": "待查證",
+          "text": "模型公司的大型募資與高估值：Anthropic 2026 年 2 月估值 3,800 億美元，6 月再募 650 億美元；OpenAI 募資 1,220 億美元。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "builtin-anthropic-g",
+            "builtin-anthropic-h",
+            "convergedigest-openai"
+          ]
         }
       ],
-      "reading": []
+      "reading": [
+        "aiindex-2026",
+        "msft-10k-2026"
+      ],
+      "asOf": "2026-11"
     },
     {
       "id": "ai-app",
@@ -1029,7 +1073,7 @@
       "nameEn": "AI Applications",
       "zone": "ai-sw",
       "order": 11,
-      "status": "待查證",
+      "status": "待審核",
       "oneLiner": "把 AI 模型變成實際可用、能收費的產品或服務，例如寫程式助理、辦公室助理、客服機器人。",
       "analogy": "模型像電力，AI 應用就像各種家電：真正讓消費者願意掏錢的，是好用的電器，而不是電本身。",
       "upstream": [
@@ -1057,51 +1101,70 @@
         "salesforce"
       ],
       "business": {
-        "model": "主要是訂閱制（按人頭或按月收費），也有按使用量收費；大型軟體公司把 AI 功能加進既有產品，藉此漲價或提高續約率。",
-        "margin": "軟體本身利潤高，但每次使用 AI 都要付算力成本，毛利比傳統軟體低；規模和定價能力決定能否賺錢。",
-        "bargainingPower": "已經擁有大量用戶的平台（例如辦公軟體、作業系統）把 AI 加進去最有優勢；新創公司則容易被模型公司或大平台的新功能取代。"
+        "model": "主要是訂閱制（按人頭或按月收費），也越來越多按使用量收費；大型軟體公司把 AI 功能加進既有產品，例如微軟 365 Copilot、Salesforce 的 Agentforce。",
+        "margin": "每次使用 AI 都有算力成本；Salesforce 年報指出，按使用量計價的收入比較難預測，客戶用得比預期少，營收就會下降。",
+        "bargainingPower": "已經擁有大量用戶的平台（例如辦公軟體、搜尋）把 AI 加進去最有優勢；但 AI 也可能改變使用者行為和變現方式，對既有業者同時是機會與風險。"
       },
       "issues": [
         {
-          "text": "企業試用很多，但真正大規模付費、證明投資報酬率的案例仍在累積。",
-          "status": "待查證",
+          "text": "企業會不會大規模付費還在驗證：Salesforce 年報指出，Agentforce 等 AI 產品的定價與銷售策略不一定能被客戶廣泛接受。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "crm-10k-2026"
+          ]
         },
         {
-          "text": "應用新創的護城河不明顯，容易被模型公司的新功能取代。",
-          "status": "待查證",
+          "text": "AI 改變商業模式：Google 年報指出，新產品可能改變使用者行為和營收趨勢，帶來不同的變現模式。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "googl-10k-2025"
+          ]
         },
         {
-          "text": "AI 出錯（幻覺）、資料隱私、責任歸屬等導入風險。",
-          "status": "待查證",
+          "text": "導入風險：AI、隱私、智慧財產權等相關法規還在演變，企業導入時要面對法律上的不確定性。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "googl-10k-2025"
+          ]
         }
       ],
       "topics": [
         {
-          "text": "AI 寫程式工具快速普及，改變軟體開發的工作方式。",
-          "status": "待查證",
+          "text": "AI 寫程式工具快速普及：AI Index 2026 引用的研究指出，客服和軟體開發的生產力提升約 14–26%；Claude Code 年化營收在 2026 年初超過 25 億美元。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "aiindex-2026-stark",
+            "aiindex-2026-digit",
+            "builtin-anthropic-g"
+          ]
         },
         {
-          "text": "AI 對傳統軟體公司（SaaS）商業模式的衝擊：按人頭收費是否會被取代。",
-          "status": "待查證",
+          "text": "軟體公司（SaaS）的收費方式在改變：Salesforce 年報指出，調整定價模式（包括按使用量計價）可能影響營運。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "crm-10k-2026"
+          ]
         },
         {
-          "text": "台灣企業導入 AI 的情況，以及 AI 對就業與工作內容的影響。",
-          "status": "待查證",
+          "text": "AI 對就業的影響：AI Index 2026 引用的資料顯示，22–25 歲的初階軟體工程師職缺一年減少約 20%。",
+          "status": "待審核",
           "asOf": "2026-11",
-          "sources": []
+          "sources": [
+            "aiindex-2026-stark",
+            "aiindex-2026-digit"
+          ]
         }
       ],
-      "reading": []
+      "reading": [
+        "crm-10k-2026",
+        "aiindex-2026"
+      ],
+      "asOf": "2026-11"
     }
   ]
 }
