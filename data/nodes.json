@@ -1,0 +1,252 @@
+{
+  "zones": [
+    {
+      "id": "semi",
+      "name": "半導體供應鏈",
+      "nameEn": "Semiconductor Supply Chain"
+    },
+    {
+      "id": "ai-hw",
+      "name": "AI 硬體與基礎建設",
+      "nameEn": "AI Hardware & Infrastructure"
+    },
+    {
+      "id": "ai-sw",
+      "name": "AI 軟體與商業模式",
+      "nameEn": "AI Software & Business Models"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "equipment",
+      "name": "設備與材料",
+      "nameEn": "Equipment & Materials",
+      "zone": "semi",
+      "order": 1,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "ic-design",
+      "name": "IC 設計",
+      "nameEn": "IC Design",
+      "zone": "semi",
+      "order": 2,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "foundry",
+      "name": "晶圓代工",
+      "nameEn": "Foundry",
+      "zone": "semi",
+      "order": 3,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "memory",
+      "name": "記憶體",
+      "nameEn": "Memory",
+      "zone": "semi",
+      "order": 4,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "packaging",
+      "name": "封測與先進封裝",
+      "nameEn": "Packaging & Testing",
+      "zone": "semi",
+      "order": 5,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "ai-chip",
+      "name": "AI 晶片",
+      "nameEn": "AI Chips",
+      "zone": "ai-hw",
+      "order": 6,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "ai-server",
+      "name": "AI 伺服器",
+      "nameEn": "AI Servers",
+      "zone": "ai-hw",
+      "order": 7,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "datacenter",
+      "name": "資料中心",
+      "nameEn": "Data Centers",
+      "zone": "ai-hw",
+      "order": 8,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "cloud",
+      "name": "雲端平台",
+      "nameEn": "Cloud Platforms",
+      "zone": "ai-sw",
+      "order": 9,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "model",
+      "name": "大型模型公司",
+      "nameEn": "Foundation Models",
+      "zone": "ai-sw",
+      "order": 10,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    },
+    {
+      "id": "ai-app",
+      "name": "AI 應用與服務",
+      "nameEn": "AI Applications",
+      "zone": "ai-sw",
+      "order": 11,
+      "status": "待查證",
+      "oneLiner": "",
+      "analogy": "",
+      "upstream": [],
+      "downstream": [],
+      "companies": [],
+      "business": {
+        "model": "",
+        "margin": "",
+        "bargainingPower": ""
+      },
+      "issues": [],
+      "topics": [],
+      "reading": []
+    }
+  ]
+}
