@@ -4,7 +4,7 @@
 
 一張可以點擊的產業鏈地圖，幫商管背景的人在 30 分鐘內建立半導體與 AI 產業的全貌：每個環節在做什麼、誰是代表公司、怎麼賺錢、議價能力強不強、現在遇到什麼問題。
 
-🔗 **線上版：https://GITHUB_USER.github.io/semiconductor-ai-map/**
+🔗 **線上版：https://dannyyao-maker.github.io/semiconductor-ai-map/**
 
 ![產業鏈全景：三大區塊、11 個環節，價值由左往右流動](docs/screenshots/overview.png)
 
@@ -111,4 +111,4 @@ node tools/serve.mjs
 - 原始資料（年報、法說會、新聞）的著作權屬於各自的發布者；本專案只放改寫後的摘要和原始連結。
 - 內容僅供學習參考，**不構成任何投資建議**。
 
-作者：danny
+作者：danny（[@dannyyao-maker](https://github.com/dannyyao-maker)）
