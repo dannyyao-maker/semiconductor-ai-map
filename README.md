@@ -6,6 +6,8 @@
 
 🔗 **線上版：https://dannyyao-maker.github.io/semiconductor-ai-map/**
 
+> 狀態：階段 5 完成，已上線：https://dannyyao-maker.github.io/semiconductor-ai-map/ 。內容等待本人閱讀審核。
+
 ![產業鏈全景：三大區塊、11 個環節，價值由左往右流動](docs/screenshots/overview.png)
 
 > An interactive map of the semiconductor and AI value chain for business readers: 11 segments, 41 companies and 27 glossary terms, each claim backed by a source link (27 of 83 sources are official filings such as 10-K / 20-F and earnings call transcripts). Built from scratch with Claude Code as a static site.
