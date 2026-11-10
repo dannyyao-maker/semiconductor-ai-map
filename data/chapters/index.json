@@ -1,0 +1,17 @@
+{
+  "note": "章節清單。start 是第一章；其他章節在相鄰環節（nodes.json 的 upstream／downstream）完成「認識」後解鎖。file 為 null 表示內容還沒做。",
+  "start": "ic-design",
+  "chapters": [
+    { "node": "ic-design",  "file": "ic-design.json" },
+    { "node": "foundry",    "file": null },
+    { "node": "packaging",  "file": null },
+    { "node": "equipment",  "file": null },
+    { "node": "memory",     "file": null },
+    { "node": "ai-chip",    "file": null },
+    { "node": "ai-server",  "file": null },
+    { "node": "datacenter", "file": null },
+    { "node": "cloud",      "file": null },
+    { "node": "model",      "file": null },
+    { "node": "ai-app",     "file": null }
+  ]
+}

@@ -5,7 +5,7 @@ import { esc } from "./util.js";
 const COUNTRY = { TW: "台灣", US: "美國", KR: "韓國", CN: "中國", JP: "日本", NL: "荷蘭" };
 
 // 每次畫一張卡時建立：同一張卡裡，每個術語只標第一次出現的地方
-const makeT = (ctx) => { const used = new Set(); return (text) => ctx.glossify(esc(text || ""), used); };
+export const makeT = (ctx) => { const used = new Set(); return (text) => ctx.glossify(esc(text || ""), used); };
 
 const statusTag = (status) =>
   status ? `<span class="status status-${esc(status)}" title="內容狀態">${esc(status)}</span>` : "";
@@ -28,7 +28,7 @@ function flowList(items, ctx, T) {
 
 // 當前問題、熱門話題：每條附狀態與資料時間點
 // 來源連結：每個來源顯示成一個小連結，滑過去看完整標題
-function sourceLinks(ids, ctx) {
+export function sourceLinks(ids, ctx) {
   const list = (ids || []).map((id) => ctx.sourceById[id]).filter(Boolean);
   if (!list.length) return "";
   // 同一個發布者有好幾份文件時，合併成「台積電 TSMC ①②③」，避免名字重複出現
@@ -91,7 +91,6 @@ export function nodeCardHTML(node, ctx) {
   }
   const b = node.business || {};
   const T = makeT(ctx);
-  const read = ctx.isRead(node.id);
   return header(zone, node.name, node.nameEn, node.status) + `
     <div class="card-body">
       <p class="lead">${T(node.oneLiner)}</p>
@@ -111,10 +110,7 @@ export function nodeCardHTML(node, ctx) {
       ${section("延伸閱讀", "Further Reading", node.reading?.length
         ? `<ul>${node.reading.map((id) => ctx.sourceById[id]).filter(Boolean).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>（${esc(s.publisher)}，${esc(s.asOf)}）</li>`).join("")}</ul>`
         : `<p class="empty">尚未填寫</p>`)}
-      <div class="read-row">
-        <button class="read-btn${read ? " is-read" : ""}" data-read="${esc(node.id)}" aria-pressed="${read}">${read ? "✓ 已讀懂（再按一次取消）" : "我讀懂了"}</button>
-        <p class="hint">讀完、看得懂就按一下；地圖上會打勾，進度存在你的瀏覽器。看不懂的地方，可以把句子貼給 Claude Code 問。</p>
-      </div>
+      ${ctx.chapterLink ? ctx.chapterLink(node.id) : ""}
     </div>`;
 }
 

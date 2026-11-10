@@ -1,0 +1,30 @@
+{
+  "note": "段位與盃數設定。數字可以直接改，改完重新整理網頁就生效。規則見 data/README.md。",
+  "ranks": [
+    { "id": "bronze",    "name": "青銅", "en": "Bronze",    "color": "#a86b3c", "tiers": [0, 100, 200],     "win": 30, "loss": 0 },
+    { "id": "silver",    "name": "白銀", "en": "Silver",    "color": "#8a96a3", "tiers": [300, 450, 600],   "win": 25, "loss": 5 },
+    { "id": "gold",      "name": "黃金", "en": "Gold",      "color": "#c9a227", "tiers": [750, 950, 1150],  "win": 20, "loss": 10 },
+    { "id": "diamond",   "name": "鑽石", "en": "Diamond",   "color": "#3aa6c9", "tiers": [1350, 1600, 1850], "win": 16, "loss": 12 },
+    { "id": "mythic",    "name": "神話", "en": "Mythic",    "color": "#8e4fc9", "tiers": [2100, 2400, 2700], "win": 13, "loss": 15 },
+    { "id": "legendary", "name": "傳奇", "en": "Legendary", "color": "#d4512b", "tiers": [3000, 3400, 3800], "win": 10, "loss": 18 },
+    { "id": "masters",   "name": "大師", "en": "Masters",   "color": "#2b8a5e", "tiers": [4200, 4700, 5200], "win": 8,  "loss": 20 },
+    { "id": "pro",       "name": "PRO",  "en": "Pro",       "color": "#1c1c1a", "tiers": [5700],            "win": 5,  "loss": 25 }
+  ],
+  "difficulty": {
+    "note": "題目難度 1–3。難度高於目前段位能解鎖的題目不會出現。minRank 是該難度最低需要的段位。",
+    "levels": [
+      { "level": 1, "name": "基礎", "minRank": "bronze" },
+      { "level": 2, "name": "進階", "minRank": "gold" },
+      { "level": 3, "name": "高階", "minRank": "mythic" }
+    ]
+  },
+  "streak": {
+    "timeZone": "Asia/Taipei",
+    "milestones": [
+      { "days": 3,  "reward": "double", "label": "連續 3 天：今天答對的盃數加倍" },
+      { "days": 7,  "reward": "double", "label": "連續 7 天：今天答對的盃數加倍" },
+      { "days": 14, "reward": "double", "label": "連續 14 天：今天答對的盃數加倍" },
+      { "days": 30, "reward": "double", "label": "連續 30 天：今天答對的盃數加倍" }
+    ]
+  }
+}
