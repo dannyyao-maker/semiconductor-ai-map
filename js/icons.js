@@ -1,6 +1,6 @@
 // 圖示庫：全部是自己畫的 SVG（不用表情符號，因為每支手機的表情符號長得不一樣）。
 // 用法：ic("flame") → 一段 <svg>；顏色跟著文字顏色（currentColor），大小用 CSS 的 --ic 控制。
-// mascot("happy") → 吉祥物「小晶」（一顆會眨眼的晶片）。
+// mascot("happy") → 吉祥物「小晶」（斜方塊晶片）。
 
 // 線條圖示：24×24 格，線寬 2，圓頭
 const LINE = {
@@ -81,24 +81,41 @@ export const unitIcon = (nodeId) => UNIT_ICON[nodeId] || "chip";
 export const levelIcon = (sectionId, isMatch) => (isMatch ? "trophy" : LEVEL_ICON[sectionId] || "bulb");
 
 /**
- * 吉祥物「小晶」：一顆有手腳（針腳）的晶片。mood：idle（眨眼）、happy（笑）、sad（難過）、cheer（歡呼）。
+ * 吉祥物「小晶」：一顆斜斜的方塊晶片，畫風參考荒野亂鬥（粗黑邊、純色塊、低彩度）。
+ * 座標量自本人畫的原圖（1254×1254）：眼睛是純黑的大圓點、右眼比較大比較低、鼻子在兩眼中間偏下。
+ * mood：idle（生氣，原圖，會眨眼）、happy、sad、cheer（閉眼笑）、sleepy、wow。col：blue（預設）、green、clay、plum。
  */
-export function mascot(mood = "idle", size = 96) {
-  const eyes = mood === "happy" || mood === "cheer"
-    ? `<path class="m-eye-happy" d="M36 52q5-7 10 0M58 52q5-7 10 0" stroke="#10233a" stroke-width="4" fill="none" stroke-linecap="round"/>`
-    : mood === "sad"
-      ? `<path d="M34 48l12 4M70 48l-12 4" stroke="#10233a" stroke-width="3.500" stroke-linecap="round"/><ellipse cx="41" cy="55" rx="4" ry="4.500" fill="#10233a"/><ellipse cx="63" cy="55" rx="4" ry="4.500" fill="#10233a"/>`
-      : `<g class="m-eyes"><ellipse cx="41" cy="52" rx="6.500" ry="8" fill="#fff"/><ellipse cx="63" cy="52" rx="6.500" ry="8" fill="#fff"/><circle cx="42.500" cy="53" r="3.500" fill="#10233a"/><circle cx="64.500" cy="53" r="3.500" fill="#10233a"/></g>`;
-  const mouth = mood === "sad" ? `<path d="M44 72q8-6 16 0" stroke="#10233a" stroke-width="3.500" fill="none" stroke-linecap="round"/>`
-    : mood === "cheer" ? `<path d="M42 68q10 12 20 0z" fill="#10233a"/>`
-    : `<path d="M44 68q8 8 16 0" stroke="#10233a" stroke-width="3.500" fill="none" stroke-linecap="round"/>`;
-  return `<svg class="mascot mascot-${mood}" viewBox="0 0 104 112" width="${size}" height="${size * 112 / 104}" role="img" aria-label="小晶" focusable="false">
-    <g stroke="#c9922e" stroke-width="7" stroke-linecap="round"><path d="M32 12v10M52 10v12M72 12v10M32 90v10M52 92v12M72 90v10M10 36h10M10 56h10M10 76h10M84 36h10M84 56h10M84 76h10"/></g>
-    <rect x="18" y="20" width="68" height="72" rx="18" fill="#2f6bff"/>
-    <rect x="18" y="20" width="68" height="72" rx="18" fill="url(#mg)"/>
-    <defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fb0ff" stop-opacity=".55"/><stop offset=".5" stop-color="#7fb0ff" stop-opacity="0"/><stop offset="1" stop-color="#0a2a8a" stop-opacity=".35"/></linearGradient></defs>
-    <circle cx="28" cy="30" r="3" fill="#ffd84d"/>
-    ${eyes}${mouth}
+const INK = "#0f1520", NOSE = "#b36b00";
+const M_OUT = "M430 152 L915 218 Q965 228 1000 270 L1048 330 Q1070 360 1068 395 L1020 740 L990 925 Q985 960 940 1010 L880 1050 Q850 1068 815 1065 L320 1000 Q275 992 245 950 L215 905 Q165 850 168 810 L240 300 Q250 260 290 225 L345 180 Q385 148 430 152Z";
+const M_FACE = "M455 278 L870 337 Q910 345 935 375 L950 395 Q962 420 957 460 L895 860 Q885 905 840 925 L805 948 L370 893 Q325 887 300 850 L285 815 Q277 790 282 760 L342 365 Q350 330 385 305 L405 285 Q425 275 455 278Z";
+const mPin = (cx, cy, gold) => `<g transform="rotate(7 ${cx} ${cy})"><rect x="${cx - 48}" y="${cy - 62}" width="96" height="124" rx="40" fill="${INK}"/><rect x="${cx - 26}" y="${cy - 40}" width="62" height="80" rx="16" fill="${gold}"/></g>`;
+const mBrow = (d) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>`;
+const mDots = (ry1, ry2, rx1 = 108, rx2 = 112) => `<g class="m-eyes"><ellipse cx="437" cy="${680 + (112 - ry1)}" rx="${rx1}" ry="${ry1}" fill="${INK}"/><ellipse cx="766" cy="${745 + (115 - ry2)}" rx="${rx2}" ry="${ry2}" fill="${INK}"/></g>`;
+const mArc = (d, w = 44) => `<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}" stroke-linecap="round"/>`;
+const M_FACES = {
+  idle: mBrow("M510 520 Q550 548 582 580") + mBrow("M672 608 Q725 586 772 564") + mDots(112, 115),
+  happy: mBrow("M380 545 Q440 500 500 545") + mBrow("M700 600 Q770 555 840 600") + mDots(100, 103),
+  sad: mBrow("M385 560 Q450 560 505 515") + mBrow("M700 585 Q770 620 840 660") + mDots(108, 110, 104, 108),
+  cheer: mArc("M345 710 Q437 600 530 710") + mArc("M672 770 Q766 660 860 770"),
+  sleepy: mArc("M333 700 Q437 760 540 700", 40) + mArc("M660 765 Q766 825 872 765", 40),
+  wow: mBrow("M390 520 Q440 490 500 520") + mBrow("M700 550 Q770 520 830 555") + mDots(86, 90, 82, 86),
+};
+const M_COLORS = {
+  blue: { rim: "#587fa9", face: "#cde7f0", gold: "#d6a545" },
+  green: { rim: "#6aa186", face: "#f7ead7", gold: "#e0a931" },
+  clay: { rim: "#c98a66", face: "#f8e8d2", gold: "#e0b24a" },
+  plum: { rim: "#8a84b8", face: "#ebe7f6", gold: "#e0b24a" },
+};
+export function mascot(mood = "idle", size = 96, col = "blue") {
+  const c = M_COLORS[col] || M_COLORS.blue;
+  return `<svg class="mascot mascot-${mood}" viewBox="60 90 1100 1050" width="${size}" height="${Math.round(size * 1050 / 1100)}" role="img" aria-label="小晶" focusable="false">
+    <path d="${M_OUT}" fill="#000" opacity=".2" transform="translate(22 32)"/>
+    ${mPin(213, 457, c.gold)}${mPin(188, 655, c.gold)}${mPin(1055, 572, c.gold)}${mPin(1022, 778, c.gold)}
+    <path d="${M_OUT}" fill="${INK}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+    <path d="${M_OUT}" fill="${c.rim}" transform="translate(620 610) scale(.915) translate(-620 -610)"/>
+    <path d="${M_FACE}" fill="${c.face}" stroke="${c.face}" stroke-width="6" stroke-linejoin="round"/>
+    ${M_FACES[mood] || M_FACES.idle}
+    <path d="M588 742 L525 822 L634 832Z" fill="${NOSE}" stroke="${NOSE}" stroke-width="14" stroke-linejoin="round"/>
   </svg>`;
 }
 

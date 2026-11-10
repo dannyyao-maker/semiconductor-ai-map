@@ -17,7 +17,7 @@ export function mountMe(root, ctx) {
     root.innerHTML = `
       <div class="me">
         <div class="me-hero${sn.doneToday ? " is-lit" : ""}">
-          ${mascot(sn.doneToday ? "happy" : "idle", 120)}
+          ${mascot(sn.doneToday ? "happy" : "idle", 130)}
           <div class="me-streak" aria-label="連續 ${sn.count} 天">${ic("flame")}<b>${sn.count}</b></div>
           ${next ? `<div class="me-goal" aria-label="再 ${next.days - sn.count} 天加倍">${ic("flame")}<i>${next.days}</i><span>×2</span></div>` : ""}
           ${sn.double ? `<div class="me-double">${ic("bolt")}×2</div>` : ""}
