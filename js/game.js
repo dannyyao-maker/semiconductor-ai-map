@@ -7,6 +7,7 @@
 // 連續天數仿 Duolingo：當天完成至少一題計分題才算，斷一天就歸零。
 import { state, save } from "./state.js";
 import { esc } from "./util.js";
+import { rankGlyph } from "./icons.js";
 
 const ROMAN = ["I", "II", "III"];
 
@@ -136,5 +137,5 @@ export function rankBadge(tier, size = "md") {
   const r = tier.rank;
   const roman = r.tiers.length > 1 && tier.ti != null ? ROMAN[tier.ti] : "";
   return `<span class="rank-badge rank-${esc(r.id)} size-${size}" style="--rank:${esc(r.color)}" title="${esc(tier.label)}" aria-label="段位：${esc(tier.label)}">
-    <span class="rank-shield"><i>${esc(r.icon || "★")}</i>${roman ? `<b>${roman}</b>` : ""}</span></span>`;
+    <span class="rank-shield"><i>${rankGlyph(r.id)}</i>${roman ? `<b>${roman}</b>` : ""}</span></span>`;
 }

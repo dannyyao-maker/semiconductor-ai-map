@@ -1,27 +1,15 @@
-// 探索：章節清單、章節總覽、一節一節的畫面播放。
-// 網址：#/explore（清單）、#/explore/intro（全景開場）、#/explore/ic-design（章節總覽）、
-//       #/explore/ic-design/know.what（播放「認識」部分的「在做什麼」這一節）
-import { esc, toast } from "../util.js";
+// 上課：一關一關的畫面播放。入口在「闖關」頁（點關卡），這裡不放清單。
+// 網址：#/explore/intro（全景開場）、#/explore/ic-design/know.what（播放「認識」部分的「在做什麼」這一關）、
+//       #/explore/<環節>/review（5 分鐘速複習；沒學過的環節是 30 秒速覽）
+import { esc } from "../util.js";
 import { state, save } from "../state.js";
 import { renderScreen } from "../screens.js";
 import { renderQuiz } from "../quiz.js";
 import { runMatch } from "../match.js";
-
-const STATE_TEXT = { locked: "🔒 尚未解鎖", soon: "內容製作中", open: "可以開始", started: "進行中", done: "✓ 完成" };
-const cache = {};
-
-async function loadChapter(ctx, id) {
-  if (cache[id]) return cache[id];
-  const file = id === "intro" ? "intro.json" : ctx.chapterIndex.chapters.find((c) => c.node === id)?.file;
-  if (!file) return null;
-  const res = await fetch(`data/chapters/${file}`);
-  if (!res.ok) throw new Error(`讀不到章節 ${file}`);
-  return (cache[id] = await res.json());
-}
+import { ic, levelIcon } from "../icons.js";
 
 // ---- 進度 ----
 const progress = (id) => (state().chapters[id] ||= { sections: {}, parts: {} });
-const sectionDone = (id, key) => Boolean(state().chapters[id]?.sections?.[key]);
 function partUnlocked(ctx, ch, pi) {
   const part = ch.parts[pi];
   if (part.minRank && !ctx.game.difficultyUnlocked(rankLevel(ctx, part.minRank))) return false;
@@ -36,99 +24,35 @@ function rankLevel(ctx, rankId) {
 
 export function mountExplore(root, ctx, initial) {
   let token = 0;
+  const goPath = () => ctx.nav("/path");
 
-  function list() {
-    const items = ctx.chapterList();
-    const intro = state().onboarded;
-    root.innerHTML = `
-      <div class="view-head"><div><h1>探索</h1>
-        <p class="muted">從 IC 設計出發，一章一章往相鄰的環節走。完成一章的「認識」，相鄰的環節就會解鎖。</p></div></div>
-      <a class="chapter-item intro-item${intro ? " is-done" : ""}" href="#/explore/intro">
-        <span class="ch-no">★</span>
-        <div class="ch-body"><p class="ch-name">全景開場：一顆 AI 晶片的旅程</p>
-          <p class="muted small">${intro ? "✓ 看過了，可以隨時重看" : "3 分鐘・不考試・先看全貌"}</p></div>
-        <span class="btn">${intro ? "重看" : "開始"}</span></a>
-      <ol class="chapter-list">
-        ${items.map((c, i) => `
-          <li class="chapter-item is-${c.state} zone-${esc(c.zone)}">
-            <span class="ch-no">${i + 1}</span>
-            <div class="ch-body">
-              <p class="ch-name">${esc(c.name)} <span class="en">${esc(c.nameEn)}</span></p>
-              <p class="muted small">${c.state === "locked" ? `先完成相鄰環節的「認識」：${esc(c.neighbors.join("、"))}` : esc(STATE_TEXT[c.state])}</p>
-            </div>
-            ${c.state === "locked" || c.state === "soon" ? `<span class="ch-state muted small">${esc(STATE_TEXT[c.state])}</span>`
-              : `<a class="btn" href="#/explore/${esc(c.id)}">${c.state === "done" ? "複習" : c.state === "started" ? "繼續" : "開始"}</a>`}
-          </li>`).join("")}
-      </ol>`;
-  }
-
-  function overview(ch) {
-    const id = chId(ch);
-    const n = ctx.nodeById[id];
-    const first = firstUnfinished(ch);
-    root.innerHTML = `
-      <div class="view-head"><div><p><a href="#/explore">← 探索</a></p>
-        <h1>${esc(ch.title)}</h1><p class="muted">${esc(ch.tagline || "")}</p></div>
-        ${n ? `<a class="btn" href="#/hq/${esc(id)}">在研究總部看完整卡片</a>` : ""}</div>
-      ${first ? `<p><a class="btn primary" href="#/explore/${esc(id)}/${esc(first)}">${Object.keys(progress(id).sections).length ? "繼續" : "開始"}：${esc(sectionTitle(ch, first))}</a></p>` : `<p class="done-note">✓ 這一章完成了。可以重玩任何一節，或回研究總部複習。</p>`}
-      <div class="parts">${ch.parts.map((p, pi) => {
-        const open = partUnlocked(ctx, ch, pi);
-        const done = state().chapters[id]?.parts?.[p.id];
-        return `<section class="panel part ${open ? "" : "is-locked"}${done ? " is-done" : ""}">
-          <h2 class="panel-title">${done ? "✓ " : open ? "" : "🔒 "}${esc(p.name)}</h2>
-          ${p.minRank && !open ? `<p class="muted small">升到${esc(ctx.game.ranks.find((r) => r.id === p.minRank)?.name || "")}才會開放</p>` : ""}
-          ${!open && !p.minRank ? `<p class="muted small">先完成前面的部分</p>` : ""}
-          <ol class="section-list">${p.sections.map((s) => {
-            const key = `${p.id}.${s.id}`;
-            const sd = sectionDone(id, key);
-            return `<li class="${sd ? "is-done" : ""}">${open ? `<a href="#/explore/${esc(id)}/${esc(key)}">${sd ? "✓ " : ""}${esc(s.title)}</a>` : `<span>${esc(s.title)}</span>`}
-              <span class="muted small">${s.match ? "對局" : `${s.screens.length} 張`}</span></li>`;
-          }).join("")}</ol></section>`;
-      }).join("")}</div>`;
-  }
-
-  function firstUnfinished(ch) {
-    const id = chId(ch);
-    for (let pi = 0; pi < ch.parts.length; pi++) {
-      if (!partUnlocked(ctx, ch, pi)) continue;
-      for (const s of ch.parts[pi].sections) {
-        const key = `${ch.parts[pi].id}.${s.id}`;
-        if (!sectionDone(id, key)) return key;
-      }
-    }
-    return null;
-  }
-  const sectionTitle = (ch, key) => {
-    const [pid, sid] = key.split(".");
-    return ch.parts.find((p) => p.id === pid)?.sections.find((s) => s.id === sid)?.title || "";
-  };
-
-  // ---- 播放一節 ----
+  // ---- 播放一關 ----
   function play(ch, key, rv) {
     const id = chId(ch);
     const [pid, sid] = key.split(".");
     const pi = rv ? -1 : ch.parts.findIndex((p) => p.id === pid);
     const part = rv ? rv.part : ch.parts[pi];
     const sec = rv ? rv.sec : part?.sections.find((s) => s.id === sid);
-    if (!rv && (!sec || !partUnlocked(ctx, ch, pi))) return overview(ch);
-    const back = rv ? rv.back : id === "intro" ? "#/explore" : `#/explore/${id}`;
+    if (!rv && (!sec || !partUnlocked(ctx, ch, pi))) return goPath();
+    const back = rv ? rv.back : "#/path";
+    const icon = rv ? "bolt" : id === "intro" ? "globe" : levelIcon(sec.id, sec.match);
 
     root.innerHTML = `
       <div class="player">
         <div class="player-head">
-          <a class="player-back" href="${esc(back)}" aria-label="離開">✕</a>
-          <div class="player-title">${id === "intro" ? `<p class="muted small">全景開場</p><p><b>一顆 AI 晶片的旅程</b></p>` : `<p class="muted small">${esc(ch.title)}・${esc(part.name)}</p><p><b>${esc(sec.title)}</b></p>`}</div>
+          <a class="player-back" href="${esc(back)}" aria-label="離開">${ic("close")}</a>
+          ${sec.match ? "" : `<div class="player-progress"><span></span></div>`}
+          <span class="player-ic" title="${esc(sec.title)}">${ic(icon)}</span>
         </div>
-        ${sec.match ? "" : `<div class="player-progress"><span></span></div>`}
-        <div class="player-stage panel"></div>
-        ${sec.match ? "" : `<div class="player-nav"><button class="btn" data-prev>上一張</button><button class="btn primary" data-next disabled>下一步</button></div>`}
+        <div class="player-stage"></div>
+        ${sec.match ? "" : `<div class="player-nav"><button class="pn-prev" type="button" data-prev aria-label="上一張">${ic("back")}</button><button class="pn-next" type="button" data-next disabled aria-label="下一步">${ic("play")}</button></div>`}
       </div>`;
     const stage = root.querySelector(".player-stage");
 
     if (sec.match) {
       runMatch(stage, ctx, {
         key: `${id}.${key}`, title: `${ch.title}・章末對局`, questions: sec.screens.filter((s) => s.type === "quiz"),
-        onExit: (sum) => { if (sum) finishSection(ch, part, sec, sum); else ctx.nav(`/explore/${id}`); },
+        onExit: (sum) => { if (sum) finishSection(ch, part, sec); else goPath(); },
       });
       return;
     }
@@ -141,12 +65,15 @@ export function mountExplore(root, ctx, initial) {
       bar.style.width = `${((i + 1) / sec.screens.length) * 100}%`;
       prev.disabled = i === 0;
       next.disabled = true;
-      next.textContent = i === sec.screens.length - 1 ? "完成這一節" : "下一步";
+      const last = i === sec.screens.length - 1;
+      next.innerHTML = ic(last ? "check" : "play");
+      next.setAttribute("aria-label", last ? "完成這一關" : "下一步");
+      next.classList.toggle("is-finish", last);
       const s = sec.screens[i];
       if (s.type === "quiz") {
         root.querySelector(".player-nav").hidden = true;
         const m = ctx.game.standing().tier.rank.match || {};
-        renderQuiz(stage, s, ctx, { seconds: m.seconds || 0, label: "計分題", continueLabel: i === sec.screens.length - 1 ? "完成這一節" : "下一步",
+        renderQuiz(stage, s, ctx, { seconds: m.seconds || 0, label: "計分題", continueLabel: last ? "完成" : "繼續",
           onDone: () => { root.querySelector(".player-nav").hidden = false; step(); } });
       } else {
         root.querySelector(".player-nav").hidden = false;
@@ -160,51 +87,43 @@ export function mountExplore(root, ctx, initial) {
     show();
   }
 
-  function finishSection(ch, part, sec, sum) {
+  function finishSection(ch, part, sec) {
     const id = chId(ch);
     const pr = progress(id);
     pr.sections[`${part.id}.${sec.id}`] = true;
     pr.at = Date.now();
-    const partDone = part.sections.every((s) => pr.sections[`${part.id}.${s.id}`]);
-    const firstTime = partDone && !pr.parts[part.id];
-    if (partDone) pr.parts[part.id] = true;
+    if (part.sections.every((s) => pr.sections[`${part.id}.${s.id}`])) pr.parts[part.id] = true;
     if (id === "intro") state().onboarded = true;
+    // 記下「剛完成」哪一關，回到闖關頁時播動畫；整個單元完成就慶祝
+    const unitDone = ch.parts.filter((p) => !p.minRank).every((p) => pr.parts[p.id]);
+    state().justDone = { unit: id, key: `${part.id}.${sec.id}`, at: Date.now(), finalOfUnit: id !== "intro" && unitDone };
     save();
-
-    if (id === "intro") return ctx.nav(`/explore/${ctx.chapterIndex.start}`);
-    if (firstTime && part.id === "know") {
-      const unlocked = ctx.chapterList().filter((c) => c.state !== "locked" && c.id !== id).map((c) => c.name);
-      toast(`完成「認識」！地圖上的${ctx.nodeById[id].name}亮起來了${unlocked.length ? `，解鎖：${unlocked.join("、")}` : ""}`);
-    } else if (firstTime && part.id === "final") {
-      toast(`🎉 ${ctx.nodeById[id].name} 這一章完成了！研究總部的地圖已打勾`);
-    } else toast(`✓ 完成：${sec.title}`);
-    const nextKey = firstUnfinished(ch);
-    ctx.nav(nextKey && !sum ? `/explore/${id}/${nextKey}` : `/explore/${id}`);
+    goPath();
   }
 
   async function render(p) {
     const my = ++token;
     const [id, key] = p;
-    if (!id) return list();
+    if (!id) return goPath();
     if (key === "review") return review(id, my);
     if (id !== "intro") {
       const st = ctx.chapterState(id);
-      if (st === "locked" || st === "soon") return list();
+      if (st === "locked" || st === "soon") return goPath();
     }
     let ch;
-    try { ch = await loadChapter(ctx, id); } catch (err) { root.innerHTML = `<p class="error">${esc(err.message)}</p>`; return; }
+    try { ch = await ctx.loadChapter(id); } catch (err) { root.innerHTML = `<p class="error">${esc(err.message)}</p>`; return; }
     if (my !== token) return;
-    if (!ch) return list();
+    if (!ch) return goPath();
     if (id === "intro" && !key) return play(ch, "intro.journey");
-    return key ? play(ch, key) : overview(ch);
+    return key ? play(ch, key) : goPath();
   }
 
   // ---- 速覽／5 分鐘速複習：從環節卡的資料自動產生 7 張重點卡，學過的章節再加 3 題 ----
   async function review(id, my) {
     const n = ctx.nodeById[id];
-    if (!n) return list();
+    if (!n) return goPath();
     let ch = null;
-    try { ch = await loadChapter(ctx, id); } catch { ch = null; }
+    try { ch = await ctx.loadChapter(id); } catch { ch = null; }
     if (my !== token) return;
     const known = ctx.nodeProgress(id).known;
     const name = (x) => (x.node && ctx.nodeById[x.node]?.name) || "";
@@ -235,8 +154,7 @@ export function mountExplore(root, ctx, initial) {
       sec: { id: "review", title: n.name, screens },
       back: `#/hq/${id}`,
       onFinish: () => {
-        if (known) { progress(id).reviewAt = Date.now(); save(); toast(`⚡ 複習完成：${n.name}`); }
-        else toast(`看完了「${n.name}」的速覽`);
+        if (known) { progress(id).reviewAt = Date.now(); save(); }
         ctx.nav(`/hq/${id}`);
       },
     });

@@ -10,7 +10,7 @@
 
 | 今天 | 事件任務（圖表） | 答題 | 研究總部 |
 | --- | --- | --- | --- |
-| ![首頁：下一章、段位、連續天數](docs/screenshots/app-today.png) | ![事件任務：台積電營收折線圖，財測用虛線和空心點](docs/screenshots/app-event-chart.png) | ![答題：答錯變紅、附正確答案和解析](docs/screenshots/app-quiz.png) | ![研究總部：沒探索的環節是灰色](docs/screenshots/app-hq.png) |
+| ![闖關：電路走線路徑，一關一關通電](docs/screenshots/app-today.png) | ![事件任務：台積電營收折線圖，財測用虛線和空心點](docs/screenshots/app-event-chart.png) | ![上課與答題](docs/screenshots/app-quiz.png) | ![地圖：沒探索的環節是灰色](docs/screenshots/app-hq.png) |
 
 > An interactive, gamified learning app for the semiconductor and AI value chain, built for business readers. Static site (no backend, no API keys), installable as a PWA, with sourced content, rank-based quizzes, and event missions generated from official filings and checked automatically against the original documents. Built with Claude Code.
 

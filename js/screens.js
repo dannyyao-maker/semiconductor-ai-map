@@ -21,8 +21,7 @@ export function renderScreen(el, s, ctx, ready) {
   } else if (s.type === "choice") {
     html = `<p class="scr-prompt">${T(s.prompt)}</p>
       <div class="scr-choices">${s.options.map((o, i) => `<button class="scr-choice" data-i="${i}">${esc(o.label)}</button>`).join("")}</div>
-      <div class="scr-reveal" aria-live="polite"></div>
-      <p class="hint">探索題：選哪個都不扣分，看看每個選項的說明。</p>`;
+      <div class="scr-reveal" aria-live="polite"></div>`;
   } else if (s.type === "stat") {
     html = `<p class="scr-title">${T(s.title)}</p>
       <dl class="scr-stat">${s.items.map((it) => `<div><dt>${esc(it.label)}</dt><dd><b>${T(it.value)}</b>${it.note ? `<span>${T(it.note)}</span>` : ""}</dd></div>`).join("")}</dl>${src}`;

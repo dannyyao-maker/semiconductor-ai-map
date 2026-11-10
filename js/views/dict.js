@@ -32,8 +32,7 @@ export function mountDict(root, ctx, initial) {
     const list = ctx.metrics.filter((m) => !q || [m.name, m.en, m.abbr, m.category].join(" ").toLowerCase().includes(q));
     const groups = ORDER.map((c) => [c, list.filter((m) => m.category === c)]).filter(([, l]) => l.length);
     root.innerHTML = `
-      <div class="view-head"><div><p><a href="#/hq">← 研究總部</a></p><h1>指標字典</h1>
-        <p class="muted">${ctx.metrics.length} 個常用財務指標。不教財務基礎，只講重點，以及在半導體與 AI 產業要注意的地方。</p></div>
+      <div class="view-head">
         <div class="search-box"><input type="search" class="dict-search" placeholder="找指標（例：EPS、毛利率、本益比）" value="${esc(filter)}" aria-label="搜尋指標"></div></div>
       ${groups.length ? groups.map(([c, l]) => `
         <section class="dict-group"><h2 class="panel-title">${esc(c)}</h2>${l.map((m) => card(m, m.id === openId || Boolean(q))).join("")}</section>`).join("")

@@ -7,6 +7,7 @@ import { renderScreen } from "../screens.js";
 import { renderQuiz } from "../quiz.js";
 import { renderMap } from "../map.js";
 import { sourceLinks } from "../card.js";
+import { ic, unitIcon, mascot } from "../icons.js";
 
 /** 事件狀態標籤：自動整理的事件特別標出來，並說明它通過了什麼檢查、還沒經過什麼 */
 function statusTag(status) {
@@ -21,32 +22,31 @@ export function mountEvents(root, ctx, initial) {
   function list() {
     const active = ctx.activeEvents();
     const archived = ctx.events.filter((e) => !active.includes(e));
-    const li = (e) => `<li class="event-item${done(e.id) ? " is-done" : ""}"><a href="#/events/${esc(e.id)}">
-      <span class="ev-date">${esc(e.date)}</span><b>${esc(e.title)}</b>
-      <span class="muted small">${done(e.id) ? "✓ 已結案" : "待處理"}・${e.origin === "官方" ? "官方來源" : "媒體／研究機構來源"}${e.status.startsWith("自動整理") ? "・🤖 自動整理" : ""}</span></a></li>`;
+    const row = (e) => `<li><a class="ev-row${done(e.id) ? " is-done" : ""}" href="#/events/${esc(e.id)}">
+      <span class="ev-ic">${ic(done(e.id) ? "check" : "siren")}</span>
+      <span class="ev-body"><b>${esc(e.title)}</b><span class="ev-meta"><time>${esc(e.date)}</time>${e.status.startsWith("自動整理") ? `<i title="自動整理">🤖</i>` : ""}</span></span></a></li>`;
     root.innerHTML = `
-      <div class="view-head"><div><h1>事件</h1><p class="muted">重大事件發生時，這裡會出現任務：狀況簡報 → 地圖導覽 → 3 題 → 結案。</p></div></div>
-      <section class="panel"><h2 class="panel-title">🚨 進行中</h2>
-        ${active.length ? `<ul class="plain event-list">${active.map(li).join("")}</ul>` : `<p class="muted">目前沒有進行中的事件。</p>`}</section>
-      <section class="panel"><h2 class="panel-title">事件檔案</h2>
-        ${archived.length ? `<ul class="plain event-list">${archived.map(li).join("")}</ul>` : `<p class="muted">還沒有歸檔的事件。</p>`}</section>`;
+      <div class="ev">
+        ${active.length ? `<ul class="ev-list">${active.map(row).join("")}</ul>` : `<div class="ev-empty">${mascot("happy", 110)}<span class="pr-empty-ok">${ic("check")}</span></div>`}
+        ${archived.length ? `<h2 class="ev-sub">${ic("book")}</h2><ul class="ev-list">${archived.map(row).join("")}</ul>` : ""}
+      </div>`;
   }
 
   function brief(ev) {
     const pre = ev.nodes.map((id) => ({ n: ctx.nodeById[id], known: ctx.nodeProgress(id).known })).filter((x) => x.n);
     root.innerHTML = `
-      <div class="view-head"><div><p><a href="#/events">← 事件</a></p>
-        <p class="ev-alert">🚨 重大事件・${esc(ev.date)}</p><h1>${esc(ev.title)}</h1>
-        <p>${statusTag(ev.status)} <span class="muted small">${ev.origin === "官方" ? "官方來源" : "媒體／研究機構來源"}</span></p></div></div>
-      <section class="panel">
-        <p class="lead">${ctx.textify()(ev.summary)}</p>
-        <p class="muted small">任務流程：狀況簡報（${ev.briefing.length} 張，含圖表）→ 地圖導覽 → ${ev.matrix ? "影響矩陣 → " : ""}${ev.questions.length} 題（含看圖題）→ 結案，大約 5–8 分鐘。</p>
-        <h2 class="panel-title">需要先懂的環節</h2>
-        <ul class="prereq">${pre.map(({ n, known }) => `<li>${known ? "✓" : "○"} ${esc(n.name)}
-          ${known ? `<span class="muted small">學過了</span>` : `<a class="btn" href="#/explore/${esc(n.id)}/review">30 秒速覽</a>`}</li>`).join("")}</ul>
-        <p class="actions"><a class="btn primary" href="#/events/${esc(ev.id)}/play">${done(ev.id) ? "重看任務" : "開始任務"}</a></p>
+      <div class="ev ev-brief">
+        <div class="evb-hero">
+          <span class="evb-siren">${ic("siren")}</span>
+          <h2>${esc(ev.title)}</h2>
+          <p class="evb-meta"><time>${esc(ev.date)}</time>${statusTag(ev.status)}</p>
+        </div>
+        <p class="evb-summary">${ctx.textify()(ev.summary)}</p>
+        <ul class="evb-pre" aria-label="需要先懂的環節">${pre.map(({ n, known }) => `
+          <li class="${known ? "is-known" : ""} z-${esc(n.zone)}">${known ? `<span class="evb-pic">${ic(unitIcon(n.id))}<i>${ic("check")}</i></span>` : `<a class="evb-pic" href="#/explore/${esc(n.id)}/review" aria-label="${esc(n.name)} 30 秒速覽">${ic(unitIcon(n.id))}<i>${ic("bolt")}</i></a>`}<b>${esc(n.name)}</b></li>`).join("")}</ul>
+        <a class="evb-go" href="#/events/${esc(ev.id)}/play" aria-label="${done(ev.id) ? "重看任務" : "開始任務"}">${ic("play")}</a>
         ${ev.sources?.length ? `<p class="claim-meta">${sourceLinks(ev.sources, ctx)}</p>` : ""}
-      </section>`;
+      </div>`;
   }
 
   function play(ev) {
@@ -61,17 +61,15 @@ export function mountEvents(root, ctx, initial) {
     root.innerHTML = `
       <div class="player">
         <div class="player-head">
-          <a class="player-back" href="#/events/${esc(ev.id)}" aria-label="離開">✕</a>
-          <div class="player-title"><p class="muted small">🚨 事件任務</p><p><b>${esc(ev.title)}</b></p></div>
+          <a class="player-back" href="#/events/${esc(ev.id)}" aria-label="離開">${ic("close")}</a>
+          <div class="player-progress"><span></span></div>
+          <span class="player-ic">${ic("siren")}</span>
         </div>
-        <div class="player-progress"><span></span></div>
-        <p class="step-label muted small"></p>
-        <div class="player-stage panel"></div>
-        <div class="player-nav"><button class="btn" data-prev>上一步</button><button class="btn primary" data-next disabled>下一步</button></div>
+        <div class="player-stage"></div>
+        <div class="player-nav"><button class="pn-prev" type="button" data-prev aria-label="上一步">${ic("back")}</button><button class="pn-next" type="button" data-next disabled aria-label="下一步">${ic("play")}</button></div>
       </div>`;
     const stage = root.querySelector(".player-stage");
     const bar = root.querySelector(".player-progress span");
-    const label = root.querySelector(".step-label");
     const nav = root.querySelector(".player-nav");
     const next = root.querySelector("[data-next]");
     const prev = root.querySelector("[data-prev]");
@@ -80,27 +78,28 @@ export function mountEvents(root, ctx, initial) {
     const show = () => {
       const st = steps[i];
       bar.style.width = `${((i + 1) / steps.length) * 100}%`;
-      label.textContent = `${st.label}（${i + 1}／${steps.length}）`;
       prev.disabled = i === 0;
       next.disabled = true;
-      next.textContent = "下一步";
+      next.innerHTML = ic("play");
+      next.setAttribute("aria-label", "下一步");
+      next.classList.remove("is-finish");
       nav.hidden = false;
       if (st.kind === "screen") renderScreen(stage, st.s, ctx, () => { next.disabled = false; });
       else if (st.kind === "map") { mapStep(stage, ev); next.disabled = false; }
       else if (st.kind === "quiz") {
         nav.hidden = true;
         const m = ctx.game.standing().tier.rank.match || {};
-        renderQuiz(stage, st.q, ctx, { seconds: m.seconds || 0, label: "考考你", continueLabel: "下一步", onDone: () => step() });
+        renderQuiz(stage, st.q, ctx, { seconds: m.seconds || 0, label: "考考你", continueLabel: "繼續", onDone: () => step() });
       } else {
-        const first = !done(ev.id);
         state().events[ev.id] = { done: true, at: Date.now() };
         save();
         stage.innerHTML = `
-          <div class="scr"><p class="scr-speaker">結案</p><p class="scr-text">${ctx.textify()(ev.conclusion)}</p>
+          <div class="scr"><div class="evb-done">${mascot("cheer", 96)}</div><p class="scr-text">${ctx.textify()(ev.conclusion)}</p>
           ${impactList(ev)}</div>`;
-        next.textContent = "回到事件";
+        next.innerHTML = ic("check");
+        next.setAttribute("aria-label", "回到事件");
+        next.classList.add("is-finish");
         next.disabled = false;
-        if (first) toast("✓ 事件結案，已存進事件檔案");
       }
       stage.scrollIntoView({ block: "nearest" });
     };
@@ -113,8 +112,7 @@ export function mountEvents(root, ctx, initial) {
   // 地圖導覽：受影響的環節亮綠燈或紅燈，點一下看原因
   function mapStep(el, ev) {
     el.innerHTML = `
-      <p class="scr-title">這件事影響了哪些環節？</p>
-      <p class="hint">藍色（▲）是受惠、橘色（▼）是受壓、灰色（●）是影響不大。點地圖或下方的項目，看原因。</p>
+      <p class="scr-title scr-title-ic">${ic("map")}</p>
       <div class="event-map"></div>
       <div class="impact-reason" aria-live="polite"></div>
       ${impactList(ev, true)}`;
