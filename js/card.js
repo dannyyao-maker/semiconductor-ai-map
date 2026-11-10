@@ -93,6 +93,7 @@ export function nodeCardHTML(node, ctx) {
   const T = makeT(ctx);
   return header(zone, node.name, node.nameEn, node.status) + `
     <div class="card-body">
+      ${ctx.nodeBanner ? ctx.nodeBanner(node.id) : ""}
       <p class="lead">${T(node.oneLiner)}</p>
       ${node.analogy ? `<div class="analogy"><span class="analogy-label">白話比喻</span>${T(node.analogy)}</div>` : ""}
       ${section("上游與下游", "Upstream & Downstream", `
@@ -110,7 +111,6 @@ export function nodeCardHTML(node, ctx) {
       ${section("延伸閱讀", "Further Reading", node.reading?.length
         ? `<ul>${node.reading.map((id) => ctx.sourceById[id]).filter(Boolean).map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>（${esc(s.publisher)}，${esc(s.asOf)}）</li>`).join("")}</ul>`
         : `<p class="empty">尚未填寫</p>`)}
-      ${ctx.chapterLink ? ctx.chapterLink(node.id) : ""}
     </div>`;
 }
 

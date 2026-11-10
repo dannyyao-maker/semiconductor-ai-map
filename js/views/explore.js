@@ -104,14 +104,14 @@ export function mountExplore(root, ctx, initial) {
   };
 
   // ---- 播放一節 ----
-  function play(ch, key) {
+  function play(ch, key, rv) {
     const id = chId(ch);
     const [pid, sid] = key.split(".");
-    const pi = ch.parts.findIndex((p) => p.id === pid);
-    const part = ch.parts[pi];
-    const sec = part?.sections.find((s) => s.id === sid);
-    if (!sec || !partUnlocked(ctx, ch, pi)) return overview(ch);
-    const back = id === "intro" ? "#/explore" : `#/explore/${id}`;
+    const pi = rv ? -1 : ch.parts.findIndex((p) => p.id === pid);
+    const part = rv ? rv.part : ch.parts[pi];
+    const sec = rv ? rv.sec : part?.sections.find((s) => s.id === sid);
+    if (!rv && (!sec || !partUnlocked(ctx, ch, pi))) return overview(ch);
+    const back = rv ? rv.back : id === "intro" ? "#/explore" : `#/explore/${id}`;
 
     root.innerHTML = `
       <div class="player">
@@ -154,7 +154,7 @@ export function mountExplore(root, ctx, initial) {
       }
       stage.scrollIntoView({ block: "nearest" });
     };
-    const step = () => { if (i < sec.screens.length - 1) { i++; show(); } else finishSection(ch, part, sec); };
+    const step = () => { if (i < sec.screens.length - 1) { i++; show(); } else if (rv) rv.onFinish(); else finishSection(ch, part, sec); };
     next.addEventListener("click", step);
     prev.addEventListener("click", () => { if (i > 0) { i--; show(); } });
     show();
@@ -186,6 +186,7 @@ export function mountExplore(root, ctx, initial) {
     const my = ++token;
     const [id, key] = p;
     if (!id) return list();
+    if (key === "review") return review(id, my);
     if (id !== "intro") {
       const st = ctx.chapterState(id);
       if (st === "locked" || st === "soon") return list();
@@ -196,6 +197,49 @@ export function mountExplore(root, ctx, initial) {
     if (!ch) return list();
     if (id === "intro" && !key) return play(ch, "intro.journey");
     return key ? play(ch, key) : overview(ch);
+  }
+
+  // ---- 速覽／5 分鐘速複習：從環節卡的資料自動產生 7 張重點卡，學過的章節再加 3 題 ----
+  async function review(id, my) {
+    const n = ctx.nodeById[id];
+    if (!n) return list();
+    let ch = null;
+    try { ch = await loadChapter(ctx, id); } catch { ch = null; }
+    if (my !== token) return;
+    const known = ctx.nodeProgress(id).known;
+    const name = (x) => (x.node && ctx.nodeById[x.node]?.name) || "";
+    const screens = [
+      { type: "story", speaker: "一句話", text: n.oneLiner },
+      { type: "story", speaker: "白話比喻", text: n.analogy },
+      { type: "flow", title: "跟誰買、賣給誰", here: id, steps: [
+        ...n.upstream.map((u) => ({ label: name(u) || "上游", note: u.text })),
+        { label: n.name, node: id, note: "這一環" },
+        ...n.downstream.map((d) => ({ label: name(d) || "下游", note: d.text })),
+      ] },
+      { type: "stat", title: "代表公司", items: n.companies.slice(0, 5).map((cid) => ctx.companyById[cid]).filter(Boolean)
+        .map((c) => ({ label: c.name, value: c.nameEn, note: c.oneLiner })) },
+      { type: "stat", title: "怎麼賺錢", items: [
+        { label: "商業模式", value: "", note: n.business.model },
+        { label: "利潤高低", value: "", note: n.business.margin },
+        { label: "議價能力", value: "", note: n.business.bargainingPower } ] },
+      n.issues[0] && { type: "story", speaker: "現在的挑戰", text: n.issues[0].text, sources: n.issues[0].sources },
+      n.topics[0] && { type: "story", speaker: "熱門話題", text: n.topics[0].text, sources: n.topics[0].sources },
+    ].filter(Boolean);
+    if (known && ch) {
+      const qs = ch.parts.flatMap((p) => p.sections.flatMap((s) => s.screens)).filter((x) => x.type === "quiz" && ctx.game.difficultyUnlocked(x.difficulty || 1));
+      screens.push(...qs.map((q) => [Math.random(), q]).sort((a, b) => a[0] - b[0]).slice(0, 3).map((p) => p[1]));
+    }
+    const fake = ch || { id, title: n.name, parts: [] };
+    play(fake, "review", {
+      part: { id: "review", name: known ? "5 分鐘速複習" : "30 秒速覽" },
+      sec: { id: "review", title: n.name, screens },
+      back: `#/hq/${id}`,
+      onFinish: () => {
+        if (known) { progress(id).reviewAt = Date.now(); save(); toast(`⚡ 複習完成：${n.name}`); }
+        else toast(`看完了「${n.name}」的速覽`);
+        ctx.nav(`/hq/${id}`);
+      },
+    });
   }
 
   render(initial);

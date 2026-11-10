@@ -8,6 +8,7 @@ export function mountToday(root, ctx) {
     const next = ctx.nextChapter();
     const events = ctx.activeEvents();
     const first = !s.onboarded;
+    const stale = ctx.staleNodes();
     root.innerHTML = `
       <div class="view-head"><div><h1>今天</h1><p class="muted">${esc(ctx.game.dayKey())}</p></div></div>
       <div class="today-grid">
@@ -27,6 +28,12 @@ export function mountToday(root, ctx) {
         </section>
         <section class="panel">${rankCardHTML(ctx, { compact: true })}</section>
         <section class="panel">${streakCardHTML(ctx)}</section>
+        ${stale.length ? `<section class="panel">
+          <h2 class="panel-title">⌛ 快忘了，複習一下</h2>
+          <ul class="stale-list">${stale.map(({ n, p }) => `
+            <li><span>${esc(n.name)} <span class="muted small">${p.days} 天沒複習</span></span>
+              <a class="btn" href="#/explore/${esc(n.id)}/review">⚡ 5 分鐘</a></li>`).join("")}</ul>
+        </section>` : ""}
         <section class="panel">
           <h2 class="panel-title">🚨 進行中的事件</h2>
           ${events.length ? `<ul class="plain">${events.map((ev) => `

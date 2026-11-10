@@ -41,7 +41,7 @@ export function renderScreen(el, s, ctx, ready) {
         <a class="small" href="#/hq/${esc(c.segments[0])}/${esc(c.id)}">看公司小卡 →</a></div>`).join("")}</div>${src}`;
   } else if (s.type === "flow") {
     html = `<p class="scr-title">${esc(s.title)}</p>
-      <ol class="scr-flow">${s.steps.map((st) => `<li class="${st.node === "ic-design" ? "is-here" : ""}">
+      <ol class="scr-flow">${s.steps.map((st) => `<li class="${st.node && st.node === (s.here || "ic-design") ? "is-here" : ""}">
         <b>${esc(st.label)}</b><span>${T(st.note || "")}</span></li>`).join("")}</ol>
       <p class="hint">東西由上往下做出來，錢由下往上付回去。</p>`;
   }

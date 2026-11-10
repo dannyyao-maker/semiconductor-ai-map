@@ -102,10 +102,29 @@ function buildChapters(index) {
     if (!c) return null;
     return { ...c, started: c.state === "started", stateLabel: c.state === "started" ? "上次學到一半，接著往下" : "新的一章已經解鎖" };
   };
-  ctx.chapterLink = (nodeId) => {
+  ctx.chapterLink = () => "";
+  // 研究總部用：每個環節的學習狀態
+  const STALE_DAYS = 7;
+  ctx.nodeProgress = (id) => {
+    const pr = state().chapters[id] || {};
+    const known = Boolean(pr.parts?.know);
+    const lastAt = Math.max(pr.at || 0, pr.reviewAt || 0) || null;
+    const days = lastAt ? Math.floor((Date.now() - lastAt) / 864e5) : null;
+    return { known, done: Boolean(pr.parts?.final), lastAt, days, stale: known && days != null && days >= STALE_DAYS };
+  };
+  ctx.staleNodes = () => ctx.nodes.map((n) => ({ n, p: ctx.nodeProgress(n.id) })).filter((x) => x.p.stale).sort((a, b) => b.p.days - a.p.days);
+  // 環節卡最上方的學習狀態：沒學過→速覽／去探索；學過→上次複習、5 分鐘速複習
+  ctx.nodeBanner = (nodeId) => {
+    const p = ctx.nodeProgress(nodeId);
     const s = chapterState(nodeId);
-    if (s === "locked" || s === "soon") return "";
-    return `<p class="read-row"><a class="btn primary" href="#/explore/${esc(nodeId)}">到探索章節學這一環</a></p>`;
+    const explore = s === "locked" || s === "soon" ? "" : `<a class="btn" href="#/explore/${esc(nodeId)}">到探索章節</a>`;
+    if (!p.known) {
+      return `<div class="node-banner is-fog"><p>🌫️ 你還沒探索這一環${s === "locked" ? "（還沒解鎖）" : ""}。可以先看 30 秒速覽。</p>
+        <p class="actions"><a class="btn primary" href="#/explore/${esc(nodeId)}/review">30 秒速覽</a>${explore}</p></div>`;
+    }
+    const when = p.days == null ? "" : p.days === 0 ? "今天複習過" : `上次複習：${p.days} 天前`;
+    return `<div class="node-banner ${p.stale ? "is-stale" : "is-known"}"><p>${p.done ? "✓ 這一章完成了" : "✓ 學過「認識」"}・${when}${p.stale ? "　⌛ 快忘了，複習一下" : ""}</p>
+      <p class="actions"><a class="btn primary" href="#/explore/${esc(nodeId)}/review">⚡ 5 分鐘速複習</a>${explore}</p></div>`;
   };
 }
 

@@ -458,3 +458,30 @@ p.up { color: var(--up); }
 .m-formula span { display: inline-block; font-size: .75rem; font-weight: 800; color: #fff; background: var(--text); border-radius: 6px; padding: 0 6px; margin-right: 8px; }
 .m-semi { background: var(--semi-tint); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
 .m-related .chip { text-decoration: none; display: inline-block; }
+
+/* ===== 研究總部：霧、沙漏、學習狀態 ===== */
+.node.is-fog .node-box { fill: #ecebe6; stroke: #c9c7bf; stroke-dasharray: 5 4; stroke-width: 1.5; }
+.node.is-fog .node-name { fill: #8d8b83; }
+.node.is-fog .node-en { fill: #a8a69e; }
+.node.is-fog.is-selected .node-box { fill: #8d8b83; stroke: #8d8b83; }
+.node.is-fog.is-selected .node-name, .node.is-fog.is-selected .node-en { fill: #fff; }
+.node-stale { display: none; pointer-events: none; }
+.node.is-stale .node-stale { display: inline; }
+.node-stale circle { fill: #f59e0b; stroke: #fff; stroke-width: 2; }
+.node-stale text { font-size: 11px; text-anchor: middle; }
+.node-banner { border-radius: 12px; padding: 10px 12px; margin: 0 0 14px; background: var(--bg); }
+.node-banner p { margin: 0; font-size: .92rem; font-weight: 600; }
+.node-banner .actions { margin-top: 8px; }
+.node-banner .btn { min-height: 38px; padding: 6px 14px; font-size: .9rem; }
+.node-banner.is-fog { background: #f1f0eb; color: #55544e; }
+.node-banner.is-known { background: #e7f4e5; color: #2f6b2a; }
+.node-banner.is-stale { background: #fff4d6; color: #8a6100; }
+/* 電腦版打開卡片時，地圖變小：拿掉英文、放大中文，避免字太小 */
+@media (min-width: 1101px) {
+  body.card-open .view .node-en, body.card-open .view .zone-title-en { display: none; }
+  body.card-open .view .node-name { font-size: 20px; transform: translateY(8px); }
+  body.card-open .view .zone-title { font-size: 19px; }
+}
+.stale-list { list-style: none; margin: 0; padding: 0; }
+.stale-list li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.stale-list li:last-child { border-bottom: 0; }

@@ -1,6 +1,6 @@
 // 研究總部：產業鏈地圖＋環節卡、公司小卡。隨時回來複習用。
 // 網址：#/hq、#/hq/foundry、#/hq/foundry/tsmc
-import { renderMap, highlightMap, markRead } from "../map.js";
+import { renderMap, highlightMap, markProgress } from "../map.js";
 import { nodeCardHTML, companyCardHTML } from "../card.js";
 import { hideTerm, showTerm } from "../glossary.js";
 import { setupSearch } from "../search.js";
@@ -8,7 +8,7 @@ import { setupSearch } from "../search.js";
 export function mountHQ(root, ctx, initial) {
   root.innerHTML = `
     <div class="view-head">
-      <div><h1>研究總部</h1><p class="muted">產業鏈全貌。忘了哪一環，點進去複習。</p>
+      <div><h1>研究總部</h1><p class="muted">產業鏈全貌。灰色是還沒探索的環節；忘了哪一環，點進去做 5 分鐘速複習。</p>
         <p class="hq-links"><a class="btn" href="#/dict">📖 指標字典</a></p></div>
       <div class="search-box">
         <input id="search" type="search" placeholder="搜尋環節、公司、術語（例：台積、HBM）" autocomplete="off"
@@ -51,7 +51,7 @@ export function mountHQ(root, ctx, initial) {
 
   function draw() {
     renderMap(mapEl, ctx, { mobile: mobileQuery.matches, onSelect: (id) => go(id), onBackground: () => go("") });
-    markRead(mapEl, ctx.completedNodes());
+    markProgress(mapEl, ctx.nodeProgress);
     render();
   }
 
