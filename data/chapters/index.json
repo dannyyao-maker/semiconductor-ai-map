@@ -1,12 +1,12 @@
 {
-  "note": "章節清單。start 是第一章；其他章節在相鄰環節（nodes.json 的 upstream／downstream）完成「認識」後解鎖。file 為 null 表示內容還沒做。",
+  "note": "章節清單，順序就是闖關順序：前一章章末對局完成，才解鎖下一章。file 為 null 表示內容還沒做。",
   "start": "ic-design",
   "chapters": [
     { "node": "ic-design",  "file": "ic-design.json" },
-    { "node": "foundry",    "file": null },
-    { "node": "packaging",  "file": null },
+    { "node": "foundry",    "file": "foundry.json" },
+    { "node": "packaging",  "file": "packaging.json" },
+    { "node": "memory",     "file": "memory.json" },
     { "node": "equipment",  "file": null },
-    { "node": "memory",     "file": null },
     { "node": "ai-chip",    "file": null },
     { "node": "ai-server",  "file": null },
     { "node": "datacenter", "file": null },

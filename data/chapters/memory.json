@@ -1,0 +1,149 @@
+{
+  "node": "memory",
+  "title": "記憶體與 HBM：景氣循環最劇烈的一章",
+  "tagline": "AI 把一個出了名「看天吃飯」的產業，推到了前所未有的高點。",
+  "status": "待審核",
+  "asOf": "2026-11",
+  "parts": [
+    {
+      "id": "know",
+      "name": "認識",
+      "sections": [
+        {
+          "id": "what",
+          "title": "在做什麼",
+          "screens": [
+            { "type": "story", "speaker": "情境", "text": "你的 AI 晶片已經做好、封好了。但它運算得再快，也要有地方「放資料」：模型的資料要從記憶體不斷送進晶片，再把結果寫回去。記憶體就是晶片旁邊的倉庫。" },
+            { "type": "choice", "prompt": "你覺得記憶體跟前面學的 IC 設計、晶圓代工，最大的商業差別是什麼？", "options": [
+              { "label": "產品很標準化，價格看供需", "reveal": "對。記憶體像農產品：規格比較統一，多家廠商賣的東西差不多，價格主要跟著整體供需波動。" },
+              { "label": "每顆晶片都是客戶專屬設計", "reveal": "那是客製化 AI 晶片（ASIC）的特點。標準記憶體則是大量生產、規格統一的產品。" }
+            ] },
+            { "type": "story", "speaker": "記憶體在做什麼", "text": "記憶體廠生產「存資料」的晶片：電腦和伺服器用的 DRAM、手機與硬碟用的 NAND Flash，以及 AI 晶片旁邊的高頻寬記憶體（HBM）。它們大多自己設計、自己製造、自己賣，業界稱為 IDM（整合元件製造）。美光就是這種模式。", "sources": ["mu-10k-2025"] },
+            { "type": "story", "speaker": "HBM 是什麼", "text": "HBM（High-Bandwidth Memory，高頻寬記憶體）是把 DRAM 一層一層垂直疊起來、用特殊的垂直線路連接的設計。美光年報說，它能達到更高的頻寬，又比較省電，所以很適合 AI。", "sources": ["mu-10k-2026"] },
+            { "type": "choice", "prompt": "HBM 為什麼要和 AI 晶片「封裝在一起」？", "options": [
+              { "label": "距離越近，資料傳得越快", "reveal": "對。這也是上一章先進封裝的任務：把 HBM 和 AI 晶片組成一間「套房」。" },
+              { "label": "為了讓它看起來比較小", "reveal": "縮小是附帶好處，主要目的是讓資料傳輸更快、更省電。" }
+            ] }
+          ]
+        },
+        {
+          "id": "money",
+          "title": "錢怎麼流",
+          "screens": [
+            { "type": "flow", "here": "memory", "title": "記憶體的上下游", "steps": [
+              { "label": "設備與材料商", "node": "equipment", "note": "記憶體廠自己蓋工廠、買機台" },
+              { "label": "記憶體廠", "node": "memory", "note": "自己設計、製造、銷售" },
+              { "label": "封測（HBM 與 AI 晶片）", "node": "packaging", "note": "HBM 要和 AI 晶片封裝在一起" },
+              { "label": "AI 伺服器", "node": "ai-server", "note": "AI 伺服器需要大量記憶體" }
+            ] },
+            { "type": "story", "speaker": "怎麼賺錢", "text": "記憶體廠賣的是標準化的產品，賺多賺少主要看兩件事：產品的市場價格，以及自己的生產成本。價格高於成本就賺錢，低於成本就虧。" },
+            { "type": "choice", "prompt": "標準化商品的廠商，最怕發生什麼事？", "options": [
+              { "label": "大家同時擴產，供給過多讓價格崩跌", "reveal": "對。美光年報指出，競爭對手可能增加資本支出、擴大供給；如果需求沒有跟上，平均售價就可能下滑。", "sources": ["mu-10k-2026"] },
+              { "label": "沒有客戶要買", "reveal": "客戶不是問題；問題是供給與需求不平衡，使價格劇烈波動。" }
+            ] }
+          ]
+        },
+        {
+          "id": "market",
+          "title": "市場多大",
+          "screens": [
+            { "type": "kpi", "title": "美光 2026 會計年度（至 2026 年 9 月）", "items": [
+              { "label": "營收", "value": "1,332 億美元", "delta": "+256%（2025 年 374 億美元）", "dir": "up" },
+              { "label": "毛利率", "value": "81%", "delta": "2025 年 40%、2024 年 22%", "dir": "up" },
+              { "label": "淨利", "value": "850 億美元", "delta": "淨利率 64%（2025 年 23%）", "dir": "up" }
+            ], "sources": ["mu-10k-2026"] },
+            { "type": "line", "title": "三年內營收成長超過五倍", "subtitle": "美光年度營收（億美元）", "x": ["2024", "2025", "2026"], "series": [
+              { "label": "營收", "values": [251.1, 373.8, 1331.9] }
+            ], "yMin": 0, "yMax": 1400, "yStep": 200, "dec": 0, "yLabel": "單位：億美元，會計年度。2024 年到 2026 年約成長 5.3 倍（推算）。", "sources": ["mu-10k-2026"] },
+            { "type": "stat", "title": "2026 年營收為什麼爆發", "items": [
+              { "label": "DRAM 營收", "value": "+252%", "note": "平均售價約 +180%，出貨量增幅在 20% 中段" },
+              { "label": "NAND 營收", "value": "+274%", "note": "平均售價約 +200%，出貨量增幅在 20% 中段" }
+            ], "sources": ["mu-10k-2026"] },
+            { "type": "choice", "prompt": "營收增加 256%，主要是「賣更多顆」還是「每顆賣更貴」？", "options": [
+              { "label": "每顆賣更貴", "reveal": "對。DRAM 價格約漲 180%，出貨量增幅只在 20% 中段。這是記憶體景氣的特色：價格比銷量更重要。", "sources": ["mu-10k-2026"] },
+              { "label": "賣更多顆", "reveal": "出貨量有成長，但幅度遠小於價格上漲。", "sources": ["mu-10k-2026"] }
+            ] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "name": "比較",
+      "sections": [
+        {
+          "id": "players",
+          "title": "誰是玩家",
+          "screens": [
+            { "type": "compare", "title": "主要的記憶體廠", "companies": ["samsung", "skhynix", "micron", "nanya"], "rows": [
+              { "label": "類型", "values": ["記憶體＋晶圓代工的綜合型公司", "韓國記憶體大廠", "美國最大記憶體廠", "台塑集團的 DRAM 廠"] },
+              { "label": "重點", "values": ["記憶體規模與垂直整合", "2026 年第一季 HBM 營收市佔 56.4%（IDC）", "自行設計並生產 HBM；2025 年大部分 DRAM 產出來自台灣的工廠", "主攻利基型、消費性記憶體；全球 DRAM 市佔約 2–3%"] }
+            ], "sources": ["joongang-samsung-tesla", "skh-f1-2026", "mu-10k-2025", "statementdog-nanya", "cmoney-nanya"] },
+            { "type": "choice", "prompt": "HBM 的市場，誰領先？", "options": [
+              { "label": "SK 海力士", "reveal": "對。IDC 數據顯示，它 2026 年第一季 HBM 營收市佔 56.4%。三星、美光都在追趕。", "sources": ["skh-f1-2026"] },
+              { "label": "南亞科", "reveal": "南亞科主攻利基型記憶體，不是 HBM 的主要供應者。", "sources": ["statementdog-nanya"] }
+            ] },
+            { "type": "story", "speaker": "橫跨多個環節", "text": "三星同時在記憶體和晶圓代工：它既做 HBM，也接代工訂單。到地圖上點開三星，會看到它的兩個環節。" }
+          ]
+        },
+        {
+          "id": "moat",
+          "title": "憑什麼贏",
+          "screens": [
+            { "type": "stat", "title": "各家的護城河", "items": [
+              { "label": "SK 海力士", "value": "HBM 領先", "note": "技術與量產經驗領先" },
+              { "label": "美光", "value": "自研 HBM＋美國本土", "note": "自行設計並生產 HBM；美國本土記憶體廠的戰略地位" },
+              { "label": "三星", "value": "規模＋整合", "note": "記憶體規模與垂直整合能力" },
+              { "label": "南亞科", "value": "集團資源", "note": "專注 DDR4 等利基型市場" }
+            ], "sources": ["skh-f1-2026", "mu-10k-2025", "joongang-samsung-tesla", "statementdog-nanya"] },
+            { "type": "choice", "prompt": "標準化商品的護城河，通常來自哪裡？", "options": [
+              { "label": "比別人更低的成本，和更領先的高階產品", "reveal": "對。標準品很難差異化，所以要靠成本和率先量產新產品（例如 HBM）。" },
+              { "label": "品牌", "reveal": "記憶體是零組件，品牌效果很小；客戶更在意規格、價格與供貨能力。" }
+            ] }
+          ]
+        },
+        {
+          "id": "profit",
+          "title": "怎麼賺錢",
+          "screens": [
+            { "type": "line", "title": "毛利率在三年內從 22% 衝到 81%", "subtitle": "美光年度毛利率（%）", "x": ["2024", "2025", "2026"], "series": [
+              { "label": "毛利率", "values": [22, 40, 81] }
+            ], "yMin": 0, "yMax": 90, "yStep": 10, "dec": 0, "suffix": "%", "yLabel": "單位：%，會計年度。2024 年毛利率含 9.87 億美元利益（出清先前已提列跌價的存貨）。", "sources": ["mu-10k-2026"] },
+            { "type": "story", "speaker": "為什麼這麼誇張", "text": "毛利率＝（售價−成本）÷ 售價。成本變化小、價格暴漲時，毛利率就會飆升。美光 2026 年 DRAM 價格約漲 180%，毛利率就從 40% 變成 81%。這也代表：價格如果反方向走，毛利率會掉得一樣快。", "sources": ["mu-10k-2026"] },
+            { "type": "story", "speaker": "想改變景氣循環", "text": "美光年報說，它和客戶簽了「策略客戶協議」：多年期、約定量，大部分的價格有上下限。美光預期，即使在下限價格，毛利率也會明顯高於過去景氣高峰。這是公司的預期，不是結果；實際會不會維持，要看後續財報。", "sources": ["mu-10k-2026"] }
+          ]
+        },
+        {
+          "id": "issues",
+          "title": "現在的挑戰",
+          "screens": [
+            { "type": "story", "speaker": "三則新聞", "text": "接下來三題是計分題，判斷每則消息對記憶體廠代表什麼。答對加盃數，答錯會扣。" },
+            { "type": "quiz", "id": "memory.issues.1", "difficulty": 1, "prompt": "美光年報指出，競爭對手可能增加資本支出、擴大供給。如果需求沒有跟上，會發生什麼事？", "options": ["平均售價下滑", "毛利率一定上升", "客戶變多", "HBM 消失"], "answer": 0, "explain": "供給增加但需求沒跟上，價格就會被壓低。這是記憶體景氣循環的核心：好景氣吸引擴產，擴產又造成下一次的供過於求。", "sources": ["mu-10k-2026"] },
+            { "type": "quiz", "id": "memory.issues.2", "difficulty": 1, "prompt": "HBM 要做出同樣容量，需要用到更多晶圓和廠房空間。所以廠商把產能轉去做 HBM，會影響什麼？", "options": ["一般記憶體的供給與價格", "晶圓代工的價格", "手機的尺寸", "電費"], "answer": 0, "explain": "產能被 HBM 吃掉，一般記憶體的供給就減少，價格可能上漲。反過來轉回來，也會影響供給。", "sources": ["mu-10k-2025"] },
+            { "type": "quiz", "id": "memory.issues.3", "difficulty": 1, "prompt": "美光年報指出，中國政府大力投資記憶體產業，競爭對手可能用激進的價格搶市佔。這是哪一種風險？", "options": ["低價競爭與地緣政治", "原料缺貨", "匯率獲利", "人才過多"], "answer": 0, "explain": "有政府支持的新對手，不一定以獲利為目標，可能用低價搶市佔，壓低整個市場的價格。", "sources": ["mu-10k-2025"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "name": "章末對局",
+      "sections": [
+        {
+          "id": "case",
+          "title": "章末對局",
+          "match": true,
+          "screens": [
+            { "type": "quiz", "id": "memory.final.hbm", "difficulty": 1, "prompt": "HBM（高頻寬記憶體）的特色是什麼？", "options": ["把 DRAM 垂直疊起來，頻寬高又省電", "容量比硬碟大", "只用在手機", "不需要封裝"], "answer": 0, "explain": "HBM 是 3D 堆疊的 DRAM，美光年報說能達到更高頻寬、消耗更少電力，所以適合 AI。", "sources": ["mu-10k-2026"] },
+            { "type": "quiz", "id": "memory.final.share", "difficulty": 1, "prompt": "2026 年第一季，誰的 HBM 營收市佔最高（IDC 數據）？", "options": ["SK 海力士", "美光", "南亞科", "華邦電"], "answer": 0, "explain": "SK 海力士的 HBM 營收市佔 56.4%，三星與美光追趕。", "sources": ["skh-f1-2026"] },
+            { "type": "quiz", "id": "memory.final.idm", "difficulty": 1, "prompt": "美光是哪一種商業模式？", "options": ["自己設計、製造、銷售（IDM）", "只設計不製造", "只代工不設計", "只做封裝"], "answer": 0, "explain": "記憶體廠大多是 IDM，和台積電（只代工）及高通（只設計）都不同。", "sources": ["mu-10k-2025"] },
+            { "type": "quiz", "id": "memory.final.gm", "difficulty": 2, "prompt": "美光毛利率：2024 年 22%、2025 年 40%、2026 年 81%。最主要的原因是什麼？", "options": ["平均售價大幅上漲，成本變動小", "員工大幅減少", "產品全部變成 HBM", "匯率獲利"], "answer": 0, "explain": "2026 年 DRAM 平均售價約漲 180%、NAND 約漲 200%，出貨量增幅只在 20% 中段。價格是最大推手。", "sources": ["mu-10k-2026"] },
+            { "type": "quiz", "id": "memory.final.capex", "difficulty": 2, "prompt": "美光資本支出（購買設備與廠房）：2025 年約 158.6 億美元，2026 年約 307.1 億美元。這代表什麼？", "options": ["在高景氣下大幅擴產，也增加未來供給過剩的風險", "公司要停止擴產", "公司不需要設備", "公司要縮小規模"], "answer": 0, "explain": "資本支出約翻倍。好景氣時各家都擴產，一旦需求跟不上，價格就會下跌；這是記憶體景氣循環的來源。", "sources": ["mu-10k-2026"] },
+            { "type": "quiz", "id": "memory.final.margin", "difficulty": 3, "prompt": "美光 2026 年營收 1,332 億美元、淨利 850 億美元，淨利率大約是多少？", "options": ["約 64%", "約 23%", "約 3%", "約 81%"], "answer": 0, "explain": "850 ÷ 1,332 ≈ 64%。23% 是 2025 年、3% 是 2024 年的淨利率；81% 是 2026 年的毛利率，不是淨利率。把毛利率和淨利率分清楚，是看財報的基本功。", "sources": ["mu-10k-2026"] },
+            { "type": "quiz", "id": "memory.final.cycle", "difficulty": 3, "prompt": "美光說，策略客戶協議的價格有上下限，預期即使在下限，毛利率也明顯高於過去景氣高峰。投資人看這句話時，最該注意什麼？", "options": ["這是公司的預期，要用後續財報檢驗", "這已經是保證", "這是政府規定", "這代表景氣循環消失了"], "answer": 0, "explain": "年報寫的是「預期」（expect），不是已經發生的結果。判斷財報時，要分清楚「已發生的數字」和「公司對未來的說法」。", "sources": ["mu-10k-2026"] }
+          ]
+        }
+      ]
+    }
+  ]
+}
