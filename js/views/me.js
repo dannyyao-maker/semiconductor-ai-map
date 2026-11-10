@@ -1,11 +1,11 @@
 // 我的：段位、連續天數、段位之路、學習統計、匯出／匯入進度。
 // 網址加上 ?dev（例如 index.html?dev#/me）會出現測試工具：直接設定盃數、模擬昨天有學習。
 import { esc, toast } from "../util.js";
-import { rankBadge } from "../game.js";
-import { rankCardHTML, streakCardHTML } from "../ui.js";
+import { rankCardHTML, streakCardHTML, rankRoadHTML, setupRankRoad } from "../ui.js";
 import { renderQuiz } from "../quiz.js";
 import { exportJSON, importJSON, reset, state, save } from "../state.js";
 
+const COUNTRY = { TW: "台灣", US: "美國", KR: "韓國", CN: "中國", JP: "日本", NL: "荷蘭" };
 const DEV = new URLSearchParams(location.search).has("dev");
 
 export function mountMe(root, ctx) {
@@ -19,6 +19,11 @@ export function mountMe(root, ctx) {
       <div class="me-grid">
         <section class="panel">${rankCardHTML(ctx)}</section>
         <section class="panel">${streakCardHTML(ctx)}</section>
+        <section class="panel wide road-panel">
+          <h2 class="panel-title">段位之路</h2>
+          <p class="muted small">左右滑動看每個段位。越往上，答對加得越少、答錯扣得越多、作答時間越短；到過的大段位不會掉出去。</p>
+          ${rankRoadHTML(ctx)}
+        </section>
         <section class="panel">
           <h2 class="panel-title">學習統計</h2>
           <dl class="stats">
@@ -32,19 +37,6 @@ export function mountMe(root, ctx) {
           <h2 class="panel-title">段位試玩：公司歸位</h2>
           <p class="muted small">暫時的練習區，讓你先感受加減盃數。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？</p>
           <div class="drill"></div>
-        </section>
-        <section class="panel wide">
-          <h2 class="panel-title">段位之路</h2>
-          <p class="muted small">越往上，答對加得越少、答錯扣得越多；到過的大段位不會掉出去。</p>
-          <ol class="road">
-            ${ctx.game.tiers.map((t) => `
-              <li class="${t.index === st.tier.index ? "is-current" : ""}${s.trophies >= t.from ? " is-reached" : ""}">
-                ${rankBadge(t, "sm")}
-                <span class="road-label">${esc(t.label)}</span>
-                <span class="road-from">${t.from}+</span>
-                <span class="road-rule">+${t.rank.win}／${t.rank.loss ? "−" + t.rank.loss : "0"}</span>
-              </li>`).join("")}
-          </ol>
         </section>
         <section class="panel wide">
           <h2 class="panel-title">進度備份</h2>
@@ -66,6 +58,7 @@ export function mountMe(root, ctx) {
           </p>
         </section>` : ""}
       </div>`;
+    setupRankRoad(root, ctx);
     drill();
   }
 
@@ -141,7 +134,8 @@ function makeDrill(ctx) {
     prompt: `${c.name}（${c.nameEn}）屬於哪個環節？`,
     options: options.map((n) => n.name),
     answer: options.indexOf(right),
-    explain: `${c.name}：${c.oneLiner}（所屬環節：${segs}）`,
+    explain: `${c.name}${COUNTRY[c.country] ? `（${COUNTRY[c.country]}）` : ""}：${c.oneLiner}
+所屬環節：${segs}。`,
     sources: c.sources,
   };
 }

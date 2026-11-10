@@ -133,7 +133,7 @@ export function makeGame(cfg) {
 /** 段位徽章：盾牌形狀，顏色依段位 */
 export function rankBadge(tier, size = "md") {
   const r = tier.rank;
-  const roman = r.tiers.length > 1 ? ROMAN[tier.ti] : "";
+  const roman = r.tiers.length > 1 && tier.ti != null ? ROMAN[tier.ti] : "";
   return `<span class="rank-badge rank-${esc(r.id)} size-${size}" style="--rank:${esc(r.color)}" title="${esc(tier.label)}" aria-label="段位：${esc(tier.label)}">
-    <span class="rank-shield">${roman ? `<b>${roman}</b>` : `<b>★</b>`}</span></span>`;
+    <span class="rank-shield"><i>${esc(r.icon || "★")}</i>${roman ? `<b>${roman}</b>` : ""}</span></span>`;
 }
