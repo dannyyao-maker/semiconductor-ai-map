@@ -136,6 +136,19 @@ export function makeGame(cfg) {
 export function rankBadge(tier, size = "md") {
   const r = tier.rank;
   const roman = r.tiers.length > 1 && tier.ti != null ? ROMAN[tier.ti] : "";
+  // 畫風：粗墨色外框、純色塊、上緣一道亮面；顏色來自段位（--rank），圖案是白色加墨色描邊
+  const SH = "M60 6 L108 22 L108 70 Q108 108 60 134 Q12 108 12 70 L12 22 Z";
+  const sc = (k) => `translate(60 70) scale(${k}) translate(-60 -70)`;
+  const glyph = rankGlyph(r.id).replace("<svg ", '<svg x="36" y="34" width="48" height="48" style="color:#fff" stroke="#0f1520" stroke-width="1.5" stroke-linejoin="round" paint-order="stroke" ');
   return `<span class="rank-badge rank-${esc(r.id)} size-${size}" style="--rank:${esc(r.color)}" title="${esc(tier.label)}" aria-label="段位：${esc(tier.label)}">
-    <span class="rank-shield"><i>${rankGlyph(r.id)}</i>${roman ? `<b>${roman}</b>` : ""}</span></span>`;
+    <svg class="rb" viewBox="0 0 120 146" focusable="false" aria-hidden="true">
+      <path d="${SH}" fill="#000" opacity=".22" transform="translate(5 8)"/>
+      <path d="${SH}" fill="#0f1520" stroke="#0f1520" stroke-width="6" stroke-linejoin="round"/>
+      <path d="${SH}" fill="color-mix(in srgb, var(--rank) 62%, #fff)" transform="${sc(.9)}"/>
+      <path d="M25 30 L60 19 L95 30" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+      <path d="${SH}" fill="color-mix(in srgb, var(--rank) 78%, #0f1520)" transform="${sc(.7)}"/><path d="${SH}" fill="none" stroke="#0f1520" stroke-width="3" stroke-linejoin="round" opacity=".55" transform="${sc(.7)}"/>
+      
+      ${glyph}
+      ${roman ? `<g class="rb-tier"><rect x="36" y="118" width="48" height="25" rx="12.500" fill="#0f1520" stroke="#e0b24a" stroke-width="3"/><text x="60" y="136.500" text-anchor="middle" font-size="17" font-weight="900" fill="#e0b24a" font-family="system-ui,sans-serif">${roman}</text></g>` : ""}
+    </svg></span>`;
 }
