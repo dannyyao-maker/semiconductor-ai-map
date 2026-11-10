@@ -1,0 +1,172 @@
+{
+  "node": "ic-design",
+  "title": "IC 設計：晶片的建築師",
+  "tagline": "整條產業鏈的起點：決定要做什麼晶片的人。",
+  "status": "待審核",
+  "asOf": "2026-11",
+  "parts": [
+    {
+      "id": "know",
+      "name": "認識",
+      "sections": [
+        {
+          "id": "what",
+          "title": "在做什麼",
+          "screens": [
+            { "type": "story", "speaker": "情境", "text": "你是一家手機品牌的產品經理，新手機需要一顆「大腦」晶片：負責運算、拍照、連網。老闆問你：這顆晶片要從哪裡來？" },
+            { "type": "choice", "prompt": "你會建議老闆怎麼做？", "options": [
+              { "label": "自己設計，也自己蓋工廠製造", "reveal": "這叫 IDM（整合元件製造），英特爾就是代表。但蓋一座先進晶圓廠要投資上百億美元，手機品牌幾乎不會這樣做。" },
+              { "label": "向專門設計晶片的公司買現成的", "reveal": "這就是聯發科、高通的生意：它們設計手機晶片，賣給很多手機品牌。大多數 Android 手機都這樣做。" },
+              { "label": "自己設計，交給代工廠製造", "reveal": "蘋果就是這樣做的。但這對賣晶片的公司是威脅：高通年報就指出，蘋果現在只向它買比較低毛利的數據機晶片。", "sources": ["qcom-10k-2025"] }
+            ] },
+            { "type": "story", "speaker": "IC 設計是什麼", "text": "第二和第三種做法，都靠「只設計、不製造」的模式，業界稱為 Fabless（無晶圓廠）。IC 設計公司負責畫晶片的設計圖、經營客戶和品牌，製造全部外包給晶圓代工廠。就像只做設計的服裝品牌：自己畫設計圖，衣服交給代工廠縫製。", "sources": ["tsmc-20f-2025"] },
+            { "type": "stat", "title": "IC 設計公司的晶片用在哪裡", "items": [
+              { "label": "手機", "value": "聯發科、高通", "note": "手機的處理器與通訊晶片" },
+              { "label": "網通、電腦周邊", "value": "瑞昱、博通", "note": "Wi-Fi、乙太網路、音訊晶片" },
+              { "label": "螢幕", "value": "聯詠", "note": "面板驅動 IC：讓螢幕顯示畫面" },
+              { "label": "電腦、伺服器", "value": "AMD、英特爾", "note": "處理器（英特爾也自己製造）" },
+              { "label": "AI", "value": "NVIDIA、博通、聯發科", "note": "AI GPU 與客製化 AI 晶片（ASIC）" }
+            ], "sources": ["qcom-10k-2025", "avgo-10k-2025", "ctee-ddi-2026", "amd-10k-2025", "nvda-10k-2026"] },
+            { "type": "choice", "prompt": "IC 設計公司不用蓋工廠。那它最大的成本會是什麼？", "options": [
+              { "label": "機台和廠房", "reveal": "那是晶圓代工廠的成本。IC 設計公司的資本支出很低。" },
+              { "label": "研發人才和晶圓代工費", "reveal": "對。IC 設計靠工程師畫設計圖，再付錢請代工廠製造，所以研發人才和代工費是主要成本。" },
+              { "label": "原料（矽砂）", "reveal": "原料是晶圓廠和材料商在買。IC 設計公司買的是「代工服務」，不是原料。" }
+            ] }
+          ]
+        },
+        {
+          "id": "money",
+          "title": "錢怎麼流",
+          "screens": [
+            { "type": "flow", "title": "一顆手機晶片的上下游", "steps": [
+              { "label": "EDA 軟體、矽智財（IP）", "note": "Synopsys、Cadence 賣設計工具；Arm 授權現成的電路設計" },
+              { "label": "IC 設計公司", "node": "ic-design", "note": "畫設計圖、賣晶片" },
+              { "label": "晶圓代工", "node": "foundry", "note": "台積電等，依設計圖製造" },
+              { "label": "封測", "node": "packaging", "note": "把晶片包好、測試" },
+              { "label": "品牌與系統廠", "note": "手機、筆電、汽車、網通設備" }
+            ] },
+            { "type": "story", "speaker": "錢往哪裡流", "text": "品牌廠付錢向 IC 設計公司買晶片；IC 設計公司再付代工費給台積電、付封測費給封測廠，並付授權費給 EDA 和 IP 公司。IC 設計公司賺的是中間的差價，靠的是設計能力。" },
+            { "type": "story", "speaker": "另一種賺法", "text": "也有公司不只賣晶片：高通握有大量通訊專利，手機品牌就算不用高通的晶片，也要付專利授權費。這個授權業務叫 QTL，利潤很高。", "sources": ["qcom-10k-2025"] },
+            { "type": "choice", "prompt": "在這條錢流裡，IC 設計公司對誰比較沒有議價能力？", "options": [
+              { "label": "對下游的手機品牌", "reveal": "要看情況：有獨家規格時議價能力強；但大客戶採購量大，也有壓價能力。" },
+              { "label": "對上游的先進製程代工廠", "reveal": "對。最先進的製程集中在少數代工廠，IC 設計公司選擇不多，所以對上游的議價能力偏弱。" }
+            ] }
+          ]
+        },
+        {
+          "id": "market",
+          "title": "市場多大",
+          "screens": [
+            { "type": "stat", "title": "全球前十大 IC 設計公司，2025 年", "items": [
+              { "label": "合計營收", "value": "超過 3,594 億美元", "note": "年增 44%" },
+              { "label": "第一名 NVIDIA", "value": "2,057 億美元", "note": "占前十大合計的 57%" }
+            ], "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "bars", "title": "2025 年營收排名（億美元）", "unit": "億美元", "items": [
+              { "label": "NVIDIA", "value": 2057 },
+              { "label": "博通", "value": 397 },
+              { "label": "高通", "value": 389 },
+              { "label": "AMD", "value": 346 },
+              { "label": "聯發科", "value": 191, "tw": true },
+              { "label": "Marvell", "value": 80, "note": "超過 80" },
+              { "label": "瑞昱", "value": 39, "tw": true },
+              { "label": "豪威 OmniVision", "value": 33 },
+              { "label": "聯詠", "value": 32, "tw": true },
+              { "label": "MPS", "value": 28 }
+            ], "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "choice", "prompt": "前十大合計一年成長 44%。你覺得主要的推手是什麼？", "options": [
+              { "label": "手機銷量大增", "reveal": "手機有幫忙（聯發科、高通都成長），但幅度小得多：高通 2025 年營收年增 12%。" },
+              { "label": "AI 運算需求", "reveal": "對。TrendForce 指出成長主要來自 AI 運算需求：NVIDIA 營收年增 65%，博通靠客製化 AI 晶片和 AI 網通年增 30%。" }
+            ], "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "stat", "title": "台灣的 IC 設計業", "items": [
+              { "label": "2026 年產值預估", "value": "約 1.7 兆元新台幣", "note": "年增 19.7%（台灣半導體產業協會引用工研院 2026 年 5 月的預估）" },
+              { "label": "前十大裡的台灣公司", "value": "聯發科、瑞昱、聯詠", "note": "分別排第 5、7、9 名" }
+            ], "sources": ["ltn-tsia-2026-05", "trendforce-top10-fabless-2025"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "name": "比較",
+      "sections": [
+        {
+          "id": "players",
+          "title": "誰是玩家",
+          "screens": [
+            { "type": "compare", "title": "主要的 IC 設計公司", "companies": ["mediatek", "qualcomm", "broadcom", "realtek", "novatek"], "rows": [
+              { "label": "主力產品", "values": ["Android 手機晶片，跨足雲端 AI ASIC", "手機晶片＋通訊專利授權", "網通晶片、客製化 AI 晶片、企業軟體", "網通、音訊、電腦周邊晶片", "面板驅動 IC"] },
+              { "label": "2025 營收", "values": ["191 億美元", "389 億美元", "397 億美元", "39 億美元", "32 億美元"] },
+              { "label": "全球排名", "values": ["第 5", "第 3", "第 2", "第 7", "第 9"] }
+            ], "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "choice", "prompt": "你要做一台 Wi-Fi 路由器，需要網通晶片。你會先找誰談？", "options": [
+              { "label": "瑞昱或博通", "reveal": "對。兩家都是網通晶片大廠：瑞昱是台灣的網通晶片廠，博通的高速網路晶片技術領先。" },
+              { "label": "聯詠", "reveal": "聯詠做的是面板驅動 IC，讓螢幕顯示畫面，不做網通晶片。" },
+              { "label": "高通", "reveal": "高通也有網通產品，但它的主力是手機晶片和專利授權。" }
+            ] },
+            { "type": "story", "speaker": "橫跨多個環節", "text": "有些公司不只在 IC 設計：聯發科和博通也做 AI 晶片，AMD 同時在 AI 晶片，英特爾還自己經營晶圓代工。到研究總部點開這些公司，可以看到地圖上亮起它們參與的所有環節。" }
+          ]
+        },
+        {
+          "id": "moat",
+          "title": "憑什麼贏",
+          "screens": [
+            { "type": "stat", "title": "各家的護城河", "items": [
+              { "label": "高通", "value": "通訊專利", "note": "大量通訊專利，授權業務帶來高利潤" },
+              { "label": "聯發科", "value": "規模與產品線", "note": "產品線廣、出貨規模大，在 Android 手機晶片市場領先" },
+              { "label": "博通", "value": "技術＋大客戶", "note": "高速網路晶片技術領先，與雲端大客戶長期合作" },
+              { "label": "瑞昱", "value": "產品多、客戶分散", "note": "網通產品隨規格升級持續成長" },
+              { "label": "聯詠", "value": "面板廠關係", "note": "與面板廠合作關係深，在驅動 IC 市場規模大" }
+            ], "sources": ["qcom-10k-2025", "morningstar-mtk", "avgo-10k-2025", "cnyes-realtek-3q26", "ctee-ddi-2026"] },
+            { "type": "choice", "prompt": "你覺得哪一種護城河最難被對手複製？", "options": [
+              { "label": "專利", "reveal": "專利受法律保護，對手要用就得付錢，所以很難繞過；但專利會到期，也常引發訴訟。" },
+              { "label": "規模", "reveal": "規模讓成本更低、談判籌碼更大；但對手也能靠價格戰或大客戶支持追上來。" },
+              { "label": "客戶關係", "reveal": "長期合作讓客戶換供應商的成本變高；但大客戶也可能自己設計晶片（例如蘋果）。" }
+            ] }
+          ]
+        },
+        {
+          "id": "profit",
+          "title": "怎麼賺錢",
+          "screens": [
+            { "type": "story", "speaker": "商業模式", "text": "賣晶片賺錢。不用蓋工廠，資本支出低；主要成本是研發人才和晶圓代工費。有獨家技術的產品利潤比較好，標準化產品容易陷入價格戰。" },
+            { "type": "stat", "title": "IC 設計一定比代工賺嗎？", "items": [
+              { "label": "瑞昱毛利率", "value": "約 47%", "note": "2026 年第三季" },
+              { "label": "台積電毛利率", "value": "約 66%", "note": "2026 年第三季" }
+            ], "sources": ["cnyes-realtek-3q26", "tsmc-3q26"] },
+            { "type": "story", "speaker": "為什麼", "text": "很多人以為「不用蓋工廠」的 IC 設計一定比較賺，但不一定。台積電在最先進的製程幾乎沒有對手，議價能力強，所以毛利率反而比多數 IC 設計公司高。這也是查證時發現的一個常見誤解。" }
+          ]
+        },
+        {
+          "id": "issues",
+          "title": "現在的挑戰",
+          "screens": [
+            { "type": "story", "speaker": "三則新聞", "text": "接下來三題是計分題，判斷每則消息對 IC 設計公司代表什麼。答對加盃數，答錯會扣（青銅不扣）。" },
+            { "type": "quiz", "id": "ic-design.issues.1", "difficulty": 1, "prompt": "高通年報指出，蘋果只向它買比較低毛利的數據機晶片，部分中國客戶也改用自家晶片。這對高通是哪一種風險？", "options": ["大客戶自己設計晶片", "出口管制", "匯率波動", "代工廠產能不足"], "answer": 0, "explain": "這叫垂直整合：大客戶自己設計晶片，就不再向 IC 設計公司買。客戶越大，自己做的動機越強。", "sources": ["qcom-10k-2025"] },
+            { "type": "quiz", "id": "ic-design.issues.2", "difficulty": 1, "prompt": "面板驅動 IC 在 2025 年被形容為「量穩利弱」。主要原因是什麼？", "options": ["中國市場價格競爭，壓低平均售價", "台積電拒絕接單", "螢幕需求消失", "專利到期"], "answer": 0, "explain": "出貨量穩定，但中國市場的價格競爭把平均售價壓低，利潤跟著變薄。聯詠就面臨這個壓力。", "sources": ["ctee-ddi-2026", "wantrich-novatek"] },
+            { "type": "quiz", "id": "ic-design.issues.3", "difficulty": 1, "prompt": "聯發科的第一顆雲端 AI ASIC 在 2026 年 9 月開始出貨。這代表 IC 設計公司正在做什麼？", "options": ["跨進客製化 AI 晶片", "改做晶圓代工", "退出手機市場", "轉做記憶體"], "answer": 0, "explain": "IC 設計公司替雲端業者設計專用的 AI 晶片（ASIC），博通是最大的例子。這讓它們從手機、網通延伸到 AI，也是 IC 設計和 AI 晶片兩個環節重疊的地方。", "sources": ["technews-mtk-asic", "uanalyze-mtk-asic", "avgo-10k-2025"] }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "name": "章末對局",
+      "sections": [
+        {
+          "id": "case",
+          "title": "章末對局",
+          "match": true,
+          "screens": [
+            { "type": "quiz", "id": "ic-design.final.fabless", "difficulty": 1, "prompt": "Fabless（無晶圓廠）的意思是什麼？", "options": ["只設計晶片，製造外包給代工廠", "只製造晶片，不做設計", "設計和製造都自己來", "只做封裝和測試"], "answer": 0, "explain": "Fabless 公司只負責設計、經營客戶，製造交給晶圓代工廠，所以不用負擔蓋廠的巨額投資。", "sources": ["tsmc-20f-2025"] },
+            { "type": "quiz", "id": "ic-design.final.top1", "difficulty": 1, "prompt": "2025 年營收最高的 IC 設計公司是誰？", "options": ["NVIDIA", "高通", "聯發科", "博通"], "answer": 0, "explain": "NVIDIA 2025 年營收 2,057 億美元，年增 65%，遠高於第二名的博通（397 億美元）。", "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "quiz", "id": "ic-design.final.qtl", "difficulty": 1, "prompt": "高通除了賣手機晶片，還靠什麼賺錢？", "options": ["通訊專利授權", "晶圓代工", "雲端服務", "賣手機"], "answer": 0, "explain": "高通的授權業務（QTL）向手機品牌收取專利授權費，利潤很高。", "sources": ["qcom-10k-2025"] },
+            { "type": "quiz", "id": "ic-design.final.novatek", "difficulty": 1, "prompt": "聯詠主要設計哪一種晶片？", "options": ["面板驅動 IC", "手機處理器", "AI GPU", "記憶體"], "answer": 0, "explain": "聯詠是台灣主要的面板驅動 IC 設計公司，這種晶片負責讓螢幕顯示畫面。", "sources": ["ctee-ddi-2026"] },
+            { "type": "quiz", "id": "ic-design.final.margin", "difficulty": 2, "prompt": "2026 年第三季，瑞昱毛利率約 47%，台積電約 66%。這說明了什麼？", "options": ["IC 設計不一定比代工賺", "IC 設計一定比代工賺", "代工廠的成本比較低", "瑞昱的營收比台積電大"], "answer": 0, "explain": "不用蓋工廠不代表比較賺。台積電在先進製程議價能力強，毛利率反而比多數 IC 設計公司高。", "sources": ["cnyes-realtek-3q26", "tsmc-3q26"] },
+            { "type": "quiz", "id": "ic-design.final.share", "difficulty": 2, "prompt": "2025 年，NVIDIA 的營收大約占全球前十大 IC 設計公司合計的多少？", "options": ["約 57%", "約 15%", "約 30%", "約 85%"], "answer": 0, "explain": "前十大合計超過 3,594 億美元，NVIDIA 就占 2,057 億美元，約 57%，而且比重還在上升。", "sources": ["trendforce-top10-fabless-2025"] },
+            { "type": "quiz", "id": "ic-design.final.broadcom", "difficulty": 3, "prompt": "博通前五大終端客戶約占營收 40%。對博通來說，這代表什麼？", "options": ["客戶集中：少數大客戶縮減訂單，影響就很大", "客戶很分散，營收很穩", "博通的產品賣不出去", "博通主要靠賣給消費者"], "answer": 0, "explain": "替大型雲端業者做客製化晶片，訂單大但集中。少數客戶的決定，就會大幅影響營收。", "sources": ["avgo-10k-2025"] }
+          ]
+        }
+      ]
+    }
+  ]
+}

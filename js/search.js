@@ -9,6 +9,7 @@ export function setupSearch(input, list, ctx, onPick) {
     ...ctx.nodes.map((n) => ({ kind: "環節", id: n.id, label: n.name, sub: n.nameEn, keys: [n.name, n.nameEn, n.id] })),
     ...ctx.companies.map((c) => ({ kind: "公司", id: c.id, label: c.name, sub: c.nameEn, keys: [c.name, c.nameEn, c.id] })),
     ...ctx.glossary.map((t) => ({ kind: "術語", id: t.id, label: t.term, sub: t.en, keys: [t.term, t.en, ...t.aliases] })),
+    ...(ctx.metrics || []).map((m) => ({ kind: "指標", id: m.id, label: m.name, sub: m.en, keys: [m.name, m.en, m.abbr, m.id] })),
   ].map((it) => ({ ...it, hay: it.keys.map(norm) }));
 
   let results = [];

@@ -662,5 +662,37 @@
     "url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-10/eba4fac72873bf546b669bd2b5d973df5c93215d/TSMC%203Q26%20Transcript.pdf",
     "asOf": "2026-10",
     "type": "官方"
+  },
+  {
+    "id": "trendforce-top10-fabless-2025",
+    "publisher": "TrendForce 集邦科技",
+    "title": "AI Compute Demand Drives 44% YoY Growth for Top 10 Global Fabless IC Firms in 2025",
+    "url": "https://www.trendforce.com/presscenter/news/20260401-12996.html",
+    "asOf": "2026-04",
+    "type": "研究機構"
+  },
+  {
+    "id": "ltn-tsia-2026-05",
+    "publisher": "自由時報（引述 TSIA、工研院產科國際所）",
+    "title": "年增29.5% 台灣半導體業今年產值估破8兆",
+    "url": "https://ec.ltn.com.tw/article/paper/1755027",
+    "asOf": "2026-05",
+    "type": "研究機構"
+  },
+  {
+    "id": "tsmc-4q25-pr",
+    "publisher": "台積電 TSMC",
+    "title": "2025 年第四季營運結果新聞稿（Form 6-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000008/a4q25e_withguidancexfinal.htm",
+    "asOf": "2026-01",
+    "type": "官方"
+  },
+  {
+    "id": "tsmc-1q26",
+    "publisher": "台積電 TSMC",
+    "title": "2026 年第一季財報簡報（Form 6-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000199/a1q26e_withguidancexfinal.htm",
+    "asOf": "2026-04",
+    "type": "官方"
   }
 ]

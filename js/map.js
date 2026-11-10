@@ -138,6 +138,11 @@ export function renderMap(container, { zones, nodes }, { mobile, onSelect, onBac
     el("circle", { r: 10 }, chk);
     const ct = el("text", { y: 4 }, chk);
     ct.textContent = "✓";
+    // 快忘了的標記（超過 7 天沒複習）
+    const stale = el("g", { class: "node-stale", transform: "translate(4,4)" }, g);
+    el("circle", { r: 10 }, stale);
+    const sti = el("text", { y: 4 }, stale);
+    sti.textContent = "⌛";
     const pick = (e) => { e.stopPropagation(); onSelect(n.id); };
     g.addEventListener("click", pick);
     g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(e); } });
@@ -169,5 +174,17 @@ export function markRead(container, readIds) {
     g.classList.toggle("is-read", read);
     const label = g.getAttribute("aria-label").replace(/（已讀懂）$/, "");
     g.setAttribute("aria-label", read ? `${label}（已讀懂）` : label);
+  });
+}
+
+/** 研究總部的學習狀態：沒學過是霧（灰色）、學過「認識」亮起來、完成打勾、超過 7 天沒複習出現沙漏 */
+export function markProgress(container, progressOf) {
+  container.querySelectorAll(".node").forEach((g) => {
+    const p = progressOf(g.dataset.id);
+    g.classList.toggle("is-fog", !p.known);
+    g.classList.toggle("is-read", p.done);
+    g.classList.toggle("is-stale", p.stale);
+    const base = g.getAttribute("aria-label").replace(/（.*）$/, "");
+    g.setAttribute("aria-label", base + (p.done ? "（已完成）" : p.known ? "（已學過）" : "（還沒探索）"));
   });
 }

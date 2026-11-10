@@ -2,44 +2,44 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>半導體 × AI 產業鏈地圖</title>
-  <meta name="description" content="一張可以點擊的半導體與 AI 產業鏈地圖：每個環節在做什麼、代表公司、怎麼賺錢、當前問題。">
-  <meta property="og:title" content="半導體 × AI 產業鏈地圖">
-  <meta property="og:description" content="11 個環節、41 家公司、83 個來源：給商管人的半導體與 AI 產業鏈互動地圖。">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>半導體 × AI 產業學習 App</title>
+  <meta name="description" content="用遊戲的方式認識半導體與 AI 產業：探索章節、段位盃數、事件任務，加上隨時可以複習的產業鏈地圖。">
+  <meta property="og:title" content="半導體 × AI 產業學習 App">
+  <meta property="og:description" content="給商管人的半導體與 AI 產業學習 App：從 IC 設計出發，一章一章看懂整條產業鏈。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dannyyao-maker.github.io/semiconductor-ai-map/">
-  <meta property="og:image" content="https://dannyyao-maker.github.io/semiconductor-ai-map/docs/screenshots/overview.png">
+  <meta property="og:image" content="https://dannyyao-maker.github.io/semiconductor-ai-map/docs/screenshots/app-today.png">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#2d5f8b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="半導體學習">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/arena.css">
+  <link rel="stylesheet" href="css/charts.css">
 </head>
 <body>
-  <header class="site-header">
-    <div>
-      <h1>半導體 × AI 產業鏈地圖</h1>
-      <p class="subtitle">Semiconductor × AI Value Chain Map · 從晶片到 AI 服務，價值由左往右流動</p>
-    </div>
-    <div class="tools">
-      <div class="search-box">
-        <input id="search" type="search" placeholder="搜尋環節、公司、術語（例：台積、HBM）" autocomplete="off"
-          role="combobox" aria-label="搜尋環節、公司或術語" aria-controls="search-results" aria-expanded="false" aria-autocomplete="list">
-        <ul id="search-results" class="search-results" role="listbox" aria-label="搜尋結果" hidden></ul>
-      </div>
-      <button id="progress" class="tool-btn" type="button">已讀 0／11</button>
-      <button id="tour-btn" class="tool-btn" type="button">導覽</button>
-    </div>
-    <p class="legend" aria-label="內容狀態說明">
-      <span class="legend-item"><span class="status status-待查證">待查證</span>底稿，尚未對照來源</span>
-      <span class="legend-item"><span class="status status-待審核">待審核</span>已附來源</span>
-      <span class="legend-item"><span class="status status-已審核">已審核</span>本人確認</span>
-    </p>
+  <a class="skip-link" href="#view">跳到主要內容</a>
+  <header class="app-header">
+    <a class="brand" href="#/today">半導體 × AI <span>產業學習</span></a>
+    <div id="hud" class="hud" aria-label="學習狀態"></div>
   </header>
-  <main class="layout">
-    <section id="map" class="map" aria-label="產業鏈地圖"><p class="loading">載入中…</p></section>
-    <aside id="card" class="card" aria-labelledby="card-title" hidden></aside>
-  </main>
+  <nav class="tabbar" aria-label="主選單">
+    <a href="#/today" data-view="today"><span aria-hidden="true">☀️</span>今天</a>
+    <a href="#/explore" data-view="explore"><span aria-hidden="true">🧭</span>探索</a>
+    <a href="#/hq" data-view="hq"><span aria-hidden="true">🗺️</span>研究總部</a>
+    <a href="#/events" data-view="events"><span aria-hidden="true">🚨</span>事件</a>
+    <a href="#/me" data-view="me"><span aria-hidden="true">👤</span>我的</a>
+  </nav>
+  <main id="view" class="view" tabindex="-1"><p class="loading">載入中…</p></main>
   <footer class="site-footer">
-    內容為學習用途整理，只談商業面。每條內容附來源連結與資料時間點（asOf）；「待查證」表示尚未對照來源，請勿直接引用，也不構成投資建議。<br>
+    內容為學習用途整理，每條內容附來源連結與資料時間點（asOf），不構成任何投資建議。
     作者：danny ・ <a href="https://github.com/dannyyao-maker/semiconductor-ai-map">GitHub 原始碼與查證紀錄</a>
   </footer>
   <script type="module" src="js/app.js"></script>

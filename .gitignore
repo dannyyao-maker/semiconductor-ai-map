@@ -7,3 +7,7 @@ sources/*
 Thumbs.db
 desktop.ini
 node_modules/
+
+# 自動事件的暫存（只在本機）
+inbox/
+drafts/

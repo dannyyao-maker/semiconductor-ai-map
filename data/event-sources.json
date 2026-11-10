@@ -1,0 +1,365 @@
+{
+  "note": "自動事件要追蹤的來源清單。enabled 是 true 才會檢查。標準：官方資料（公司申報、政府公告）和常被其他企業、媒體當作公開資料引用的來源（研究機構、主流財經科技媒體）都算可信；二手來源要有兩個以上獨立發布者、抓得到原文、數字對得上，才會自動上線。",
+  "rules": {
+    "defaultLookbackDays": 14,
+    "maxEventsPerRun": 2,
+    "maxItemsPerSource": 10
+  },
+  "sources": [
+    {
+      "id": "sec-tsm",
+      "name": "台積電（TSM）美國證券交易委員會申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "TSM",
+        "forms": [
+          "6-K"
+        ]
+      },
+      "nodes": [
+        "foundry",
+        "packaging",
+        "equipment"
+      ],
+      "note": "季報新聞稿、法說會簡報、每月營收、董事會決議都在這裡；已驗證可以讀取。"
+    },
+    {
+      "id": "sec-nvda",
+      "name": "NVIDIA（NVDA）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "NVDA",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "ai-chip"
+      ],
+      "note": "季報在 8-K（Item 2.02）的附件。"
+    },
+    {
+      "id": "fr-bis",
+      "name": "美國商務部工業與安全局（BIS）公告：半導體與先進運算",
+      "kind": "federal-register",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "agency": "industry-and-security-bureau",
+        "terms": [
+          "semiconductor",
+          "advanced computing",
+          "entity list"
+        ],
+        "types": [
+          "Rule",
+          "Proposed Rule",
+          "Notice"
+        ]
+      },
+      "nodes": [
+        "ai-chip",
+        "equipment",
+        "foundry"
+      ],
+      "note": "出口管制的規則和實體清單變動，已驗證可以讀取。"
+    },
+    {
+      "id": "sec-asml",
+      "name": "ASML 申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "ASML",
+        "forms": [
+          "6-K",
+          "20-F"
+        ]
+      },
+      "nodes": [
+        "equipment"
+      ]
+    },
+    {
+      "id": "sec-mu",
+      "name": "美光（MU）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "MU",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "memory"
+      ]
+    },
+    {
+      "id": "sec-amd",
+      "name": "超微（AMD）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "AMD",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "ai-chip",
+        "ic-design"
+      ]
+    },
+    {
+      "id": "sec-avgo",
+      "name": "博通（AVGO）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "AVGO",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "ic-design",
+        "ai-chip"
+      ]
+    },
+    {
+      "id": "sec-qcom",
+      "name": "高通（QCOM）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "QCOM",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "ic-design"
+      ]
+    },
+    {
+      "id": "sec-amat",
+      "name": "應用材料（AMAT）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "AMAT",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "equipment"
+      ]
+    },
+    {
+      "id": "sec-msft",
+      "name": "微軟（MSFT）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "MSFT",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "cloud",
+        "model"
+      ]
+    },
+    {
+      "id": "sec-googl",
+      "name": "Alphabet（GOOGL）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "GOOGL",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "cloud",
+        "model"
+      ]
+    },
+    {
+      "id": "sec-amzn",
+      "name": "亞馬遜（AMZN）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "AMZN",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "cloud"
+      ]
+    },
+    {
+      "id": "sec-smci",
+      "name": "美超微（SMCI）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "SMCI",
+        "forms": [
+          "8-K",
+          "10-Q",
+          "10-K"
+        ]
+      },
+      "nodes": [
+        "ai-server"
+      ]
+    },
+    {
+      "id": "sec-asx",
+      "name": "日月光（ASX）申報",
+      "kind": "sec",
+      "type": "官方",
+      "enabled": true,
+      "params": {
+        "ticker": "ASX",
+        "forms": [
+          "6-K"
+        ]
+      },
+      "nodes": [
+        "packaging"
+      ]
+    },
+    {
+      "id": "rss-trendforce",
+      "name": "TrendForce 集邦科技 新聞",
+      "kind": "rss",
+      "type": "研究機構",
+      "enabled": true,
+      "params": {
+        "url": "https://www.trendforce.com/news/feed/",
+        "keywords": [
+          "TSMC",
+          "HBM",
+          "DRAM",
+          "NAND",
+          "AI server",
+          "foundry",
+          "Nvidia",
+          "export"
+        ]
+      },
+      "nodes": [
+        "memory",
+        "foundry",
+        "ai-server"
+      ],
+      "note": "已驗證可以讀取（20 則）。二手來源，要有兩個獨立發布者才能自動上線。"
+    },
+    {
+      "id": "rss-technews",
+      "name": "科技新報",
+      "kind": "rss",
+      "type": "媒體",
+      "enabled": true,
+      "params": {
+        "url": "https://technews.tw/feed/",
+        "keywords": [
+          "台積電",
+          "輝達",
+          "NVIDIA",
+          "HBM",
+          "CoWoS",
+          "ASIC",
+          "AI 伺服器",
+          "出口管制",
+          "法說會"
+        ]
+      },
+      "nodes": [
+        "foundry",
+        "ai-chip",
+        "ai-server"
+      ],
+      "note": "已驗證可以讀取（40 則）。二手來源，要有兩個獨立發布者才能自動上線。"
+    },
+    {
+      "id": "rss-digitimes",
+      "name": "DIGITIMES 每日新聞",
+      "kind": "rss",
+      "type": "媒體",
+      "enabled": false,
+      "params": {
+        "url": "https://www.digitimes.com/rss/daily.xml",
+        "keywords": [
+          "TSMC",
+          "Nvidia",
+          "HBM",
+          "CoWoS",
+          "AI server",
+          "export"
+        ]
+      },
+      "nodes": [
+        "foundry",
+        "packaging",
+        "ai-server"
+      ],
+      "note": "已驗證可以讀取標題，但文章多半要付費，抓不到全文就無法核對數字，所以預設關閉。"
+    },
+    {
+      "id": "rss-google-news-tsmc",
+      "name": "Google 新聞搜尋：台積電 TSMC（最近 7 天）",
+      "kind": "rss",
+      "type": "媒體",
+      "enabled": false,
+      "params": {
+        "url": "https://news.google.com/rss/search?q=TSMC+when:7d&hl=en-US",
+        "keywords": []
+      },
+      "nodes": [
+        "foundry"
+      ],
+      "note": "只是多家媒體的標題彙整，連結不是原始報導，預設關閉；有需要再開。"
+    }
+  ]
+}
