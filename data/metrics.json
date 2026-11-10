@@ -1,1 +1,186 @@
-[]
+[
+  {
+    "id": "gross-margin", "name": "毛利率", "en": "Gross Margin", "abbr": "GM", "category": "獲利能力",
+    "formula": "（營收 − 營業成本）÷ 營收",
+    "meaning": "每賣 100 元，扣掉直接成本（原料、代工費、折舊等）後剩多少。反映產品的定價能力和成本結構。",
+    "highLow": "偏高：有技術領先或獨家產品，議價能力強。偏低：產品容易被替代、靠量取勝，或正在價格戰。",
+    "semiNote": "同一條產業鏈差異很大：台積電 2026 年第三季約 66%，NVIDIA 2026 會計年度約 71%，瑞昱約 47%，AI 伺服器的美超微只有 10.8%。「不用蓋工廠」的 IC 設計不一定比代工賺。",
+    "related": ["foundry", "ic-design", "ai-chip", "ai-server"],
+    "sources": ["tsmc-3q26", "nvda-10k-2026", "cnyes-realtek-3q26", "smci-10k-2026"]
+  },
+  {
+    "id": "operating-margin", "name": "營業利益率", "en": "Operating Margin", "abbr": "OPM", "category": "獲利能力",
+    "formula": "營業利益 ÷ 營收",
+    "meaning": "毛利再扣掉研發、行銷、管理等營業費用後的獲利比率，看本業真正賺多少。",
+    "highLow": "偏高：規模經濟好、費用控制佳。和毛利率差距大，代表營業費用（例如研發）吃掉很多毛利。",
+    "semiNote": "IC 設計公司的研發費用高，毛利率和營業利益率常差很多；組裝代工廠毛利薄，營業利益率常只有個位數，看的是規模和周轉。",
+    "related": ["ic-design", "ai-server"]
+  },
+  {
+    "id": "net-margin", "name": "淨利率", "en": "Net Margin", "abbr": "", "category": "獲利能力",
+    "formula": "稅後淨利 ÷ 營收",
+    "meaning": "所有成本、費用、利息、稅都扣完後，每 100 元營收最後留下多少。",
+    "highLow": "要和營業利益率一起看：差距大，可能是業外損益（匯兌、投資、一次性費用）造成的。",
+    "semiNote": "出口管制等一次性費用會讓單季淨利大幅波動，例如 NVIDIA 因 H20 出口許可認列 45 億美元的費用。",
+    "related": ["ai-chip"],
+    "sources": ["nvda-10k-2026"]
+  },
+  {
+    "id": "eps", "name": "每股盈餘", "en": "Earnings Per Share", "abbr": "EPS", "category": "獲利能力",
+    "formula": "（稅後淨利 − 特別股股利）÷ 流通在外普通股股數",
+    "meaning": "每一股替股東賺了多少錢，是計算本益比的分母。",
+    "highLow": "看趨勢比看絕對值重要：連續成長代表獲利能力提升。股本不同的公司，EPS 絕對值不能直接比較。",
+    "semiNote": "半導體是景氣循環產業，記憶體廠的 EPS 可能一年大賺、下一年虧損；看 EPS 要搭配產業所在的景氣位置。",
+    "related": ["memory", "foundry"]
+  },
+  {
+    "id": "roe", "name": "股東權益報酬率", "en": "Return on Equity", "abbr": "ROE", "category": "獲利能力",
+    "formula": "稅後淨利 ÷ 平均股東權益",
+    "meaning": "股東投入的每 100 元，一年替股東賺多少。",
+    "highLow": "偏高：資本運用效率好。但高負債也會推高 ROE，要搭配負債比率一起看。",
+    "semiNote": "晶圓代工、記憶體這類重資產產業，股東權益大，ROE 要靠高毛利才撐得起來；IC 設計這類輕資產產業的 ROE 容易比較高。",
+    "related": ["foundry", "ic-design", "memory"]
+  },
+  {
+    "id": "revenue-growth", "name": "營收成長率", "en": "Revenue Growth (YoY / QoQ)", "abbr": "YoY", "category": "成長",
+    "formula": "年增率＝（本期營收 − 去年同期營收）÷ 去年同期營收；季增率（QoQ）是和上一季比",
+    "meaning": "看公司或產業成長的速度。年增率排除季節性，季增率看短期動能。",
+    "highLow": "高成長要問「靠什麼成長」：價格、數量還是新產品？成長放緩時，市場常先反應在股價上。",
+    "semiNote": "2025 年全球前十大 IC 設計公司營收年增 44%，NVIDIA 年增 65%、高通年增 12%：同一個環節，AI 相關和非 AI 的成長差很多。",
+    "related": ["ic-design", "ai-chip"],
+    "sources": ["trendforce-top10-fabless-2025"]
+  },
+  {
+    "id": "debt-ratio", "name": "負債比率", "en": "Debt Ratio", "abbr": "", "category": "財務結構",
+    "formula": "總負債 ÷ 總資產",
+    "meaning": "公司的資產有多少是借來的，看財務槓桿和抵抗景氣下行的能力。",
+    "highLow": "偏高：景氣不好時利息和還款壓力大。偏低：財務保守，但也可能錯失槓桿帶來的成長。",
+    "semiNote": "要大量蓋廠的公司（晶圓代工、記憶體、資料中心）比較常靠借款；資料中心業者（例如 REIT）的負債比率通常比晶片公司高。",
+    "related": ["foundry", "memory", "datacenter"]
+  },
+  {
+    "id": "interest-coverage", "name": "利息保障倍數", "en": "Interest Coverage Ratio", "abbr": "TIE", "category": "財務結構",
+    "formula": "稅前息前利益（EBIT）÷ 利息費用",
+    "meaning": "本業賺的錢，夠付幾次利息。看公司會不會被利息壓垮。",
+    "highLow": "偏高：還息能力強，借錢的空間大。低於 1～2 倍要警覺：本業賺的錢不太夠付利息。",
+    "semiNote": "景氣循環產業在谷底時 EBIT 會大幅下降，利息保障倍數也跟著掉；所以要看谷底那幾年，而不是景氣好的時候。",
+    "related": ["memory", "datacenter"]
+  },
+  {
+    "id": "current-ratio", "name": "流動比率", "en": "Current Ratio", "abbr": "", "category": "財務結構",
+    "formula": "流動資產 ÷ 流動負債",
+    "meaning": "一年內能變現的資產，夠不夠還一年內要付的債，看短期償債能力。",
+    "highLow": "大於 1 代表短期資金比較充足；但太高也可能是現金閒置或存貨太多。",
+    "semiNote": "存貨多的公司（例如記憶體、伺服器組裝）流動比率看起來高，但存貨跌價時，實際能變現的金額會比帳上少。",
+    "related": ["memory", "ai-server"]
+  },
+  {
+    "id": "inventory-days", "name": "存貨週轉天數", "en": "Days Inventory Outstanding", "abbr": "DIO", "category": "經營效率",
+    "formula": "平均存貨 ÷ 營業成本 × 365",
+    "meaning": "存貨平均要放多少天才賣得掉。是判斷景氣和供需的領先指標。",
+    "highLow": "天數拉長：可能需求轉弱、要準備降價。天數縮短：賣得快，供不應求。",
+    "semiNote": "記憶體最看這個：產品可以互相替代，價格由整體供需決定，美光的平均售價過去曾跌到低於成本；存貨天數上升常是價格下跌的前兆。",
+    "related": ["memory", "ic-design", "ai-server"],
+    "sources": ["mu-10k-2025"]
+  },
+  {
+    "id": "receivable-days", "name": "應收帳款天數", "en": "Days Sales Outstanding", "abbr": "DSO", "category": "經營效率",
+    "formula": "平均應收帳款 ÷ 營收 × 365",
+    "meaning": "賣出商品後，平均多少天才收到錢。",
+    "highLow": "天數拉長：可能客戶付款變慢，或公司為了衝營收放寬付款條件。",
+    "semiNote": "客戶是少數大廠時（例如雲端業者），供應商的議價能力弱，收款天數容易被拉長。",
+    "related": ["ai-server", "ic-design"]
+  },
+  {
+    "id": "utilization", "name": "產能利用率", "en": "Capacity Utilization", "abbr": "UTR", "category": "經營效率",
+    "formula": "實際產出 ÷ 最大產能",
+    "meaning": "工廠的機台有多少比例在運轉。不是財報科目，通常在法說會上揭露。",
+    "highLow": "偏高：訂單滿、固定成本被攤薄，毛利率上升。偏低：折舊等固定成本照樣要付，毛利率被壓縮。",
+    "semiNote": "重資產產業（晶圓代工、封測、記憶體）最看這個：機台折舊是固定的，利用率每差幾個百分點，毛利率就會明顯變動。",
+    "related": ["foundry", "packaging", "memory"]
+  },
+  {
+    "id": "capex-ratio", "name": "資本支出占營收比", "en": "Capex to Revenue", "abbr": "Capex", "category": "經營效率",
+    "formula": "資本支出 ÷ 營收",
+    "meaning": "公司把多少營收拿去蓋廠、買機台。反映對未來需求的看法，也決定之後幾年的折舊。",
+    "highLow": "偏高：正在擴產，看好未來需求；但如果需求不如預期，之後會變成產能過剩和折舊負擔。",
+    "semiNote": "台積電表示 2026–2028 年的資本支出會明顯高於過去三年；雲端業者的 AI 資本支出也很龐大，微軟年報提醒相關營收可能無法如期實現。一家公司的資本支出，就是設備商的營收。",
+    "related": ["foundry", "equipment", "cloud"],
+    "sources": ["tsmc-3q26-call", "msft-10k-2026", "amat-10k-2025"]
+  },
+  {
+    "id": "rd-ratio", "name": "研發費用率", "en": "R&D to Revenue", "abbr": "", "category": "經營效率",
+    "formula": "研發費用 ÷ 營收",
+    "meaning": "公司把多少營收投入研發，看技術投入的強度。",
+    "highLow": "偏高：技術競爭激烈，必須持續投入；若營收停止成長，研發費用會快速吃掉利潤。",
+    "semiNote": "IC 設計公司不用蓋工廠，主要成本就是研發人才，所以研發費用率通常是各環節中最高的之一。",
+    "related": ["ic-design", "ai-chip"]
+  },
+  {
+    "id": "customer-concentration", "name": "客戶集中度", "en": "Customer Concentration", "abbr": "", "category": "經營效率",
+    "formula": "前幾大客戶營收 ÷ 總營收（年報常揭露占營收 10% 以上的客戶）",
+    "meaning": "營收有多少來自少數客戶。不是財務比率，但年報幾乎一定會寫，是重要的風險指標。",
+    "highLow": "偏高：大客戶縮減訂單或自己做，營收會大幅波動；但也代表和大客戶關係深。",
+    "semiNote": "半導體很常見：NVIDIA 有兩家直接客戶分別占營收 22% 和 14%；台積電前十大客戶占約 78%；ASML 最大客戶占 23.9%；博通前五大終端客戶約占 40%。",
+    "related": ["ai-chip", "foundry", "equipment", "ic-design"],
+    "sources": ["nvda-10k-2026", "tsmc-20f-2025", "asml-20f-2025", "avgo-10k-2025"]
+  },
+  {
+    "id": "fcf", "name": "自由現金流", "en": "Free Cash Flow", "abbr": "FCF", "category": "經營效率",
+    "formula": "營業活動現金流 − 資本支出",
+    "meaning": "本業賺進的現金，扣掉維持和擴充產能的投資後，真正能自由運用（發股利、還債、併購）的現金。",
+    "highLow": "長期為正：公司能自己養活自己。擴產期可能短暫為負，要看之後能不能轉正。",
+    "semiNote": "AI 擴產期，雲端業者和晶圓代工的資本支出大增，自由現金流會被壓縮；這是判斷「投資能不能回收」的關鍵。",
+    "related": ["cloud", "foundry", "datacenter"]
+  },
+  {
+    "id": "pe", "name": "本益比", "en": "Price-to-Earnings Ratio", "abbr": "P/E", "category": "估值",
+    "formula": "股價 ÷ 每股盈餘（EPS）",
+    "meaning": "市場願意為公司每 1 元的獲利付多少錢，反映市場對未來成長的期待。",
+    "highLow": "偏高：市場預期未來高成長，但期待落空時股價修正也大。偏低：可能被低估，也可能是市場預期獲利會下滑。",
+    "semiNote": "景氣循環股要小心：記憶體在景氣高峰時 EPS 最高，本益比反而看起來最低；景氣谷底時 EPS 很低甚至虧損，本益比會變得很高或無法計算。App 裡的本益比每季更新一次，只當參考，不構成投資建議。",
+    "related": ["memory", "ai-chip"]
+  },
+  {
+    "id": "pb", "name": "股價淨值比", "en": "Price-to-Book Ratio", "abbr": "P/B", "category": "估值",
+    "formula": "股價 ÷ 每股淨值",
+    "meaning": "股價是帳面淨值的幾倍，常用在重資產或獲利波動大的公司。",
+    "highLow": "低於 1：市價低於帳面價值，可能被低估，也可能是資產（例如機台、存貨）的實際價值不如帳面。",
+    "semiNote": "記憶體這類景氣循環股，景氣谷底時 EPS 失真，市場常改看股價淨值比。",
+    "related": ["memory", "foundry"]
+  },
+  {
+    "id": "ev-ebitda", "name": "企業價值倍數", "en": "EV / EBITDA", "abbr": "EV/EBITDA", "category": "估值",
+    "formula": "（市值 + 淨負債）÷ 稅前息前折舊攤銷前利益",
+    "meaning": "把負債也算進公司價值，再和「還沒扣折舊」的獲利比較，適合比較資本結構不同的公司。",
+    "highLow": "偏高：市場給的評價高。因為排除了折舊，重資產公司用這個指標比本益比公平。",
+    "semiNote": "資料中心、晶圓代工這類折舊很大的產業常用這個指標；但要記得，折舊代表的機台和廠房，遲早要花錢更新。",
+    "related": ["datacenter", "foundry"]
+  },
+  {
+    "id": "dividend-yield", "name": "殖利率", "en": "Dividend Yield", "abbr": "", "category": "估值",
+    "formula": "每股現金股利 ÷ 股價",
+    "meaning": "用現在的股價買進，一年可以領回多少比例的現金股利。",
+    "highLow": "偏高：現金回饋多，常見於成熟、成長趨緩的公司；但股價大跌也會讓殖利率「看起來」變高。",
+    "semiNote": "成長期的公司通常把錢拿去擴產或研發，殖利率較低；資料中心 REIT 依規定要把大部分獲利配發出去，殖利率通常較高。",
+    "related": ["datacenter"]
+  },
+  {
+    "id": "asp", "name": "平均售價", "en": "Average Selling Price", "abbr": "ASP", "category": "成長",
+    "formula": "營收 ÷ 出貨量",
+    "meaning": "每單位產品平均賣多少錢。營收成長可以拆成「量」和「價」兩部分來看。",
+    "highLow": "ASP 上升：產品升級或供不應求。ASP 下降：價格競爭或供給過剩。",
+    "semiNote": "記憶體的營收主要看 ASP：廠商把產能轉去做 HBM 或轉回來，都會影響一般記憶體的供給和價格；面板驅動 IC 則因中國價格競爭，出現「量穩利弱」。",
+    "related": ["memory", "ic-design"],
+    "sources": ["mu-10k-2025", "ctee-ddi-2026"]
+  },
+  {
+    "id": "book-to-bill", "name": "訂單出貨比", "en": "Book-to-Bill Ratio", "abbr": "B/B", "category": "成長",
+    "formula": "新接訂單金額 ÷ 出貨金額",
+    "meaning": "新訂單和已出貨的比例，是設備業常用的景氣領先指標。",
+    "highLow": "大於 1：接單比出貨多，未來營收可望成長。小於 1：訂單減少，景氣可能轉弱。",
+    "semiNote": "設備商的營收跟著客戶的資本支出走；應用材料年報指出，客戶投資設備的時間與金額變動，會大幅影響它的營運結果。",
+    "related": ["equipment"],
+    "sources": ["amat-10k-2025"]
+  }
+]

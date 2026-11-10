@@ -11,8 +11,9 @@ import { mountExplore } from "./views/explore.js";
 import { mountHQ } from "./views/hq.js";
 import { mountEvents } from "./views/events.js";
 import { mountMe } from "./views/me.js";
+import { mountDict, metricsAsTerms } from "./views/dict.js";
 
-const VIEWS = { today: mountToday, explore: mountExplore, hq: mountHQ, events: mountEvents, me: mountMe };
+const VIEWS = { today: mountToday, explore: mountExplore, hq: mountHQ, events: mountEvents, me: mountMe, dict: mountDict };
 const viewEl = document.getElementById("view");
 const hudEl = document.getElementById("hud");
 let ctx;
@@ -50,7 +51,7 @@ function route() {
     current.inst?.update?.(r.params);
   }
   document.querySelectorAll(".tabbar a").forEach((a) => {
-    if (a.dataset.view === r.name) a.setAttribute("aria-current", "page");
+    if (a.dataset.view === r.name || (r.name === "dict" && a.dataset.view === "hq")) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
 }
@@ -137,6 +138,9 @@ async function main() {
       loadJSON("data/events.json"), loadJSON("data/metrics.json"),
     ]);
     load();
+    // 指標字典裡的指標也當成術語：卡片文字裡的「毛利率」「EPS」可以點了看解釋（和既有術語重複的別名不加）
+    const taken = new Set(glossary.flatMap((t) => t.aliases));
+    const terms = [...glossary, ...metricsAsTerms(metrics).map((t) => ({ ...t, aliases: t.aliases.filter((x) => !taken.has(x)) })).filter((t) => t.aliases.length)];
     ctx = {
       zones: nodesData.zones,
       nodes: nodesData.nodes,
@@ -145,8 +149,8 @@ async function main() {
       nodeById: byId(nodesData.nodes),
       companyById: byId(companies),
       sourceById: byId(sources),
-      glossaryById: byId(glossary),
-      glossify: makeGlossifier(glossary),
+      glossaryById: byId(terms),
+      glossify: makeGlossifier(terms),
       game: makeGame(config),
       state,
       onState: onChange,

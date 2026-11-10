@@ -39,6 +39,7 @@ export function showTerm(anchor, term, ctx) {
     <button class="close" data-term-close aria-label="關閉解釋">×</button>
     <p class="term-title">${esc(term.term)} <span class="en">${esc(term.en)}</span></p>
     <p>${esc(term.short)}</p>
+    ${term.dictId ? `<p class="term-node"><a href="#/dict/${esc(term.dictId)}">在指標字典看更多 →</a></p>` : ""}
     ${node ? `<p class="term-node">相關環節：<button class="link" data-goto-node="${esc(node.id)}">${esc(node.name)}</button></p>` : ""}
     ${srcs.length ? `<p class="src-links">來源：${srcs.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.publisher)}</a>`).join("、")}</p>` : ""}`;
   document.body.appendChild(pop);
