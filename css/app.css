@@ -522,3 +522,5 @@ p.up { color: var(--up); }
 .install-steps { margin: 6px 0 10px; padding-left: 1.3em; }
 .install-steps li { margin: 4px 0; }
 .ok-note { color: var(--up); font-weight: 700; }
+
+.status-auto { background: #e6effc; color: #1c5cab; }

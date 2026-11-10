@@ -78,7 +78,11 @@
     "questions": [
       { "type": "quiz", "id": "event.tsmc-3q26.chart-margin", "difficulty": 1, "prompt": "看圖：台積電的毛利率在哪一季最高？", "visual": { "type": "line", "title": "台積電毛利率（%）", "x": ["3Q25", "4Q25", "1Q26", "2Q26", "3Q26"], "series": [{ "label": "毛利率", "values": [59.5, 62.3, 66.2, 67.7, 66.4] }], "yMin": 55, "yMax": 70, "yStep": 5, "dec": 1, "suffix": "%" }, "options": ["2Q26", "3Q26", "1Q26", "4Q25"], "answer": 0, "explain": "2Q26 達到 67.7%，是圖上最高；3Q26 回落 1.3 個百分點到 66.4%，主因是 2 奈米量產初期的成本稀釋。", "sources": ["tsmc-3q26", "tsmc-3q26-call"] },
       { "type": "quiz", "id": "event.tsmc-3q26.chart-platform", "difficulty": 1, "prompt": "看圖：下面哪一個說法正確？", "visual": { "type": "dbars", "title": "第三季各平台占營收與季增", "valueName": "季增", "items": [{ "label": "高效能運算", "value": 22, "share": 68 }, { "label": "智慧型手機", "value": 10, "share": 21 }, { "label": "車用", "value": 23, "share": 4 }, { "label": "消費性電子", "value": -12, "share": 1 }] }, "options": ["車用成長最快，但只占營收 4%", "高效能運算占比最大，成長也最快", "智慧型手機的營收比上一季少", "消費性電子是成長最快的平台"], "answer": 0, "explain": "車用季增 23%，比高效能運算的 22% 略高，但占營收只有 4%；真正撐起營收的是占 68% 的高效能運算。看圖要同時看「占比」和「成長」。", "sources": ["tsmc-3q26-call"] },
-      { "type": "quiz", "id": "event.tsmc-3q26.capex", "difficulty": 2, "prompt": "台積電說 2026–2028 年的資本支出會明顯高於過去三年。看影響矩陣，最直接受惠、而且台積電自己也提到「供應吃緊」的是哪個環節？", "options": ["設備與材料", "AI 應用與服務", "雲端平台", "大型模型公司"], "answer": 0, "explain": "晶圓廠的資本支出主要拿去買機台和材料，所以台積電的資本支出，就是 ASML、應用材料這些設備商的營收。台積電也提到設備供應吃緊、設備價格在上漲。", "sources": ["tsmc-3q26-call", "amat-10k-2025"] }
+      { "type": "quiz", "id": "event.tsmc-3q26.capex", "difficulty": 2, "prompt": "台積電說 2026–2028 年的資本支出會明顯高於過去三年。看影響矩陣，最直接受惠、而且台積電自己也提到「供應吃緊」的是哪個環節？", "options": ["設備與材料", "AI 應用與服務", "雲端平台", "大型模型公司"], "answer": 0, "explain": "晶圓廠的資本支出主要拿去買機台和材料，所以台積電的資本支出，就是 ASML、應用材料這些設備商的營收。台積電也提到設備供應吃緊、設備價格在上漲。", "sources": ["tsmc-3q26-call"] }
+    ],
+    "derived": [
+      { "value": "533", "why": "第四季營收財測 523–543 億美元（52.3–54.3 十億美元）的中位數，圖上取中位數畫點" },
+      { "value": "21", "why": "100% 減去 7 奈米以下合計 79%，代表其他較成熟製程", "at": ["briefing[5].items[4].value"] }
     ],
     "conclusion": "一句話看局勢：AI 需求仍然強勁，台積電用更大的資本支出擴產；上游的設備、封測跟著受惠，台積電自己則要面對 2 奈米和海外廠帶來的毛利壓力，消費性市場是要觀察的弱點。",
     "sources": ["tsmc-3q26-call", "tsmc-3q26", "tsmc-4q25-pr", "tsmc-1q26"]

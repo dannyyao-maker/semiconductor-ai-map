@@ -8,6 +8,11 @@ import { renderQuiz } from "../quiz.js";
 import { renderMap } from "../map.js";
 import { sourceLinks } from "../card.js";
 
+/** 事件狀態標籤：自動整理的事件特別標出來，並說明它通過了什麼檢查、還沒經過什麼 */
+function statusTag(status) {
+  if (status.startsWith("自動整理")) return `<span class="status status-auto" title="由 Claude Code 依官方文件自動整理，數字都通過「在原文找得到」的檢查；還沒有經過本人審核">🤖 ${esc(status)}</span>`;
+  return `<span class="status status-${esc(status)}">${esc(status)}</span>`;
+}
 const EFFECT = { "+": { cls: "pos", label: "受惠", icon: "▲" }, "-": { cls: "neg", label: "受壓", icon: "▼" }, "0": { cls: "zero", label: "影響不大", icon: "●" } };
 
 export function mountEvents(root, ctx, initial) {
@@ -18,7 +23,7 @@ export function mountEvents(root, ctx, initial) {
     const archived = ctx.events.filter((e) => !active.includes(e));
     const li = (e) => `<li class="event-item${done(e.id) ? " is-done" : ""}"><a href="#/events/${esc(e.id)}">
       <span class="ev-date">${esc(e.date)}</span><b>${esc(e.title)}</b>
-      <span class="muted small">${done(e.id) ? "✓ 已結案" : "待處理"}・${esc(e.origin)}來源</span></a></li>`;
+      <span class="muted small">${done(e.id) ? "✓ 已結案" : "待處理"}・${esc(e.origin)}來源${e.status.startsWith("自動整理") ? "・🤖 自動整理" : ""}</span></a></li>`;
     root.innerHTML = `
       <div class="view-head"><div><h1>事件</h1><p class="muted">重大事件發生時，這裡會出現任務：狀況簡報 → 地圖導覽 → 3 題 → 結案。</p></div></div>
       <section class="panel"><h2 class="panel-title">🚨 進行中</h2>
@@ -32,7 +37,7 @@ export function mountEvents(root, ctx, initial) {
     root.innerHTML = `
       <div class="view-head"><div><p><a href="#/events">← 事件</a></p>
         <p class="ev-alert">🚨 重大事件・${esc(ev.date)}</p><h1>${esc(ev.title)}</h1>
-        <p><span class="status status-${esc(ev.status.replace(/・.*/, ""))}">${esc(ev.status)}</span> <span class="muted small">${esc(ev.origin)}來源</span></p></div></div>
+        <p>${statusTag(ev.status)} <span class="muted small">${esc(ev.origin)}來源</span></p></div></div>
       <section class="panel">
         <p class="lead">${ctx.textify()(ev.summary)}</p>
         <p class="muted small">任務流程：狀況簡報（${ev.briefing.length} 張，含圖表）→ 地圖導覽 → ${ev.matrix ? "影響矩陣 → " : ""}${ev.questions.length} 題（含看圖題）→ 結案，大約 5–8 分鐘。</p>
