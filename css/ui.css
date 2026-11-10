@@ -401,3 +401,30 @@ li:not(.is-known) .evb-pic i { background: var(--gold); color: #4a3512; }
 @media (prefers-reduced-motion: reduce) {
   .tr-flow, .lv-bubble, .trace-mascot, .lv.is-current::before, .mascot *, .mascot, .icon-btn.is-alert, .evb-siren, .lg-badge .rank-badge, .cele-confetti i { animation: none !important; }
 }
+
+/* ---------- 段位解鎖提示 ---------- */
+.uc { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px 6px 9px; border-radius: 999px; background: rgba(0, 0, 0, .28); color: #fff; font-weight: 800; font-size: .88rem; line-height: 1; white-space: nowrap; }
+.uc .ic { --ic: 18px; }
+.uc b { font-weight: 800; font-variant-numeric: tabular-nums; }
+.uc-stars { display: inline-flex; color: var(--gold); }
+.uc-stars .ic { --ic: 15px; margin-right: -2px; fill: currentColor; }
+.uc.is-match { background: rgba(255, 255, 255, .18); gap: 4px; }
+.uc.is-match b { margin-right: 6px; }
+.uc.is-match b:last-child { margin-right: 0; }
+.lg-unlocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 340px; min-height: 34px; }
+.lg-unlocks.is-future .uc:not(.is-match) { background: rgba(0, 0, 0, .4); outline: 2px dashed rgba(255, 255, 255, .35); outline-offset: -2px; }
+.lg-unlocks:not(.is-future) .uc:not(.is-match) { background: var(--gold); color: #4a3512; }
+.lg-unlocks:not(.is-future) .uc-stars { color: #4a3512; }
+.cele-unlocks { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 2px 0 6px; }
+.modal .uc { background: color-mix(in srgb, var(--rank, #4f7bad) 22%, #fff); color: var(--ink, #0f1520); }
+.modal .uc-stars { color: #b36b00; }
+.modal .uc.is-match { background: #ece4cf; }
+.cele-new { display: inline-flex; align-items: center; gap: 6px; font-weight: 900; color: #b36b00; }
+.cele-new .ic { --ic: 20px; }
+/* 闖關頁：被段位鎖住的關卡 */
+.lv-rank { position: absolute; right: -8px; bottom: -6px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--rank); border: 3px solid #0f1520; color: #fff; }
+.lv-rank .ic { --ic: 14px; }
+.lv.is-rank .lv-face { opacity: .72; }
+.rank-tip { position: absolute; z-index: 6; transform: translate(-50%, -100%); margin-top: -46px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 8px; border-radius: 999px; background: #0f1520; color: #fff; font-weight: 900; box-shadow: 0 5px 0 rgba(0, 0, 0, .25); animation: pop .35s cubic-bezier(.2, 1.5, .4, 1); pointer-events: none; white-space: nowrap; }
+.rank-tip .rank-badge { --s: 30px; }
+.rank-tip .ic { --ic: 18px; color: var(--gold); }

@@ -2,7 +2,8 @@
 // 一個單元（環節）一段路，每一關是走線上的一個接點；走過的走線通電發光（金色），還沒到的是暗的。
 // 完成一個單元，下一個單元解鎖。只有目前這一關有「開始」泡泡。
 import { esc } from "../util.js";
-import { ic, unitIcon, levelIcon, mascot } from "../icons.js";
+import { ic, unitIcon, levelIcon, mascot, rankGlyph } from "../icons.js";
+import { rankBadge } from "../game.js";
 import { state, save } from "../state.js";
 
 const W = 360;          // 走線畫布的寬（SVG 座標），實際寬度跟著螢幕縮放
@@ -26,7 +27,7 @@ async function buildUnits(ctx) {
     if (c.file) {
       const ch = await ctx.loadChapter(c.node);
       for (const p of ch.parts) for (const s of p.sections) {
-        u.levels.push({ key: `${p.id}.${s.id}`, title: s.title, icon: levelIcon(s.id, s.match), required: rankOk(p.minRank), rankLock: !rankOk(p.minRank) });
+        u.levels.push({ key: `${p.id}.${s.id}`, title: s.title, icon: levelIcon(s.id, s.match), required: rankOk(p.minRank), rankLock: !rankOk(p.minRank), minRank: p.minRank, rankColor: ctx.game.ranks.find((r) => r.id === p.minRank)?.color });
       }
     }
     units.push(u);
@@ -92,7 +93,7 @@ function unitHTML(u, idx, justKey) {
     const bubble = l.state === "current" ? `<span class="lv-bubble" style="left:${(x / W) * 100}%;top:${y - 82}px"><i>${ic("play")}</i><b>${esc(l.title)}</b></span>` : "";
     return `${bubble}<button class="${cls}" type="button" data-href="${esc(href)}" data-state="${l.state}" style="left:${(x / W) * 100}%;top:${y}px" aria-label="${esc(l.title)}${l.state === "done" ? "（完成）" : l.state === "locked" ? "（鎖住）" : ""}">
       <span class="lv-face">${ic(l.state === "locked" || l.state === "rank" ? l.icon : l.icon)}</span>
-      ${l.state === "done" ? `<i class="lv-check">${ic("check")}</i>` : l.state === "locked" || l.state === "rank" ? `<i class="lv-lock">${ic("lock")}</i>` : ""}
+      ${l.state === "done" ? `<i class="lv-check">${ic("check")}</i>` : l.state === "rank" ? `<i class="lv-rank" style="--rank:${esc(l.rankColor || "#888")}" data-rank="${esc(l.minRank)}">${rankGlyph(l.minRank)}</i>` : l.state === "locked" ? `<i class="lv-lock">${ic("lock")}</i>` : ""}
       ${i === n - 1 ? "" : ""}</button>`;
   }).join("");
   const mood = u.complete ? "cheer" : "idle";
@@ -156,11 +157,28 @@ export function mountPath(root, ctx) {
     wrap.querySelector(".cele-go").focus();
   }
 
+  /** 點到被段位鎖住的關卡：在它上方短暫顯示「段位徽章＋名稱＋鎖」 */
+  function showRankTip(lv, rankId) {
+    root.querySelectorAll(".rank-tip").forEach((t) => t.remove());
+    const tier = ctx.game.tiers.find((t) => t.rank.id === rankId && t.ti === 0);
+    if (!tier) return;
+    const tip = document.createElement("div");
+    tip.className = "rank-tip";
+    tip.style.left = `${lv.offsetLeft}px`;
+    tip.style.top = `${lv.offsetTop}px`;
+    tip.style.setProperty("--rank", tier.rank.color);
+    tip.innerHTML = `${rankBadge(tier, "sm")}<b>${esc(tier.rank.name)}</b>${ic("lock")}`;
+    lv.parentElement.appendChild(tip);
+    setTimeout(() => tip.remove(), 2200);
+  }
+
   root.addEventListener("click", (e) => {
     const lv = e.target.closest(".lv");
     if (lv) {
       if (lv.dataset.state === "locked" || lv.dataset.state === "rank") {
         lv.classList.remove("shake"); void lv.offsetWidth; lv.classList.add("shake");
+        const rid = lv.querySelector(".lv-rank")?.dataset.rank;
+        if (rid) showRankTip(lv, rid);
         return;
       }
       location.hash = lv.dataset.href;

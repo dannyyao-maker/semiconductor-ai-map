@@ -2,6 +2,8 @@
 // 選完：對的格子變綠、選錯的格子變紅，下方附精簡解析和來源；時間到算答錯。
 // 第一次作答才計分；段位升降時跳出提示。通常由 match.js 一局一局串起來。
 import { esc } from "./util.js";
+import { ic } from "./icons.js";
+import { rankUnlocks, unlockChip, matchChip } from "./unlocks.js";
 import { rankBadge } from "./game.js";
 import { sourceLinks } from "./card.js";
 import { chartHTML, bindCharts } from "./charts.js";
@@ -153,9 +155,7 @@ export function celebrate(res, ctx) {
   const t = res.after;
   let title = "", body = "";
   if (res.rankUp) {
-    const m = t.rank.match || {};
     title = `晉級 ${t.rank.name}！`;
-    body = `之後一局 ${m.questions} 題${m.seconds ? `、每題 ${m.seconds} 秒` : ""}；答對加 ${t.rank.win} 盃、答錯扣 ${t.rank.loss} 盃，而且不會再掉回 ${res.before.rank.name}。`;
   } else if (res.tierUp) { title = `升到 ${t.label}`; body = `繼續答對，往 ${ctx.game.standing().next?.label || "頂點"} 前進。`; }
   else if (res.tierDown) { title = `掉到 ${t.label}`; body = "沒關係，看完解析，下次就記住了。"; }
   if (res.milestone) {
@@ -169,6 +169,7 @@ export function celebrate(res, ctx) {
       ${rankBadge(t, "xl")}
       <h2 id="cel-title">${esc(title)}</h2>
       ${body.split("\n").map((p) => `<p>${esc(p)}</p>`).join("")}
+      ${res.rankUp ? `<div class="cele-unlocks">${matchChip(t.rank)}</div>` : ""}
       <button class="btn primary" data-close-modal>好</button>
     </div>`;
   document.body.appendChild(wrap);
@@ -176,6 +177,13 @@ export function celebrate(res, ctx) {
   wrap.addEventListener("click", (e) => { if (e.target === wrap || e.target.closest("[data-close-modal]")) close(); });
   wrap.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
   wrap.querySelector("[data-close-modal]").focus();
+  // 這個段位新解鎖的東西（章節資料可能還在載入，載好再補上）
+  if (res.rankUp) rankUnlocks(ctx).then((un) => {
+    const list = un[t.rank.id] || [];
+    const box = wrap.querySelector(".cele-unlocks");
+    if (!list.length || !box) return;
+    box.insertAdjacentHTML("afterbegin", `<span class="cele-new">${ic("spark")}</span>${list.map(unlockChip).join("")}`);
+  });
 }
 
 /** 打亂選項順序（資料檔裡正確答案常寫在第一個），fixedOrder: true 的題目不打亂 */

@@ -3,6 +3,7 @@
 import { esc } from "../util.js";
 import { ic } from "../icons.js";
 import { rankBadge } from "../game.js";
+import { rankUnlocks, unlockChip, matchChip } from "../unlocks.js";
 
 const ROMAN = ["I", "II", "III"];
 
@@ -12,7 +13,7 @@ export function mountLeague(root, ctx) {
   root.classList.add("bleed");
   document.documentElement.classList.add("no-scroll");
 
-  function slide(r, i, st) {
+  function slide(r, i, st, un) {
     const isCur = i === st.tier.ri;
     const past = i < st.tier.ri;
     const start = r.tiers[0];
@@ -31,6 +32,7 @@ export function mountLeague(root, ctx) {
       <h2 class="lg-name">${esc(r.name)}</h2>
       ${pips}
       ${status}
+      <div class="lg-unlocks${i > st.tier.ri ? " is-future" : ""}">${matchChip(r)}${(un[r.id] || []).map(unlockChip).join("")}</div>
     </section>`;
   }
 
@@ -52,12 +54,13 @@ export function mountLeague(root, ctx) {
     paint();
   }
 
+  let un = ctx._unlocks || {}, alive = true;
   function render() {
     const st = ctx.game.standing();
     const ranks = ctx.game.ranks;
     root.innerHTML = `
       <div class="lg" role="group" aria-roledescription="段位輪播" aria-label="段位">
-        <div class="lg-track">${ranks.map((r, i) => slide(r, i, st)).join("")}</div>
+        <div class="lg-track">${ranks.map((r, i) => slide(r, i, st, un)).join("")}</div>
         <button type="button" class="lg-arrow lg-prev" aria-label="上一個段位">${ic("back")}</button>
         <button type="button" class="lg-arrow lg-next" aria-label="下一個段位">${ic("back")}</button>
         <div class="lg-dots" aria-hidden="true">${ranks.map((r, i) => `<i class="${i < st.tier.ri ? "is-past" : ""}${i === st.tier.ri ? " is-cur" : ""}"></i>`).join("")}</div>
@@ -85,6 +88,7 @@ export function mountLeague(root, ctx) {
   window.addEventListener("resize", onResize);
 
   render();
+  rankUnlocks(ctx).then((u) => { un = u; if (alive) render(); });
   const off = ctx.onState(render);
-  return { unmount: () => { off(); root.classList.remove("bleed"); document.documentElement.classList.remove("no-scroll"); window.removeEventListener("keydown", onKey); window.removeEventListener("resize", onResize); } };
+  return { unmount: () => { alive = false; off(); root.classList.remove("bleed"); document.documentElement.classList.remove("no-scroll"); window.removeEventListener("keydown", onKey); window.removeEventListener("resize", onResize); } };
 }
