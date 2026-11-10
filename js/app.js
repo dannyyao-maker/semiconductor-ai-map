@@ -119,7 +119,7 @@ function buildChapters(index) {
     const s = chapterState(nodeId);
     const explore = s === "locked" || s === "soon" ? "" : `<a class="btn" href="#/explore/${esc(nodeId)}">到探索章節</a>`;
     if (!p.known) {
-      return `<div class="node-banner is-fog"><p>🌫️ 你還沒探索這一環${s === "locked" ? "（還沒解鎖）" : ""}。可以先看 30 秒速覽。</p>
+      return `<div class="node-banner is-fog"><p>○ 你還沒探索這一環${s === "locked" ? "（還沒解鎖）" : ""}。可以先看 30 秒速覽。</p>
         <p class="actions"><a class="btn primary" href="#/explore/${esc(nodeId)}/review">30 秒速覽</a>${explore}</p></div>`;
     }
     const when = p.days == null ? "" : p.days === 0 ? "今天複習過" : `上次複習：${p.days} 天前`;

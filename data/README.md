@@ -146,10 +146,10 @@
 
 | 檔案 | 用途 |
 | --- | --- |
-| `event-sources.json` | 要追蹤的來源清單。`enabled: true` 才會檢查；官方來源（SEC 申報、美國政府公告）通過檢查可以直接上線，二手來源（RSS 新聞）一律先當草稿 |
+| `event-sources.json` | 要追蹤的來源清單。`enabled: true` 才會檢查；官方來源（SEC 申報、美國政府公告）和常被引用的二手來源（TrendForce、科技新報等）都可以自動上線，二手來源要有兩個以上獨立發布者 |
 | `tools/watch-sources.mjs` | 找出來源裡沒看過的新文件，存到 `inbox/new-items.json`（只在本機）；「已看過」記在 `tools/watch-state.json` |
 | `tools/fetch-text.mjs` | 把網址下載成純文字，存到 `sources/texts/<來源代號>.txt`；遇到「擋機器人」的頁面會拒絕存檔 |
-| `tools/check-event.mjs` | 事件上線前的自動檢查：格式、來源類型、每個數字都要在原文找得到；通過的官方事件才能用 `--publish` 上線 |
+| `tools/check-event.mjs` | 事件上線前的自動檢查：格式、來源類型、每個數字都要在原文找得到；通過的事件才能用 `--publish` 上線 |
 | `.claude/commands/新事件.md` | 整套流程的指令：找新文件 → 挑重大的 → 取得原文 → 寫事件 → 檢查 → 上線 |
 
 檢查的限制：它證明「數字有出現在原文」，不證明「這個數字放在對的句子裡」，所以上線的事件狀態是「自動整理・待審核」，網站上標 🤖，等本人審核。

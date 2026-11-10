@@ -23,7 +23,7 @@ export function mountEvents(root, ctx, initial) {
     const archived = ctx.events.filter((e) => !active.includes(e));
     const li = (e) => `<li class="event-item${done(e.id) ? " is-done" : ""}"><a href="#/events/${esc(e.id)}">
       <span class="ev-date">${esc(e.date)}</span><b>${esc(e.title)}</b>
-      <span class="muted small">${done(e.id) ? "✓ 已結案" : "待處理"}・${esc(e.origin)}來源${e.status.startsWith("自動整理") ? "・🤖 自動整理" : ""}</span></a></li>`;
+      <span class="muted small">${done(e.id) ? "✓ 已結案" : "待處理"}・${e.origin === "官方" ? "官方來源" : "媒體／研究機構來源"}${e.status.startsWith("自動整理") ? "・🤖 自動整理" : ""}</span></a></li>`;
     root.innerHTML = `
       <div class="view-head"><div><h1>事件</h1><p class="muted">重大事件發生時，這裡會出現任務：狀況簡報 → 地圖導覽 → 3 題 → 結案。</p></div></div>
       <section class="panel"><h2 class="panel-title">🚨 進行中</h2>
@@ -37,7 +37,7 @@ export function mountEvents(root, ctx, initial) {
     root.innerHTML = `
       <div class="view-head"><div><p><a href="#/events">← 事件</a></p>
         <p class="ev-alert">🚨 重大事件・${esc(ev.date)}</p><h1>${esc(ev.title)}</h1>
-        <p>${statusTag(ev.status)} <span class="muted small">${esc(ev.origin)}來源</span></p></div></div>
+        <p>${statusTag(ev.status)} <span class="muted small">${ev.origin === "官方" ? "官方來源" : "媒體／研究機構來源"}</span></p></div></div>
       <section class="panel">
         <p class="lead">${ctx.textify()(ev.summary)}</p>
         <p class="muted small">任務流程：狀況簡報（${ev.briefing.length} 張，含圖表）→ 地圖導覽 → ${ev.matrix ? "影響矩陣 → " : ""}${ev.questions.length} 題（含看圖題）→ 結案，大約 5–8 分鐘。</p>

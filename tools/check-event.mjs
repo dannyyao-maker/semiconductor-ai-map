@@ -3,7 +3,7 @@
 //
 // 檢查內容：
 //   1. 格式：欄位齊全、環節代碼和來源代碼存在、題目答案沒有超出選項、圖表資料長度對得上
-//   2. 來源：官方事件只能引用官方來源；二手事件至少要兩個獨立來源（而且只能當草稿）
+//   2. 來源：官方事件只能引用官方來源；二手事件至少要兩個獨立發布者，且不能把傳聞當事實
 //   3. 數字：文字、重點數字、圖表裡的每個數字，要在引用的原文裡找得到
 //      （原文放在 sources/texts/<來源代號>.txt，用 tools/fetch-text.mjs 下載）
 //      自己推算出來的數字（例如 100% 減去 79%）要寫進事件的 derived，並說明怎麼算，檢查會列出來給你看。
@@ -12,9 +12,11 @@
 //   node tools/check-event.mjs                         檢查 data/events.json 裡全部事件
 //   node tools/check-event.mjs --id=tsmc-3q26-call     只檢查一個事件
 //   node tools/check-event.mjs --file=drafts/x.json    檢查一個草稿檔
-//   node tools/check-event.mjs --file=drafts/x.json --publish   通過的官方事件，加進 data/events.json 上線
+//   node tools/check-event.mjs --file=drafts/x.json --publish   通過的事件，加進 data/events.json 上線
 //
-// 結論有三種：auto（官方來源且通過，可以直接上線）、draft（通過但是二手來源，要等本人確認）、reject（有錯誤）。
+// 結論有兩種：auto（通過所有檢查，可以直接上線）、reject（有錯誤，不能上線）。
+// 官方來源和常被引用的二手來源（研究機構、主流媒體）都可以自動上線；二手來源的標準比較嚴：
+// 至少兩個獨立發布者、原文要抓得到、數字要對得上，而且不能把傳聞當成事實。
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -183,7 +185,10 @@ function check(ev) {
   uniq.forEach((m) => err(`數字在原文找不到：${m}（找不到就不能上線；如果是自己推算的，請寫進 derived 並說明怎麼算）`));
   info.push(`檢查了 ${checked} 個數字，${checked - viaDerived - miss.length} 個在原文找到，${viaDerived} 個是標明的推算，${miss.length} 個找不到`);
 
-  const verdict = errors.length ? "reject" : ev.origin === "官方" ? "auto" : "draft";
+  // 傳聞不能當事實寫：要改成「某某媒體報導」並找到第二個獨立來源，或直接不寫
+  const rumor = /據傳|傳聞|未經證實|消息人士稱|rumou?r|unconfirmed|allegedly/i;
+  for (const { where, text } of collectStrings(ev)) if (rumor.test(text)) err(`${where} 出現傳聞用語，不能當成事實寫：「${text.match(rumor)[0]}」`);
+  const verdict = errors.length ? "reject" : "auto";
   return { id: ev.id, verdict, errors, warnings, info };
 }
 
@@ -219,15 +224,15 @@ if (!events.length) { console.error("找不到要檢查的事件"); process.exit
 const reports = events.map(check);
 if (asJSON) console.log(JSON.stringify(reports, null, 2));
 else for (const r of reports) {
-  const icon = { auto: "✅", draft: "📝", reject: "❌" }[r.verdict];
-  console.log(`\n${icon} ${r.id}　結論：${r.verdict}${{ auto: "（官方來源，通過檢查，可以直接上線）", draft: "（通過檢查，但是二手來源，要等本人確認）", reject: "（有錯誤，不能上線）" }[r.verdict]}`);
+  const icon = { auto: "✅", reject: "❌" }[r.verdict];
+  console.log(`\n${icon} ${r.id}　結論：${r.verdict}${{ auto: "（通過所有檢查，可以直接上線）", reject: "（有錯誤，不能上線）" }[r.verdict]}`);
   r.info.forEach((m) => console.log(`   · ${m}`));
   r.warnings.forEach((m) => console.log(`   ⚠ ${m}`));
   r.errors.forEach((m) => console.log(`   ✗ ${m}`));
 }
 if (reports.some((r) => r.verdict === "reject")) process.exitCode = 1;
 
-// ---------- 上線：只有通過檢查的官方事件，才會加進 data/events.json ----------
+// ---------- 上線：只有通過檢查的事件，才會加進 data/events.json ----------
 if (publish) {
   if (!file) { console.error("--publish 要搭配 --file=草稿檔"); process.exitCode = 1; }
   else {

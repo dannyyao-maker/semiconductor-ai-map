@@ -117,7 +117,7 @@ export function mountExplore(root, ctx, initial) {
       <div class="player">
         <div class="player-head">
           <a class="player-back" href="${esc(back)}" aria-label="離開">✕</a>
-          <div class="player-title"><p class="muted small">${esc(ch.title)}・${esc(part.name)}</p><p><b>${esc(sec.title)}</b></p></div>
+          <div class="player-title">${id === "intro" ? `<p class="muted small">全景開場</p><p><b>一顆 AI 晶片的旅程</b></p>` : `<p class="muted small">${esc(ch.title)}・${esc(part.name)}</p><p><b>${esc(sec.title)}</b></p>`}</div>
         </div>
         ${sec.match ? "" : `<div class="player-progress"><span></span></div>`}
         <div class="player-stage panel"></div>
