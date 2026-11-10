@@ -2,7 +2,7 @@
 // 網址加上 ?dev（例如 index.html?dev#/me）會出現測試工具：直接設定盃數、模擬昨天有學習。
 import { esc, toast } from "../util.js";
 import { rankCardHTML, streakCardHTML, rankRoadHTML, setupRankRoad } from "../ui.js";
-import { renderQuiz } from "../quiz.js";
+import { runMatch } from "../match.js";
 import { exportJSON, importJSON, reset, state, save } from "../state.js";
 
 const COUNTRY = { TW: "台灣", US: "美國", KR: "韓國", CN: "中國", JP: "日本", NL: "荷蘭" };
@@ -33,9 +33,9 @@ export function mountMe(root, ctx) {
             <div><dt>最高盃數</dt><dd>${s.peak}</dd></div>
           </dl>
         </section>
-        <section class="panel drill-panel">
-          <h2 class="panel-title">段位試玩：公司歸位</h2>
-          <p class="muted small">暫時的練習區，讓你先感受加減盃數。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？</p>
+        <section class="panel wide drill-panel">
+          <h2 class="panel-title">練習對局：公司歸位</h2>
+          <p class="muted small">暫時的練習區，先感受對局的節奏。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？越早答對分數越高，最後一題分數和盃數加倍。</p>
           <div class="drill"></div>
         </section>
         <section class="panel wide">
@@ -66,7 +66,10 @@ export function mountMe(root, ctx) {
   function drill() {
     const box = root.querySelector(".drill");
     if (!box) return;
-    renderQuiz(box, makeDrill(ctx), ctx, { continueLabel: "下一題", onDone: () => render() });
+    const m = ctx.game.standing().tier.rank.match || {};
+    box.innerHTML = `<p class="actions"><button class="btn primary" data-start-match>開始一局（${m.questions} 題・${m.seconds ? m.seconds + " 秒" : "不計時"}）</button></p>`;
+    box.querySelector("[data-start-match]").addEventListener("click", () =>
+      runMatch(box, ctx, { key: "drill.seg", title: "練習對局：公司歸位", make: (n) => makeDrills(ctx, n), onExit: () => render() }));
   }
 
   root.addEventListener("click", (e) => {
@@ -107,9 +110,9 @@ export function mountMe(root, ctx) {
 
   render();
   const off = ctx.onState(() => {
-    // 作答中不要重畫，避免解說被洗掉；按「下一題」時才重畫
-    if (!root.querySelector(".quiz.is-answered")) render();
-    else refreshCards();
+    // 對局進行中不要重畫，只更新段位卡和連續天數卡
+    if (root.querySelector(".match")) refreshCards();
+    else render();
   });
   function refreshCards() {
     const panels = root.querySelectorAll(".me-grid > .panel");
@@ -119,12 +122,16 @@ export function mountMe(root, ctx) {
   return { unmount: off };
 }
 
-/** 隨機出一題「這家公司屬於哪個環節」，優先出還沒答過的公司 */
-function makeDrill(ctx) {
+/** 出 n 題「這家公司屬於哪個環節」，優先出還沒答過的公司，同一局不重複 */
+function makeDrills(ctx, n) {
   const answered = ctx.state().answers;
-  const fresh = ctx.companies.filter((c) => !answered[`drill.seg.${c.id}`]);
-  const pool = fresh.length ? fresh : ctx.companies;
-  const c = pool[Math.floor(Math.random() * pool.length)];
+  const shuffle = (a) => a.map((x) => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map((p) => p[1]);
+  const fresh = shuffle(ctx.companies.filter((c) => !answered[`drill.seg.${c.id}`]));
+  const old = shuffle(ctx.companies.filter((c) => answered[`drill.seg.${c.id}`]));
+  return [...fresh, ...old].slice(0, n).map((c) => makeDrill(ctx, c));
+}
+
+function makeDrill(ctx, c) {
   const right = ctx.nodeById[c.segments[0]];
   const others = ctx.nodes.filter((n) => !c.segments.includes(n.id)).sort(() => Math.random() - 0.5).slice(0, 3);
   const options = [right, ...others].sort(() => Math.random() - 0.5);

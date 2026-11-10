@@ -70,20 +70,21 @@ export function makeGame(cfg) {
   }
 
   /** 預覽：現在答對、答錯各會加減多少 */
-  function preview() {
+  function preview(mult = 1) {
     const s = state();
     const r = tierOf(s.trophies).rank;
     const double = streakNow().double;
-    const win = r.win * (double ? 2 : 1);
+    const win = r.win * (double ? 2 : 1) * mult;
     const loss = Math.min(r.loss, s.trophies - floorOf(s.peak));
     return { win, loss: Math.max(0, loss), double };
   }
 
   /**
    * 回答一題計分題。同一題只有第一次作答會加減盃數，之後是練習。
+   * mult：答對時盃數的倍數（每局最後一題是 2 倍）。
    * 回傳加減的盃數、段位變化和連續天數的變化，給畫面顯示用。
    */
-  function answer(qid, correct) {
+  function answer(qid, correct, mult = 1) {
     const s = state();
     if (s.answers[qid]) return { practice: true, correct };
     const before = tierOf(s.trophies);
@@ -91,7 +92,7 @@ export function makeGame(cfg) {
     const { milestone } = bumpStreak();
     const r = before.rank;
     const double = s.streak.doubleDay === dayKey();
-    const raw = correct ? r.win * (double ? 2 : 1) : -r.loss;
+    const raw = correct ? r.win * (double ? 2 : 1) * mult : -r.loss;
     const next = Math.max(floorOf(s.peak), s.trophies + raw);
     const d = next - s.trophies;
     s.trophies = next;
@@ -103,7 +104,7 @@ export function makeGame(cfg) {
     save();
     const after = tierOf(next);
     return {
-      practice: false, correct, d, double,
+      practice: false, correct, d, double, mult,
       before, after,
       tierUp: after.index > before.index,
       rankUp: after.ri > before.ri,

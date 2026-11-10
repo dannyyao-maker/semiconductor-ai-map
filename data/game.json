@@ -1,14 +1,14 @@
 {
   "note": "段位與盃數設定。數字可以直接改，改完重新整理網頁就生效。規則見 data/README.md。",
   "ranks": [
-    { "id": "bronze", "name": "青銅", "en": "Bronze", "color": "#a86b3c", "tiers": [ 0, 100, 200 ], "win": 30, "loss": 0, "timer": 0, "icon": "⬢" },
-    { "id": "silver", "name": "白銀", "en": "Silver", "color": "#8a96a3", "tiers": [ 300, 450, 600 ], "win": 25, "loss": 5, "timer": 30, "icon": "◆" },
-    { "id": "gold", "name": "黃金", "en": "Gold", "color": "#c9a227", "tiers": [ 750, 950, 1150 ], "win": 20, "loss": 10, "timer": 25, "icon": "★" },
-    { "id": "diamond", "name": "鑽石", "en": "Diamond", "color": "#3aa6c9", "tiers": [ 1350, 1600, 1850 ], "win": 16, "loss": 12, "timer": 22, "icon": "◈" },
-    { "id": "mythic", "name": "神話", "en": "Mythic", "color": "#8e4fc9", "tiers": [ 2100, 2400, 2700 ], "win": 13, "loss": 15, "timer": 18, "icon": "✦" },
-    { "id": "legendary", "name": "傳奇", "en": "Legendary", "color": "#d4512b", "tiers": [ 3000, 3400, 3800 ], "win": 10, "loss": 18, "timer": 15, "icon": "✹" },
-    { "id": "masters", "name": "大師", "en": "Masters", "color": "#2b8a5e", "tiers": [ 4200, 4700, 5200 ], "win": 8, "loss": 20, "timer": 12, "icon": "♛" },
-    { "id": "pro", "name": "PRO", "en": "Pro", "color": "#1c1c1a", "tiers": [ 5700 ], "win": 5, "loss": 25, "timer": 10, "icon": "♔" }
+    { "id": "bronze", "name": "青銅", "en": "Bronze", "color": "#a86b3c", "tiers": [ 0, 100, 200 ], "win": 30, "loss": 0, "icon": "⬢", "match": { "questions": 3, "seconds": 0 } },
+    { "id": "silver", "name": "白銀", "en": "Silver", "color": "#8a96a3", "tiers": [ 300, 450, 600 ], "win": 25, "loss": 5, "icon": "◆", "match": { "questions": 4, "seconds": 15 } },
+    { "id": "gold", "name": "黃金", "en": "Gold", "color": "#c9a227", "tiers": [ 750, 950, 1150 ], "win": 20, "loss": 10, "icon": "★", "match": { "questions": 5, "seconds": 12 } },
+    { "id": "diamond", "name": "鑽石", "en": "Diamond", "color": "#3aa6c9", "tiers": [ 1350, 1600, 1850 ], "win": 16, "loss": 12, "icon": "◈", "match": { "questions": 5, "seconds": 10 } },
+    { "id": "mythic", "name": "神話", "en": "Mythic", "color": "#8e4fc9", "tiers": [ 2100, 2400, 2700 ], "win": 13, "loss": 15, "icon": "✦", "match": { "questions": 6, "seconds": 10 } },
+    { "id": "legendary", "name": "傳奇", "en": "Legendary", "color": "#d4512b", "tiers": [ 3000, 3400, 3800 ], "win": 10, "loss": 18, "icon": "✹", "match": { "questions": 6, "seconds": 8 } },
+    { "id": "masters", "name": "大師", "en": "Masters", "color": "#2b8a5e", "tiers": [ 4200, 4700, 5200 ], "win": 8, "loss": 20, "icon": "♛", "match": { "questions": 7, "seconds": 7 } },
+    { "id": "pro", "name": "PRO", "en": "Pro", "color": "#1c1c1a", "tiers": [ 5700 ], "win": 5, "loss": 25, "icon": "♔", "match": { "questions": 7, "seconds": 6 } }
   ],
   "difficulty": {
     "note": "題目難度 1–3。難度高於目前段位能解鎖的題目不會出現。minRank 是該難度最低需要的段位。",
@@ -55,11 +55,18 @@
       }
     ]
   },
-  "timerNote": "timer：在這個段位，每題的作答秒數（0＝不計時）。先出現題目，閱讀幾秒後才出現選項，選項出現時開始倒數；時間到算答錯。",
   "readMs": {
     "note": "選項出現前的閱讀時間：每個字 60 毫秒，最少 1.2 秒、最多 3.5 秒",
     "perChar": 60,
     "min": 1200,
     "max": 3500
+  },
+  "matchNote": "match：在這個段位，一局有幾題、每題幾秒（seconds 0＝不計時）。先出現題目，閱讀後才出現選項，選項出現時開始倒數；時間到算答錯。",
+  "scoring": {
+    "note": "對局分數（跟盃數分開）：答對得 base 分，再依剩下的時間加最多 speed 分（越快越高）；不計時固定得 base+speed/2。每局最後一題是段位能出的最難題目，分數和盃數都加倍。",
+    "base": 10,
+    "speed": 10,
+    "lastMultiplier": 2,
+    "targetRatio": 0.6
   }
 }

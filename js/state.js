@@ -13,6 +13,7 @@ const blank = () => ({
   streak: { count: 0, last: null, doubleDay: null }, // 連續天數；doubleDay＝盃數加倍的那一天
   chapters: {},         // 章節進度：{ 環節代碼: { parts: { know: true, ... }, at } }
   events: {},           // 事件任務：{ 事件代碼: { done: true, at } }
+  best: {},             // 各個對局的最佳分數：{ 對局代碼: 分數 }
   onboarded: false,     // 看過全景開場了沒
 });
 

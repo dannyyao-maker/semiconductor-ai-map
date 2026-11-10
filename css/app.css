@@ -289,3 +289,80 @@ a { color: var(--semi); }
   .road-emblem { height: 120px; }
 }
 .quiz-clock[hidden], .quiz-timer[hidden] { display: none; }
+
+/* ===== 對局（仿知識王）：圓形時鐘、兩側分數條、最後一題加倍 ===== */
+.quiz-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; margin-bottom: 8px; }
+.quiz-label { font-weight: 800; font-size: .9rem; }
+.quiz-top .stake { justify-self: end; font-size: .8rem; text-align: right; }
+.clock { position: relative; width: 64px; height: 64px; display: grid; place-items: center; }
+.clock svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.clock circle { fill: none; stroke-width: 6; }
+.clock-bg { stroke: var(--bg); fill: var(--surface) !important; }
+.clock-fg { stroke: #2f9e44; stroke-linecap: round; transition: stroke-dashoffset .1s linear, stroke .2s; }
+.clock b { position: relative; font-size: 1.5rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+.clock.is-untimed b { font-size: 1.3rem; color: var(--muted); }
+.clock.is-untimed .clock-fg { stroke: var(--line); }
+.quiz.is-hurry .clock-fg { stroke: var(--down); }
+.quiz.is-hurry .clock b { color: var(--down); animation: pulse .4s ease-in-out infinite alternate; }
+.quiz.is-reading .clock { opacity: .5; }
+.quiz-read { height: 4px; border-radius: 999px; background: var(--bg); overflow: hidden; margin: 0 0 12px; }
+.quiz-read span { display: block; height: 100%; width: 0; background: var(--muted); }
+.quiz-read[hidden] { display: none; }
+.final-banner {
+  margin: 0 0 10px; padding: 8px 12px; border-radius: 10px; text-align: center; font-weight: 800; color: #fff;
+  background: linear-gradient(90deg, #f97316, #dc2626); animation: pulse .8s ease-in-out infinite alternate;
+}
+.quiz.is-final .quiz-prompt { color: #b91c1c; }
+.fb-answer { margin: 0 0 6px; }
+
+.match-head { text-align: center; margin-bottom: 10px; }
+.match-title { margin: 0; font-weight: 800; font-size: 1.05rem; }
+.match-meta { margin: 0 0 8px; color: var(--muted); font-size: .85rem; }
+.match-dots { list-style: none; display: flex; justify-content: center; gap: 6px; margin: 0; padding: 0; }
+.match-dots li {
+  width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font-size: .8rem; font-weight: 800;
+  background: var(--bg); color: var(--muted); border: 2px solid var(--line);
+}
+.match-dots li.is-final { border-color: #f97316; color: #c2410c; }
+.match-dots li.is-now { border-color: var(--text); color: var(--text); transform: scale(1.12); }
+.match-dots li.is-right { background: #2f9e44; border-color: #2f9e44; color: #fff; }
+.match-dots li.is-wrong { background: #d6453a; border-color: #d6453a; color: #fff; }
+
+.match-stage { display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; gap: 12px; align-items: stretch; }
+.sbar { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.sbar-num { font-size: 1.1rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+.sbar small { font-size: .75rem; font-weight: 700; color: var(--muted); }
+.sbar-track {
+  position: relative; flex: 1; width: 22px; min-height: 220px; border-radius: 999px; overflow: hidden;
+  background: var(--bg); border: 1px solid var(--line); box-shadow: inset 0 2px 4px rgba(0, 0, 0, .08);
+}
+.sbar-fill { position: absolute; left: 0; right: 0; bottom: 0; height: 0; border-radius: 999px; transition: height .6s cubic-bezier(.2, 1.2, .4, 1); }
+.sbar.you .sbar-fill { background: linear-gradient(0deg, #2563eb, #60a5fa); }
+.sbar.target .sbar-fill { background: linear-gradient(0deg, #9ca3af, #d1d5db); }
+.match.is-ahead .sbar.you .sbar-num { color: #2563eb; }
+.float-pts {
+  position: absolute; top: -4px; left: 50%; transform: translateX(-50%); font-weight: 900; color: #2563eb; font-size: 1.1rem;
+  animation: float-up 1s ease-out forwards; pointer-events: none;
+}
+@keyframes float-up { to { transform: translate(-50%, -36px); opacity: 0; } }
+
+.match-end { text-align: center; padding: 10px 0; }
+.end-kicker { margin: 0; font-weight: 800; font-size: 1.1rem; }
+.match-end.is-win .end-kicker { color: #2563eb; }
+.match-end.is-lose .end-kicker { color: var(--muted); }
+.end-score { margin: 4px 0 12px; font-size: 1.1rem; }
+.end-score b { font-size: 2.6rem; font-weight: 900; }
+.match-end .stats { text-align: left; }
+.match-end .actions { justify-content: center; }
+dd.up { color: var(--up); } dd.down { color: var(--down); }
+p.up { color: var(--up); }
+
+@media (max-width: 720px) {
+  .match-stage { grid-template-columns: 30px minmax(0, 1fr) 30px; gap: 6px; }
+  .sbar-track { width: 14px; min-height: 180px; }
+  .sbar-num { font-size: .85rem; }
+  .quiz-top { grid-template-columns: auto auto; }
+  .quiz-top .clock { grid-row: 1; grid-column: 2; justify-self: end; }
+  .quiz-top .stake { grid-column: 1 / -1; justify-self: start; text-align: left; }
+  .clock { width: 54px; height: 54px; }
+}
