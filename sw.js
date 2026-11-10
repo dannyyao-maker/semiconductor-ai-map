@@ -2,16 +2,16 @@
 // 白話：第一次連線時，把整個 App（程式、資料、圖示）存進手機；之後沒網路也打得開。
 // 有網路時一律先抓最新版（改了內容馬上看到），網路慢或斷線才用存起來的舊版。
 // 要更新快取的版本號時，改下面的 VERSION；新增檔案時，把路徑加進 SHELL。
-const VERSION = "v2";
+const VERSION = "v3";
 const CACHE = `semimap-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 
 const SHELL = [
   "./", "index.html", "manifest.webmanifest",
-  "css/style.css", "css/app.css", "css/arena.css", "css/charts.css",
-  "js/app.js", "js/card.js", "js/charts.js", "js/game.js", "js/glossary.js", "js/map.js", "js/match.js",
-  "js/quiz.js", "js/screens.js", "js/search.js", "js/state.js", "js/ui.js", "js/util.js",
-  "js/views/dict.js", "js/views/events.js", "js/views/explore.js", "js/views/hq.js", "js/views/me.js", "js/views/today.js",
+  "css/style.css", "css/app.css", "css/arena.css", "css/charts.css", "css/ui.css",
+  "js/app.js", "js/card.js", "js/charts.js", "js/drills.js", "js/game.js", "js/glossary.js", "js/icons.js", "js/map.js", "js/match.js",
+  "js/quiz.js", "js/screens.js", "js/search.js", "js/state.js", "js/util.js",
+  "js/views/dict.js", "js/views/events.js", "js/views/explore.js", "js/views/hq.js", "js/views/league.js", "js/views/me.js", "js/views/path.js", "js/views/practice.js",
   "data/nodes.json", "data/companies.json", "data/sources.json", "data/glossary.json", "data/game.json",
   "data/events.json", "data/metrics.json", "data/chapters/index.json", "data/chapters/intro.json",
   "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png",

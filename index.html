@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>半導體 × AI 產業學習 App</title>
-  <meta name="description" content="用遊戲的方式認識半導體與 AI 產業：探索章節、段位盃數、事件任務，加上隨時可以複習的產業鏈地圖。">
+  <title>半導體 × AI 產業學習</title>
+  <meta name="description" content="用遊戲的方式認識半導體與 AI 產業：一關一關闖關、段位盃數、事件任務，加上隨時可以複習的產業鏈地圖。">
   <meta property="og:title" content="半導體 × AI 產業學習 App">
-  <meta property="og:description" content="給商管人的半導體與 AI 產業學習 App：從 IC 設計出發，一章一章看懂整條產業鏈。">
+  <meta property="og:description" content="給商管人的半導體與 AI 產業學習 App：從 IC 設計出發，一關一關看懂整條產業鏈。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dannyyao-maker.github.io/semiconductor-ai-map/">
   <meta property="og:image" content="https://dannyyao-maker.github.io/semiconductor-ai-map/docs/screenshots/app-today.png">
@@ -14,7 +14,7 @@
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#2d5f8b">
+  <meta name="theme-color" content="#f3f6fb">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="半導體學習">
@@ -23,25 +23,17 @@
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/arena.css">
   <link rel="stylesheet" href="css/charts.css">
+  <link rel="stylesheet" href="css/ui.css">
 </head>
 <body>
   <a class="skip-link" href="#view">跳到主要內容</a>
-  <header class="app-header">
-    <a class="brand" href="#/today">半導體 × AI <span>產業學習</span></a>
+  <header class="top">
+    <a id="top-back" class="icon-btn top-back" href="#/path" aria-label="返回" hidden></a>
+    <h1 id="page-title"></h1>
     <div id="hud" class="hud" aria-label="學習狀態"></div>
   </header>
-  <nav class="tabbar" aria-label="主選單">
-    <a href="#/today" data-view="today"><span aria-hidden="true">☀️</span>今天</a>
-    <a href="#/explore" data-view="explore"><span aria-hidden="true">🧭</span>探索</a>
-    <a href="#/hq" data-view="hq"><span aria-hidden="true">🗺️</span>研究總部</a>
-    <a href="#/events" data-view="events"><span aria-hidden="true">🚨</span>事件</a>
-    <a href="#/me" data-view="me"><span aria-hidden="true">👤</span>我的</a>
-  </nav>
   <main id="view" class="view" tabindex="-1"><p class="loading">載入中…</p></main>
-  <footer class="site-footer">
-    內容為學習用途整理，每條內容附來源連結與資料時間點（asOf），不構成任何投資建議。
-    作者：danny ・ <a href="https://github.com/dannyyao-maker/semiconductor-ai-map">GitHub 原始碼與查證紀錄</a>
-  </footer>
+  <nav id="dock" class="dock" aria-label="主選單"></nav>
   <script type="module" src="js/app.js"></script>
 </body>
 </html>

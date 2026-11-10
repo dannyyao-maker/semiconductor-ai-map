@@ -7,11 +7,9 @@ import { setupSearch } from "../search.js";
 
 export function mountHQ(root, ctx, initial) {
   root.innerHTML = `
-    <div class="view-head">
-      <div><h1>研究總部</h1><p class="muted">產業鏈全貌。灰色是還沒探索的環節；忘了哪一環，點進去做 5 分鐘速複習。</p>
-        <p class="hq-links"><a class="btn" href="#/dict">📖 指標字典</a></p></div>
+    <div class="map-search" hidden>
       <div class="search-box">
-        <input id="search" type="search" placeholder="搜尋環節、公司、術語（例：台積、HBM）" autocomplete="off"
+        <input id="search" type="search" placeholder="台積、HBM、毛利率…" autocomplete="off"
           role="combobox" aria-label="搜尋環節、公司或術語" aria-controls="search-results" aria-expanded="false" aria-autocomplete="list">
         <ul id="search-results" class="search-results" role="listbox" aria-label="搜尋結果" hidden></ul>
       </div>
@@ -69,6 +67,10 @@ export function mountHQ(root, ctx, initial) {
   document.addEventListener("keydown", onKey);
   mobileQuery.addEventListener("change", draw);
 
+  const searchBar = root.querySelector(".map-search");
+  const onSearch = () => { searchBar.hidden = !searchBar.hidden; if (!searchBar.hidden) root.querySelector("#search").focus(); };
+  window.addEventListener("ui:search", onSearch);
+
   setupSearch(root.querySelector("#search"), root.querySelector("#search-results"), ctx, (r) => {
     if (r.kind === "環節") go(r.id);
     else if (r.kind === "公司") go(`${ctx.companyById[r.id].segments[0]}/${r.id}`);
@@ -82,6 +84,7 @@ export function mountHQ(root, ctx, initial) {
     update(p) { params = p; render(); },
     unmount() {
       document.removeEventListener("keydown", onKey);
+      window.removeEventListener("ui:search", onSearch);
       mobileQuery.removeEventListener("change", draw);
       document.body.classList.remove("card-open");
       hideTerm();
