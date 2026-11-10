@@ -128,7 +128,7 @@ export function mountExplore(root, ctx, initial) {
     if (sec.match) {
       runMatch(stage, ctx, {
         key: `${id}.${key}`, title: `${ch.title}・章末對局`, questions: sec.screens.filter((s) => s.type === "quiz"),
-        onExit: (sum) => { finishSection(ch, part, sec, sum); },
+        onExit: (sum) => { if (sum) finishSection(ch, part, sec, sum); else ctx.nav(`/explore/${id}`); },
       });
       return;
     }

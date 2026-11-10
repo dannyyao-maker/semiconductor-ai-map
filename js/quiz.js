@@ -6,7 +6,18 @@ import { rankBadge } from "./game.js";
 import { sourceLinks } from "./card.js";
 
 const LETTERS = ["A", "B", "C", "D", "E"];
-const RING = 2 * Math.PI * 26; // 時鐘圓圈的周長
+const TICKS = 24; // 時鐘的刻度數量：時間一格一格熄掉
+
+/** 刻度時鐘（仿知識王）：一圈 24 個刻度，中間是剩下的秒數 */
+export function clockHTML(seconds) {
+  const ticks = Array.from({ length: TICKS }, (_, i) => {
+    const a = (i / TICKS) * 2 * Math.PI;
+    const x1 = 50 + Math.sin(a) * 38, y1 = 50 - Math.cos(a) * 38, x2 = 50 + Math.sin(a) * 47, y2 = 50 - Math.cos(a) * 47;
+    return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+  }).join("");
+  return `<span class="clock${seconds ? "" : " is-untimed"}" role="timer" aria-label="剩下秒數">
+    <svg viewBox="0 0 100 100" aria-hidden="true">${ticks}</svg><b>${seconds || "∞"}</b></span>`;
+}
 
 /**
  * 在 container 裡畫一題。q 的格式見 data/README.md 的「題目」。
@@ -14,7 +25,7 @@ const RING = 2 * Math.PI * 26; // 時鐘圓圈的周長
  * opts.onAnswer(res)：作答當下呼叫（給分數條用）；opts.onDone(res)：按「繼續」時呼叫。
  */
 export function renderQuiz(container, raw, ctx, opts = {}) {
-  const { seconds = 0, mult = 1, label = "", onAnswer, onDone, continueLabel = "繼續" } = opts;
+  const { seconds = 0, mult = 1, label = "", onAnswer, onDone, onReveal, clockHost, continueLabel = "繼續" } = opts;
   const q = shuffled(raw);
   const T = ctx.textify();
   const prior = ctx.state().answers[q.id];
@@ -28,14 +39,11 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
 
   container.innerHTML = `
     <div class="quiz is-reading${mult > 1 ? " is-final" : ""}" data-qid="${esc(q.id)}">
-      <div class="quiz-top">
+      ${clockHost ? "" : `<div class="quiz-top">
         <span class="quiz-label">${esc(label)}</span>
-        <span class="clock${seconds ? "" : " is-untimed"}" role="timer" aria-label="剩下秒數">
-          <svg viewBox="0 0 60 60" aria-hidden="true"><circle class="clock-bg" cx="30" cy="30" r="26"/>
-            <circle class="clock-fg" cx="30" cy="30" r="26" stroke-dasharray="${RING}" stroke-dashoffset="0"/></svg>
-          <b>${seconds || "∞"}</b></span>
+        ${clockHTML(seconds)}
         ${stake}
-      </div>
+      </div>`}
       ${mult > 1 ? `<p class="final-banner">🔥 最後一題・最難的題目・分數和盃數 ×${mult}</p>` : ""}
       <p class="quiz-prompt">${T(q.prompt)}</p>
       <div class="quiz-read" aria-hidden="true"><span></span></div>
@@ -48,9 +56,10 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
 
   const box = container.querySelector(".quiz");
   const readBar = box.querySelector(".quiz-read span");
-  const clockEl = box.querySelector(".clock");
+  if (clockHost) clockHost.innerHTML = clockHTML(seconds);
+  const clockEl = (clockHost || box).querySelector(".clock");
   const clockNum = clockEl.querySelector("b");
-  const ring = clockEl.querySelector(".clock-fg");
+  const ticks = [...clockEl.querySelectorAll("line")];
   let tick = null, start = 0, done = false;
 
   // 第 1 段：閱讀（細條從左長到右）
@@ -66,13 +75,16 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
     box.querySelectorAll(".quiz-opt").forEach((b) => { b.disabled = false; });
     box.querySelector(".quiz-opt")?.focus({ preventScroll: true });
     start = Date.now();
+    onReveal?.(start);
     if (!seconds) return;
     tick = setInterval(() => {
       if (!box.isConnected) return clearInterval(tick);
       const leftMs = Math.max(0, seconds * 1000 - (Date.now() - start));
-      ring.style.strokeDashoffset = String(RING * (1 - leftMs / (seconds * 1000)));
+      const lit = Math.ceil((leftMs / (seconds * 1000)) * TICKS);
+      ticks.forEach((t, j) => t.classList.toggle("is-off", j >= lit));
       clockNum.textContent = Math.ceil(leftMs / 1000);
       box.classList.toggle("is-hurry", leftMs <= 3000);
+      clockEl.classList.toggle("is-hurry", leftMs <= 3000);
       if (leftMs <= 0) finish(-1);
     }, 100);
   }
@@ -88,6 +100,7 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
     const correct = pick === q.answer;
     // 先標成「已作答」再計分：計分會通知頁面更新，頁面看到這個標記就不會把結果洗掉
     box.classList.remove("is-reading", "is-open", "is-hurry");
+    clockEl.classList.remove("is-hurry");
     box.classList.add("is-answered", correct ? "was-right" : "was-wrong");
     const res = { ...ctx.game.answer(q.id, correct, mult), timeout, timeLeft, seconds, mult };
     box.querySelectorAll(".quiz-opt").forEach((b, i) => {
@@ -101,6 +114,7 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
     const cont = box.querySelector("[data-continue]");
     cont.addEventListener("click", () => onDone?.(res));
     cont.focus({ preventScroll: true });
+    setTimeout(() => box.querySelector(".quiz-feedback")?.scrollIntoView({ block: "nearest", behavior: "smooth" }), 350);
     if (res.tierUp || res.tierDown || res.milestone) celebrate(res, ctx);
   }
 

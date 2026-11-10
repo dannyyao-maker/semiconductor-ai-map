@@ -63,7 +63,7 @@ export function rankRoadHTML(ctx) {
       <li class="road-slide is-${state}" style="--rank:${r.color}" data-ri="${ri}" aria-label="${r.name}${state === "current" ? "（目前段位）" : ""}">
         <div class="road-emblem">${rankBadge({ rank: r, ti: null, label: r.name }, "hero")}</div>
         <p class="road-name">${r.name} <span>${r.en}</span></p>
-        <p class="road-rule">答對 +${r.win}　答錯 ${r.loss ? "−" + r.loss : "不扣"}　${r.timer ? `每題 ${r.timer} 秒` : "不計時"}</p>
+        <p class="road-rule">答對 +${r.win}　答錯 ${r.loss ? "−" + r.loss : "不扣"}　${r.match?.seconds ? `${r.match.seconds} 秒` : "不計時"}・${r.match?.questions || ""} 回合</p>
         <div class="road-bar">
           <div class="road-fill" style="width:${pct}%"></div>
           ${ticks}

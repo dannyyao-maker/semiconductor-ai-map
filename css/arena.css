@@ -1,0 +1,118 @@
+/* 對戰畫面（全螢幕，仿知識王的一對一對戰）：開局倒數、你與對手、刻度時鐘、兩側分數條 */
+.modal-backdrop { z-index: 90; }
+body.arena-open { overflow: hidden; }
+.arena {
+  position: fixed; inset: 0; z-index: 80; overflow-y: auto; color: #fff;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--rank) 55%, transparent), transparent 60%),
+    linear-gradient(180deg, #1b1f2e, #0e1018);
+  padding: max(12px, env(safe-area-inset-top)) 12px max(16px, env(safe-area-inset-bottom));
+}
+.arena::after { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; transition: background .25s; }
+.arena > * { position: relative; z-index: 1; }
+.arena.is-wrong::after { background: rgba(220, 38, 38, .32); }
+.arena.is-right::after { background: rgba(34, 197, 94, .18); }
+.arena.is-final .arena-round { color: #fb923c; }
+.arena .btn { border-color: rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .08); color: #fff; }
+.arena .btn.primary { background: #fff; color: #111; border-color: #fff; }
+.arena .btn.ghost { background: transparent; }
+
+/* 開局倒數 */
+.arena-intro { min-height: 100%; display: grid; place-content: center; justify-items: center; gap: 10px; text-align: center; padding: 24px 0; }
+.intro-stage { margin: 0; font-size: clamp(3rem, 14vw, 6rem); font-weight: 900; letter-spacing: .08em; color: rgba(255, 255, 255, .14); line-height: 1; }
+.intro-title { margin: 0; font-size: 1.2rem; font-weight: 800; }
+.intro-meta { margin: 0; color: rgba(255, 255, 255, .7); }
+.intro-vs { display: flex; align-items: center; gap: 18px; margin: 12px 0; }
+.fighter { display: grid; justify-items: center; gap: 4px; width: 120px; }
+.fighter small { color: rgba(255, 255, 255, .65); font-size: .75rem; }
+.vs { font-size: 1.6rem; font-weight: 900; color: #fbbf24; font-style: italic; }
+.intro-count { margin: 6px 0; font-size: 4.5rem; font-weight: 200; line-height: 1; }
+.intro-count.pop { animation: count-pop .8s ease-out; }
+@keyframes count-pop { from { transform: scale(1.6); opacity: 0; } 30% { opacity: 1; } to { transform: scale(1); } }
+
+.avatar {
+  width: 64px; height: 64px; display: grid; place-items: center; border-radius: 10px; font-weight: 900; font-size: 1.1rem;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--rank) 70%, #fff), var(--rank)); color: #fff;
+  border: 4px solid #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+}
+.avatar.rival { background: linear-gradient(160deg, #94a3b8, #475569); }
+
+/* 上方：你、時鐘、對手 */
+.arena-quit { position: absolute; top: max(10px, env(safe-area-inset-top)); left: 10px; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .12); color: #fff; cursor: pointer; }
+.arena-top { max-width: 720px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; padding-top: 8px; }
+.player-card { position: relative; display: grid; justify-items: center; gap: 4px; font-size: .85rem; font-weight: 700; }
+.player-card > span:not(.avatar) { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mark { position: absolute; top: -8px; right: calc(50% - 44px); width: 28px; height: 28px; border-radius: 50%; display: none; place-items: center; font-style: normal; font-weight: 900; box-shadow: 0 2px 6px rgba(0, 0, 0, .3); }
+.mark.is-thinking, .mark.is-answered, .mark.is-ok, .mark.is-ng { display: grid; }
+.mark.is-thinking { background: #fff; color: #dc2626; }
+.mark.is-thinking::before { content: "?"; }
+.mark.is-answered { background: #fff; color: #111; }
+.mark.is-answered::before { content: "!!"; font-size: .7rem; }
+.mark.is-ok { background: #22c55e; color: #fff; }
+.mark.is-ok::before { content: "✓"; }
+.mark.is-ng { background: #ef4444; color: #fff; }
+.mark.is-ng::before { content: "✕"; }
+.arena-mid { display: grid; justify-items: center; }
+.arena-round { margin: 2px 0 0; font-size: .8rem; font-weight: 700; color: rgba(255, 255, 255, .75); }
+
+/* 刻度時鐘：時間一格一格熄掉 */
+.clock { position: relative; width: 96px; height: 96px; display: grid; place-items: center; }
+.clock svg { position: absolute; inset: 0; transform: none; }
+.clock line { stroke: currentColor; stroke-width: 4; stroke-linecap: round; transition: opacity .2s; }
+.clock line.is-off { opacity: .15; }
+.clock b { position: relative; font-size: 2.6rem; font-weight: 200; font-variant-numeric: tabular-nums; }
+.clock.is-untimed b { font-size: 1.8rem; color: inherit; opacity: .7; }
+.clock.is-hurry { color: #f87171; }
+.clock.is-hurry b { animation: pulse .4s ease-in-out infinite alternate; }
+.quiz-top .clock { width: 64px; height: 64px; color: var(--text); }
+.quiz-top .clock b { font-size: 1.5rem; font-weight: 800; }
+.quiz-top .clock.is-hurry { color: var(--down); }
+
+/* 中間：兩側分數條＋題目 */
+.arena-body { max-width: 720px; margin: 10px auto 0; display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 10px; }
+.arena-bar { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 120px; }
+.arena-bar b { font-size: 1.6rem; font-weight: 200; font-variant-numeric: tabular-nums; }
+.arena-bar .track { position: relative; width: 22px; flex: 1; min-height: 260px; max-height: 420px; border-radius: 8px; border: 2px solid rgba(255, 255, 255, .45); background: rgba(0, 0, 0, .35); overflow: hidden; }
+.arena-bar .fill { position: absolute; left: 2px; right: 2px; bottom: 2px; height: 0; border-radius: 5px; transition: height .6s cubic-bezier(.2, 1.2, .4, 1); }
+.arena-bar.you .fill { background: linear-gradient(0deg, #2563eb, #93c5fd); }
+.arena-bar.them .fill { background: linear-gradient(0deg, #ca8a04, #fde68a); }
+.arena.is-wrong .arena-bar.you .track { border-color: #f87171; }
+.arena-bar .float-pts { top: 90px; color: #fff; text-shadow: 0 2px 6px rgba(0, 0, 0, .5); }
+
+.arena .quiz { padding-top: 8px; }
+.arena .quiz-prompt { font-size: 1.25rem; text-align: center; margin: 18px 0; text-shadow: 0 2px 8px rgba(0, 0, 0, .4); min-height: 3.2em; }
+.arena .quiz.is-final .quiz-prompt { color: #fed7aa; }
+.arena .quiz-read { background: rgba(255, 255, 255, .12); }
+.arena .quiz-read span { background: rgba(255, 255, 255, .6); }
+.arena .quiz-options { grid-template-columns: 1fr; gap: 12px; }
+.arena .quiz-opt {
+  justify-content: center; min-height: 64px; font-size: 1.1rem; border: 0; color: #1f2937;
+  background: linear-gradient(180deg, #fff, #e5e7eb); box-shadow: 0 3px 0 rgba(0, 0, 0, .25);
+}
+.arena .opt-letter { display: none; }
+.arena .opt-text { flex: none; }
+.arena .quiz-opt.is-correct { background: #22c55e; color: #fff; }
+.arena .quiz-opt.is-wrong { background: #ef4444; color: #fff; }
+.arena .quiz-opt.is-dim { opacity: .55; }
+.arena .quiz-feedback { color: var(--text); background: #fff !important; }
+.arena .quiz-feedback .btn { background: var(--text); color: #fff; border-color: var(--text); }
+.arena .match-end { color: #fff; text-align: center; padding: 20px 0; }
+.arena .end-kicker { font-size: 1.6rem; color: #fff; }
+.arena.is-win .end-kicker { color: #fbbf24; }
+.arena .end-score b { font-size: 3rem; font-weight: 300; }
+.end-names { display: flex; justify-content: center; gap: 60px; margin: -6px 0 14px; color: rgba(255, 255, 255, .7); font-size: .85rem; }
+.arena .match-end .stats div { background: rgba(255, 255, 255, .1); }
+.arena .match-end .stats dt { color: rgba(255, 255, 255, .7); }
+
+@media (max-width: 720px) {
+  .avatar { width: 54px; height: 54px; font-size: .95rem; border-width: 3px; }
+  .clock { width: 84px; height: 84px; }
+  .clock b { font-size: 2.2rem; }
+  .arena-body { grid-template-columns: 26px minmax(0, 1fr) 26px; gap: 6px; }
+  .arena-bar { padding-top: 110px; }
+  .arena-bar b { font-size: 1.1rem; }
+  .arena-bar .track { width: 16px; min-height: 220px; }
+  .arena .quiz-prompt { font-size: 1.1rem; }
+  .arena .quiz-opt { min-height: 56px; font-size: 1rem; }
+  .fighter { width: 100px; }
+}
