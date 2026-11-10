@@ -25,7 +25,7 @@ export async function rankUnlocks(ctx) {
 
 /** 一個解鎖項目的小標籤：圖示（難度用星星）加很短的名稱 */
 export const unlockChip = (u) => u.kind === "diff"
-  ? `<span class="uc"><span class="uc-stars">${ic("star").repeat(u.level - 1)}</span><b>${esc(u.label)}</b></span>`
+  ? `<span class="uc is-diff">${ic(u.level >= 3 ? "lvl2" : "lvl1")}<b>${esc(u.label)}</b></span>`
   : `<span class="uc">${ic(u.icon)}<b>${esc(u.label)}</b></span>`;
 
 /** 這個段位每局的題數與秒數（不計時用 ∞） */

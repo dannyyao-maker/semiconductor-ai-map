@@ -2,7 +2,7 @@
 // 白話：第一次連線時，把整個 App（程式、資料、圖示）存進手機；之後沒網路也打得開。
 // 有網路時一律先抓最新版（改了內容馬上看到），網路慢或斷線才用存起來的舊版。
 // 要更新快取的版本號時，改下面的 VERSION；新增檔案時，把路徑加進 SHELL。
-const VERSION = "v7";
+const VERSION = "v8";
 const CACHE = `semimap-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 

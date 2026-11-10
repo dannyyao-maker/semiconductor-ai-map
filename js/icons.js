@@ -35,6 +35,10 @@ const LINE = {
   chart: `<path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/>`,
   people: `<circle cx="9" cy="8.500" r="3"/><circle cx="17" cy="9.500" r="2.200"/><path d="M3.500 19c.6-3 2.800-4.500 5.500-4.500S13.900 16 14.500 19M15 14.800c2.500-.4 4.800.8 5.500 4"/>`,
   castle: `<path d="M4 20V6h3v2.500h2.500V6h5v2.500H17V6h3v14zM10 20v-4.500a2 2 0 0 1 4 0V20"/>`,
+  // 財報看圖：三根 K 線（蠟燭）；難度：一道、兩道向上的箭頭（像軍階臂章）
+  candles: `<path d="M5.500 9v3M5.500 18v3M12 5v3M12 15v3M18.500 2.500v1.500M18.500 11v3"/><rect x="3" y="12" width="5" height="6" rx="1.200"/><rect x="9.500" y="8" width="5" height="7" rx="1.200"/><rect x="16" y="4" width="5" height="7" rx="1.200"/>`,
+  lvl1: `<path d="M5.500 15.500L12 9l6.500 6.500" stroke-width="3"/>`,
+  lvl2: `<path d="M5.500 11.500L12 5l6.500 6.500M5.500 19L12 12.500 18.500 19" stroke-width="3"/>`,
   percent: `<path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.300"/><circle cx="17" cy="17" r="2.300"/>`,
   warning: `<path d="M12 4l9 16H3z"/><path d="M12 10v4.500M12 17.500v.1"/>`,
   globe: `<circle cx="12" cy="12" r="8.500"/><path d="M3.500 12h17M12 3.500c2.500 2.500 3.500 5.500 3.500 8.500S14.500 18 12 20.500C9.500 18 8.500 15 8.500 12S9.500 6 12 3.500z"/>`,
@@ -75,7 +79,7 @@ export const UNIT_ICON = {
 // 章節裡每一節的關卡圖示（依節的代碼）
 export const LEVEL_ICON = {
   what: "bulb", money: "swap", market: "chart", players: "people", moat: "castle", profit: "percent", issues: "warning",
-  case: "trophy", journey: "globe", metrics: "percent",
+  case: "trophy", journey: "globe", metrics: "candles",
 };
 export const unitIcon = (nodeId) => UNIT_ICON[nodeId] || "chip";
 export const levelIcon = (sectionId, isMatch) => (isMatch ? "trophy" : LEVEL_ICON[sectionId] || "bulb");

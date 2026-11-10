@@ -18,19 +18,19 @@ export function mountLeague(root, ctx) {
     const past = i < st.tier.ri;
     const start = r.tiers[0];
     const ti = isCur ? st.tier.ti : (past ? r.tiers.length - 1 : 0);
-    const pips = r.tiers.length > 1
-      ? `<ol class="lg-pips">${r.tiers.map((t, k) => `<li class="${past || (isCur && st.trophies >= t) ? "is-on" : ""}${isCur && st.tier.ti === k ? " is-now" : ""}">${ROMAN[k]}</li>`).join("")}</ol>` : `<ol class="lg-pips" aria-hidden="true"></ol>`;
     let status;
     if (isCur) {
-      const pct = Math.round(st.progress * 100);
+      // 整條進度條＝這個段位需要的全部盃數；兩條細線把它分成三階（到 1/3 是 II、2/3 是 III、滿了就是下一個段位）
+      const base = r.tiers[0], top = ctx.game.ranks[i + 1]?.tiers[0];
+      const pct = top ? Math.round(Math.min(1, Math.max(0, (st.trophies - base) / (top - base))) * 100) : 100;
+      const ticks = top ? r.tiers.slice(1).map((t) => `<i class="lg-tick" style="left:${((t - base) / (top - base)) * 100}%"></i>`).join("") : "";
       status = `<div class="lg-now"><b class="lg-num">${ic("trophy")}${st.trophies}</b>
-        ${st.next ? `<div class="lg-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div><span class="lg-to">${ic("shield")}<b>${st.next.from}</b></span>` : ""}</div>`;
+        ${top ? `<div class="lg-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span>${ticks}</div><span class="lg-to">${ic("shield")}<b>${top}</b></span>` : ""}</div>`;
     } else if (past) status = `<div class="lg-now"><span class="lg-done">${ic("check")}</span></div>`;
     else status = `<div class="lg-now"><b class="lg-num is-lock">${ic("lock")}${start}</b></div>`;
     return `<section class="lg-slide${i === idx ? " is-active" : ""}" data-i="${i}" aria-label="${esc(r.name)}">
       <div class="lg-badge">${rankBadge({ rank: r, ti, label: r.name }, "hero")}</div>
       <h2 class="lg-name">${esc(r.name)}</h2>
-      ${pips}
       ${status}
       <div class="lg-unlocks${i > st.tier.ri ? " is-future" : ""}">${matchChip(r)}${(un[r.id] || []).map(unlockChip).join("")}</div>
     </section>`;
