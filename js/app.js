@@ -82,9 +82,9 @@ function buildChapters(index) {
     const unlocked = id === index.start || [...adj[id]].some(knowDone);
     if (!unlocked) return "locked";
     if (!c.file) return "soon";
-    const parts = state().chapters[id]?.parts || {};
-    if (parts.final) return "done";
-    if (Object.keys(parts).length) return "started";
+    const pr = state().chapters[id] || {};
+    if (pr.parts?.final) return "done";
+    if (Object.keys(pr.sections || {}).length) return "started";
     return "open";
   };
   ctx.chapterIndex = index;

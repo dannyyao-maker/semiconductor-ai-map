@@ -13,8 +13,9 @@ const RING = 2 * Math.PI * 26; // 時鐘圓圈的周長
  * opts.seconds：作答秒數（0＝不計時）；opts.mult：答對的倍數（最後一題 2）；
  * opts.onAnswer(res)：作答當下呼叫（給分數條用）；opts.onDone(res)：按「繼續」時呼叫。
  */
-export function renderQuiz(container, q, ctx, opts = {}) {
+export function renderQuiz(container, raw, ctx, opts = {}) {
   const { seconds = 0, mult = 1, label = "", onAnswer, onDone, continueLabel = "繼續" } = opts;
+  const q = shuffled(raw);
   const T = ctx.textify();
   const prior = ctx.state().answers[q.id];
   const pv = ctx.game.preview(mult);
@@ -154,4 +155,11 @@ export function celebrate(res, ctx) {
   wrap.addEventListener("click", (e) => { if (e.target === wrap || e.target.closest("[data-close-modal]")) close(); });
   wrap.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
   wrap.querySelector("[data-close-modal]").focus();
+}
+
+/** 打亂選項順序（資料檔裡正確答案常寫在第一個），fixedOrder: true 的題目不打亂 */
+function shuffled(q) {
+  if (q.fixedOrder) return q;
+  const order = q.options.map((_, i) => i).sort(() => Math.random() - 0.5);
+  return { ...q, options: order.map((i) => q.options[i]), answer: order.indexOf(q.answer) };
 }

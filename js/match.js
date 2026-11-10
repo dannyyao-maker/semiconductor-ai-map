@@ -101,12 +101,14 @@ export function runMatch(container, ctx, opts) {
   next();
 }
 
-/** 排題目：最後一題放目前段位能出的最難題目 */
+/** 排題目：隨機抽，最後一題放目前段位能出的最難題目 */
 function arrange(list, n, ctx) {
   const ok = list.filter((q) => ctx.game.difficultyUnlocked(q.difficulty || 1));
-  const pool = ok.length ? ok : list;
+  const pool = (ok.length ? ok : list).map((q) => [Math.random(), q]).sort((a, b) => a[0] - b[0]).map((p) => p[1]);
   if (pool.length <= 1) return pool.slice(0, n);
-  const take = pool.slice(0, n);
+  // 每局隨機抽題，但一定包含最難的那題（放最後）
+  const hardestAll = pool.reduce((a, b) => ((b.difficulty || 1) > (a.difficulty || 1) ? b : a), pool[0]);
+  const take = [...pool.filter((q) => q !== hardestAll).slice(0, n - 1), hardestAll];
   const hardest = take.reduce((a, b) => ((b.difficulty || 1) > (a.difficulty || 1) ? b : a), take[take.length - 1]);
   return [...take.filter((q) => q !== hardest), hardest];
 }

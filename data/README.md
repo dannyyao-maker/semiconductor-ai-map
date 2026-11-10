@@ -40,7 +40,9 @@
 
 `chapters/index.json` 是章節清單：`start` 是第一章（`ic-design`），其他章節在**相鄰環節**完成「認識」之後解鎖。相鄰的意思是 `nodes.json` 裡 `upstream`／`downstream` 有互相指到。`file` 是 `null` 表示內容還沒做。
 
-每一章一個檔案，例如 `chapters/ic-design.json`：
+每一章一個檔案，例如 `chapters/ic-design.json`。`chapters/intro.json` 是 3 分鐘的全景開場（只有 `story` 畫面，`node` 標出目前在產業鏈的哪一站，`all` 表示全部亮起）。
+
+章節的 `final` 部分設定 `"match": true`，裡面的題目會以對局方式進行（見 game.json）。章節內容的狀態（`status`）一樣是 `待審核`，本人讀過後改成 `已審核`。
 
 | 欄位 | 意思 |
 | --- | --- |
@@ -64,6 +66,7 @@
 | `story` | 情境、說明 | `speaker`（說話的人，可省略）、`text`、`sources` | 否 |
 | `choice` | 探索選擇，選了看說明 | `prompt`、`options: [{ label, reveal }]` | 否 |
 | `stat` | 數字重點 | `title`、`items: [{ label, value, note }]`、`sources` | 否 |
+| `bars` | 排名長條圖 | `title`、`unit`、`items: [{ label, value, note, tw（台灣公司標色） }]`、`sources` | 否 |
 | `compare` | 公司對比表 | `title`、`companies: [公司代碼]`、`rows: [{ label, values: [] }]`、`sources` | 否 |
 | `flow` | 錢怎麼流 | `title`、`steps: [{ label, node, note }]` | 否 |
 | `quiz` | 計分題 | 見下方「題目」 | 是 |

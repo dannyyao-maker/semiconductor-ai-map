@@ -1,0 +1,33 @@
+{
+  "id": "intro",
+  "title": "全景開場：一顆 AI 晶片的旅程",
+  "tagline": "3 分鐘看完整條產業鏈。不考試、不用記，看過就好。",
+  "parts": [
+    {
+      "id": "intro",
+      "name": "全景開場",
+      "sections": [
+        {
+          "id": "journey",
+          "title": "一顆 AI 晶片的旅程",
+          "screens": [
+            { "type": "story", "text": "你每天問 ChatGPT 的問題，背後是一整條產業鏈在運作。我們跟著一顆 AI 晶片，從「被設計出來」一路走到「回答你的問題」。" },
+            { "type": "story", "node": "ic-design", "speaker": "第 1 站・IC 設計", "text": "NVIDIA 這類公司先「設計」晶片。它們不自己蓋工廠，只畫設計圖，業界稱為 Fabless（無晶圓廠）。設計圖的工具和現成零件，來自 EDA 軟體和矽智財（IP）公司。" },
+            { "type": "story", "node": "equipment", "speaker": "第 2 站・設備與材料", "text": "要把設計圖變成實體晶片，晶圓廠得先買機台和材料。ASML 是全球唯一做得出 EUV 曝光機的公司，像淘金熱裡賣鏟子的人。", "sources": ["asml-20f-2025"] },
+            { "type": "story", "node": "foundry", "speaker": "第 3 站・晶圓代工", "text": "台積電這類代工廠，用這些機台把設計圖「印」到矽晶圓上。台積電 2026 年第三季有 68% 的營收來自高效能運算（含 AI）。", "sources": ["tsmc-3q26"] },
+            { "type": "story", "node": "memory", "speaker": "第 4 站・記憶體", "text": "AI 晶片旁邊要配高頻寬記憶體（HBM），SK 海力士、三星、美光是主要供應商。" },
+            { "type": "story", "node": "packaging", "speaker": "第 5 站・封測與先進封裝", "text": "晶片和記憶體要用 CoWoS 這類先進封裝技術「組在一起」，最後做測試。先進封裝產能吃緊，是目前 AI 供應鏈的限制之一。", "sources": ["tsmc-3q26-call", "digitimes-cowos-2025"] },
+            { "type": "story", "node": "ai-chip", "speaker": "第 6 站・AI 晶片", "text": "到這裡，一顆完整的 AI 晶片（GPU 或客製化 ASIC）誕生了。NVIDIA 賣的不只是晶片，還有讓開發者離不開的 CUDA 軟體平台。", "sources": ["nvda-10k-2026"] },
+            { "type": "story", "node": "ai-server", "speaker": "第 7 站・AI 伺服器", "text": "鴻海、廣達這些台灣廠商，把 AI 晶片、記憶體、散熱和電源組成整櫃的 AI 伺服器。這是台灣在 AI 浪潮裡最大的舞台。" },
+            { "type": "story", "node": "datacenter", "speaker": "第 8 站・資料中心", "text": "伺服器放進資料中心。這裡最缺的是電：國際能源總署（IEA）預估，資料中心用電到 2030 年會增加一倍以上。", "sources": ["iea-energy-ai"] },
+            { "type": "story", "node": "cloud", "speaker": "第 9 站・雲端平台", "text": "微軟、Google、亞馬遜把算力「出租」給別人用，這就是雲端。它們也是買最多 AI 晶片的客戶。" },
+            { "type": "story", "node": "model", "speaker": "第 10 站・大型模型公司", "text": "OpenAI、Anthropic 這些公司租用算力，訓練出 GPT、Claude 這些大型模型。" },
+            { "type": "story", "node": "ai-app", "speaker": "第 11 站・AI 應用與服務", "text": "最後，模型變成你手上的 ChatGPT、Copilot。你付的訂閱費，就是這整條鏈的收入起點。" },
+            { "type": "story", "node": "all", "speaker": "錢怎麼流", "text": "東西從左往右做出來，錢從右往左付回去：你付訂閱費 → 模型公司付雲端租金 → 雲端業者買伺服器和晶片 → 晶片公司付代工費 → 代工廠買機台。每一站都在這條錢流裡分一杯羹。" },
+            { "type": "story", "node": "ic-design", "speaker": "你的第一站", "text": "整條鏈的起點是「設計」：先有人決定要做什麼晶片，後面的一切才會發生。所以我們從 IC 設計開始。學完它，隔壁的晶圓代工、封測和 AI 晶片就會解鎖。" }
+          ]
+        }
+      ]
+    }
+  ]
+}
