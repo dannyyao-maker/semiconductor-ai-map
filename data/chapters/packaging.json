@@ -126,6 +126,23 @@
       ]
     },
     {
+      "id": "finance",
+      "name": "財報看圖",
+      "minRank": "gold",
+      "sections": [
+        {
+          "id": "metrics",
+          "title": "財報看圖",
+          "screens": [
+            {"type":"story","speaker":"財報看圖","text":"封測的財報看兩件事：各業務的毛利率（哪個業務比較賺）和資本支出（投資了多少先進封裝產能）。接下來三題是看圖題，先看圖再回答。"},
+            {"type":"quiz","id":"packaging.chart.seg","difficulty":2,"prompt":"看圖：日月光 2025 年各業務毛利率。EMS（電子代工服務）占營收約 40%，但毛利率最低。這代表什麼？","visual":{"type":"kpi","title":"日月光 2025 年各業務毛利率","fin":"ase.seg_gm"},"options":["EMS 營收規模大，但拉低整體毛利率","EMS 是最賺錢的業務","測試業務營收最大","整體毛利率一定高於 31%"],"answer":0,"explain":"測試 31.0%、封裝 22.1%、EMS 9.2%，整體 17.7%。EMS 占營收約 40% 但毛利率只有 9.2%，所以把整體拉低。若測試與封裝占比提高，整體毛利率就會上升。","sources":["ase-20f-2025"]},
+            {"type":"quiz","id":"packaging.chart.capex","difficulty":2,"prompt":"看圖：艾克爾的資本支出。2026 年預估（取中位數）大約是 2025 年的幾倍？","visual":{"type":"line","title":"艾克爾資本支出","fin":"amkor.capex","forecastFrom":2,"yMin":0,"yMax":320,"yStep":80,"dec":0,"yLabel":"單位：億美元。2026 年為公司預估區間 25–30 億美元，取中位數 27.5 億（推算）。"},"options":["約 3 倍","約 1.1 倍","約 2 倍","約 10 倍"],"answer":0,"explain":"2026 年預估 25–30 億美元，中位數 27.5 億，2025 年是 9.05 億：27.5 ÷ 9.05 ≈ 3.0 倍（推算）。年報說增加的主因是亞利桑那新廠。注意：2026 年是公司預估，不是實績，所以圖上用空心點。","sources":["amkr-10k-2025"]},
+            {"type":"quiz","id":"packaging.chart.market","difficulty":2,"prompt":"看圖：艾克爾 2025 年營收依終端市場分類。下列哪個說法正確？","visual":{"type":"segbar","title":"艾克爾 2025 年營收：終端市場","fin":"amkor.end_market"},"options":["通訊（手機、平板）最大，約占 46%；運算（資料中心等）約占 20%","運算是最大的市場","車用、工業是最大的市場","消費性占比最高"],"answer":0,"explain":"通訊 46%、運算 20%、車用工業 19%、消費性 15%。運算 2025 年成長 16%，年報說主要來自 AI 相關的電腦裝置與網路設備；但營收仍以手機、平板為主，所以艾克爾的景氣跟消費性電子連動較深。","sources":["amkr-10k-2025"]}
+          ]
+        }
+      ]
+    },
+    {
       "id": "final",
       "name": "章末對局",
       "sections": [

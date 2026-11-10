@@ -149,6 +149,24 @@
       ]
     },
     {
+      "id": "finance",
+      "name": "財報看圖",
+      "minRank": "gold",
+      "sections": [
+        {
+          "id": "metrics",
+          "title": "財報看圖",
+          "screens": [
+            {"type":"story","speaker":"財報看圖","text":"接下來四題是看圖題，每題都附一張財報圖表，先看圖再回答。重點是從數字讀出這家公司「靠什麼賺錢」。稅前利潤率＝稅前利潤 ÷ 營收，代表每一塊錢營收，扣掉成本與費用後還剩多少。"},
+            {"type":"quiz","id":"ic-design.chart.qtl","difficulty":2,"prompt":"看圖：高通 2026 會計年度，專利授權（QTL）只占營收約 13%。從兩項業務的稅前利潤率來看，最合理的結論是什麼？","visual":{"type":"kpi","title":"高通 2026 會計年度：兩項業務的稅前利潤率","fin":"qcom.margin"},"options":["專利授權的利潤率遠高於賣晶片，是重要的利潤來源","賣晶片比專利授權更賺","兩項業務的利潤率差不多","QTL 是高通營收最大的業務"],"answer":0,"explain":"QTL 稅前利潤率 72%、QCT 27%。QTL 稅前利潤約 40.2 億美元，QCT 約 101.0 億美元；QTL 營收只占約 13%，卻貢獻兩者稅前利潤合計約 28%（推算）。這就是第一章說的「另一種賺法」。","sources":["qcom-10k-2026"]},
+            {"type":"quiz","id":"ic-design.chart.qct","difficulty":2,"prompt":"看圖：高通晶片事業（QCT）2026 會計年度各產品線。下列哪個說法正確？","visual":{"type":"dbars","title":"高通 QCT 各產品線：年增率與占 QCT 營收比重","valueName":"年增","suffix":"%","dec":0,"fin":"qcom.qct"},"options":["手機營收下降，但仍是最大宗；汽車成長最快","汽車已經是最大的產品線","物聯網營收下降","三條產品線都成長"],"answer":0,"explain":"手機約 241 億美元（年減約 13%），占 QCT 約 65%；汽車約 60 億美元（年增約 52%），占約 16%；物聯網約 71 億美元（年增約 8%）。年報也提醒：蘋果未來會主要改用自家數據機，對 QCT 營收有重大負面影響。","sources":["qcom-10k-2026"]},
+            {"type":"quiz","id":"ic-design.chart.nvdashare","difficulty":2,"prompt":"看圖：NVIDIA 2026 會計年度（至 2026 年 1 月），資料中心營收約占總營收多少？","visual":{"type":"line","title":"NVIDIA：資料中心營收與總營收","subtitle":"單位：億美元（會計年度）","fin":["nvda.dc","nvda.total"],"yMin":0,"yMax":2400,"yStep":400,"dec":0,"yLabel":"單位：億美元。會計年度結束於次年 1 月（FY2026 ＝ 2025 年 2 月至 2026 年 1 月）。"},"options":["約 90%","約 70%","約 50%","約 30%"],"answer":0,"explain":"資料中心 1,937.4 億美元 ÷ 總營收 2,159.4 億美元 ≈ 89.7%（推算）。三年前（2024 會計年度）只有約 78%。AI 讓 NVIDIA 從「遊戲顯示卡公司」變成「資料中心公司」。","sources":["nvda-10k-2026"]},
+            {"type":"quiz","id":"ic-design.chart.nvdagm","difficulty":3,"prompt":"NVIDIA 營收從 1,305 億美元增加到 2,159 億美元（年增約 65%），毛利率從 75.0% 降到 71.1%。毛利金額（營收 × 毛利率）怎麼變？","visual":{"type":"line","title":"NVIDIA 毛利率與營業利益率","fin":["nvda.gm","nvda.op"],"yMin":55,"yMax":80,"yStep":5,"dec":1,"suffix":"%","tickDec":0,"yLabel":"單位：%。FY2026 ＝ 2025 年 2 月至 2026 年 1 月。"},"options":["仍大幅增加，約從 979 億增加到 1,535 億美元","減少，因為毛利率下降","幾乎不變","無法判斷"],"answer":0,"explain":"130.5 × 75.0% ≈ 97.9；215.9 × 71.1% ≈ 153.5（單位：百億美元，推算）。毛利率小降，但營收大增，所以賺到的毛利金額增加約 57%。看財報不能只看比率，要比率和金額一起看。","sources":["nvda-10k-2026"]}
+          ]
+        }
+      ]
+    },
+    {
       "id": "final",
       "name": "章末對局",
       "sections": [

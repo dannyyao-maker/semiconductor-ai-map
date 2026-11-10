@@ -1,0 +1,47 @@
+{
+  "note": "財報數字資料庫。只用官方財報（SEC 申報、法說會簡報）。章節的圖表和題目用 \"fin\": \"代碼\" 取數字（見 js/fin.js）。推算出來的數字要在 note 寫明。",
+  "series": {
+    "tsmc.rev_q": { "company": "tsmc", "label": "營收", "unit": "億美元", "x": ["3Q25", "4Q25", "1Q26", "2Q26", "3Q26", "4Q26\n財測"], "values": [331.0, 337.3, 359.0, 402.0, 467.2, 533], "range": { "i": 5, "lo": 523, "hi": 543 }, "note": "第四季為財測區間 523–543 億美元，取中位數 533（推算）", "sources": ["tsmc-3q26", "tsmc-4q25-pr", "tsmc-1q26"] },
+    "tsmc.gm_y": { "company": "tsmc", "label": "台積電", "unit": "%", "x": ["2024", "2025"], "values": [56.1, 59.9], "sources": ["tsmc-20f-2025"] },
+    "umc.gm_y": { "company": "umc", "label": "聯電", "unit": "%", "x": ["2024", "2025"], "values": [32.6, 29.0], "sources": ["umc-20f-2025"] },
+    "tsmc.top10": { "company": "tsmc", "label": "前十大客戶", "unit": "%", "x": ["2023", "2024", "2025"], "values": [70, 76, 78], "note": "占淨營收約略比重", "sources": ["tsmc-20f-2025"] },
+    "tsmc.top1": { "company": "tsmc", "label": "最大客戶", "unit": "%", "x": ["2023", "2024", "2025"], "values": [25, 22, 19], "sources": ["tsmc-20f-2025"] },
+    "tsmc.capex_budget": { "company": "tsmc", "unit": "億美元", "items": [
+      { "label": "2026 年初資本預算", "value": "520–560 億美元", "delta": "2026 年 1 月法說會" },
+      { "label": "2026 年 10 月資本預算", "value": "600–640 億美元", "delta": "第三季法說會維持此預算", "dir": "up" }
+    ], "sources": ["tsmc-4q25-pr", "tsmc-3q26-call"] },
+    "ase.seg_gm": { "company": "ase", "unit": "%", "items": [
+      { "label": "測試（占營收 11%）", "value": "31.0%", "delta": "毛利率" },
+      { "label": "封裝（占營收 48%）", "value": "22.1%", "delta": "毛利率" },
+      { "label": "電子代工服務 EMS（占營收 40%）", "value": "9.2%", "delta": "毛利率" }
+    ], "note": "2025 年。占營收比重四捨五入（47.8%、11.1%、39.9%）", "sources": ["ase-20f-2025"] },
+    "amkor.end_market": { "company": "amkor", "unit": "%", "items": [
+      { "label": "通訊（手機、平板）", "value": 46 },
+      { "label": "運算（資料中心、PC、儲存）", "value": 20 },
+      { "label": "車用、工業及其他", "value": 19 },
+      { "label": "消費性（AR、遊戲、智慧家庭、穿戴）", "value": 15 }
+    ], "note": "2025 年營收，依終端市場約略分類", "sources": ["amkr-10k-2025"] },
+    "amkor.capex": { "company": "amkor", "label": "資本支出", "unit": "億美元", "x": ["2024", "2025", "2026\n預估"], "values": [74.4, 90.5, 275], "range": { "i": 2, "lo": 250, "hi": 300 }, "note": "2026 年預估 25–30 億美元，取中位數 27.5 億（推算）", "sources": ["amkr-10k-2025"] },
+    "mu.rev": { "company": "micron", "label": "營收", "unit": "億美元", "x": ["2024", "2025", "2026"], "values": [251.1, 373.8, 1331.9], "note": "會計年度", "sources": ["mu-10k-2026"] },
+    "mu.gm": { "company": "micron", "label": "毛利率", "unit": "%", "x": ["2024", "2025", "2026"], "values": [22, 40, 81], "sources": ["mu-10k-2026"] },
+    "mu.op": { "company": "micron", "label": "營業利益率", "unit": "%", "x": ["2024", "2025", "2026"], "values": [5, 26, 75], "sources": ["mu-10k-2026"] },
+    "mu.net": { "company": "micron", "label": "淨利率", "unit": "%", "x": ["2024", "2025", "2026"], "values": [3, 23, 64], "sources": ["mu-10k-2026"] },
+    "mu.capex": { "company": "micron", "unit": "億美元", "items": [
+      { "label": "2025 會計年度資本支出", "value": "158.6 億美元", "delta": "營收 373.8 億美元" },
+      { "label": "2026 會計年度資本支出", "value": "307.1 億美元", "delta": "營收 1,331.9 億美元", "dir": "up" }
+    ], "note": "資本支出＝購買不動產、廠房與設備的支出", "sources": ["mu-10k-2026"] },
+    "qcom.margin": { "company": "qualcomm", "unit": "%", "items": [
+      { "label": "QCT：賣晶片（占營收約 86%）", "value": "27%", "delta": "稅前利潤率（上年 30%）", "dir": "down" },
+      { "label": "QTL：專利授權（占營收約 13%）", "value": "72%", "delta": "稅前利潤率（上年 72%）" }
+    ], "note": "2026 會計年度（至 2026 年 9 月）。占營收比重為推算：QCT 372.1 億、QTL 55.6 億、合計營收 431.2 億美元", "sources": ["qcom-10k-2026"] },
+    "qcom.qct": { "company": "qualcomm", "unit": "%", "items": [
+      { "label": "手機", "value": -13, "share": 65 },
+      { "label": "汽車", "value": 52, "share": 16 },
+      { "label": "物聯網", "value": 8, "share": 19 }
+    ], "note": "QCT 各產品線營收年增率與占 QCT 營收比重，皆由年報金額推算", "sources": ["qcom-10k-2026"] },
+    "nvda.dc": { "company": "nvidia", "label": "資料中心", "unit": "億美元", "x": ["FY2024", "FY2025", "FY2026"], "values": [475.3, 1151.9, 1937.4], "note": "會計年度結束於次年 1 月", "sources": ["nvda-10k-2026"] },
+    "nvda.total": { "company": "nvidia", "label": "總營收", "unit": "億美元", "x": ["FY2024", "FY2025", "FY2026"], "values": [609.2, 1305.0, 2159.4], "sources": ["nvda-10k-2026"] },
+    "nvda.gm": { "company": "nvidia", "label": "毛利率", "unit": "%", "x": ["FY2025", "FY2026"], "values": [75.0, 71.1], "sources": ["nvda-10k-2026"] },
+    "nvda.op": { "company": "nvidia", "label": "營業利益率", "unit": "%", "x": ["FY2025", "FY2026"], "values": [62.4, 60.4], "labelPos": "below", "sources": ["nvda-10k-2026"] }
+  }
+}

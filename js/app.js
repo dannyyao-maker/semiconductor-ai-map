@@ -15,6 +15,7 @@ import { mountEvents } from "./views/events.js";
 import { mountMe } from "./views/me.js";
 import { mountDict, metricsAsTerms } from "./views/dict.js";
 import { mountPractice } from "./views/practice.js";
+import { resolveFin } from "./fin.js";
 import { mountLeague } from "./views/league.js";
 
 const VIEWS = { path: mountPath, explore: mountExplore, hq: mountHQ, events: mountEvents, me: mountMe, dict: mountDict, practice: mountPractice, league: mountLeague };
@@ -145,7 +146,7 @@ function buildChapters(index) {
     if (!file) return null;
     const res = await fetch(`data/chapters/${file}`);
     if (!res.ok) throw new Error(`讀不到章節 ${file}`);
-    return (cache[id] = await res.json());
+    return (cache[id] = resolveFin(await res.json(), ctx.fin));
   };
   ctx.chapterIndex = index;
   ctx.chapterOrder = order;
@@ -208,10 +209,10 @@ window.addEventListener("resize", hideTerm);
 
 async function main() {
   try {
-    const [nodesData, companies, sources, glossary, config, chapterIndex, events, metrics] = await Promise.all([
+    const [nodesData, companies, sources, glossary, config, chapterIndex, events, metrics, fin] = await Promise.all([
       loadJSON("data/nodes.json"), loadJSON("data/companies.json"), loadJSON("data/sources.json"),
       loadJSON("data/glossary.json"), loadJSON("data/game.json"), loadJSON("data/chapters/index.json"),
-      loadJSON("data/events.json"), loadJSON("data/metrics.json"),
+      loadJSON("data/events.json"), loadJSON("data/metrics.json"), loadJSON("data/financials.json"),
     ]);
     load();
     // 指標字典裡的指標也當成術語：卡片文字裡的「毛利率」「EPS」可以點了看解釋（和既有術語重複的別名不加）
@@ -220,7 +221,7 @@ async function main() {
     ctx = {
       zones: nodesData.zones,
       nodes: nodesData.nodes,
-      companies, glossary, events, metrics, config,
+      companies, glossary, events: resolveFin(events, fin), metrics, config, fin,
       zoneById: byId(nodesData.zones),
       nodeById: byId(nodesData.nodes),
       companyById: byId(companies),

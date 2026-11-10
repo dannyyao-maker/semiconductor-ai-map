@@ -140,6 +140,23 @@
       ]
     },
     {
+      "id": "finance",
+      "name": "財報看圖",
+      "minRank": "gold",
+      "sections": [
+        {
+          "id": "metrics",
+          "title": "財報看圖",
+          "screens": [
+            {"type":"story","speaker":"財報看圖","text":"晶圓代工的財報有三個關鍵數字：毛利率（技術和議價能力）、資本支出（蓋廠買設備的錢）、客戶集中度（靠幾家客戶）。接下來三題是看圖題，先看圖再回答。"},
+            {"type":"quiz","id":"foundry.chart.gm","difficulty":2,"prompt":"看圖：2024 到 2025 年，台積電與聯電的毛利率。下列哪個說法正確？","visual":{"type":"line","title":"毛利率：台積電 vs 聯電","fin":["tsmc.gm_y","umc.gm_y"],"yMin":20,"yMax":70,"yStep":10,"dec":1,"suffix":"%","tickDec":0,"yLabel":"單位：%（年度）。"},"options":["台積電上升、聯電下降，差距拉大","兩家都上升","聯電的毛利率比台積電高","兩家的差距縮小"],"answer":0,"explain":"台積電 56.1% → 59.9%，聯電 32.6% → 29.0%。差距從 23.5 個百分點拉大到 30.9 個百分點（推算）。先進製程有議價能力，成熟製程價格被壓低。","sources":["tsmc-20f-2025","umc-20f-2025"]},
+            {"type":"quiz","id":"foundry.chart.top10","difficulty":3,"prompt":"看圖：台積電前十大客戶占營收從 70% 升到 78%，最大客戶從 25% 降到 19%。可以推出什麼？","visual":{"type":"line","title":"台積電的客戶集中度","fin":["tsmc.top10","tsmc.top1"],"yMin":0,"yMax":100,"yStep":20,"dec":0,"suffix":"%","yLabel":"單位：占淨營收的約略比重（年度）。"},"options":["第 2 至第 10 大客戶合計占比上升（約 45% → 59%），營收更依賴一群大客戶","最大客戶已經離開","客戶變得更分散","營收下降"],"answer":0,"explain":"前十大減最大客戶：2023 年約 45%、2025 年約 59%（推算）。也就是說，不是單一客戶變得更重要，而是整群大客戶的占比提高，對台積電是機會，也是集中風險。","sources":["tsmc-20f-2025"]},
+            {"type":"quiz","id":"foundry.chart.capex","difficulty":2,"prompt":"看圖：台積電 2026 年資本預算。下列哪個說法正確？","visual":{"type":"kpi","title":"台積電 2026 年資本預算","fin":"tsmc.capex_budget"},"options":["調整後預算的下限，比年初預算的上限還高","預算被調降了","兩個預算的區間有重疊","預算沒有變動"],"answer":0,"explain":"年初是 520–560 億美元，10 月的法說會維持 600–640 億美元（先前已調高）。600 高於 560，所以整個區間往上移。資本支出是設備商的營收，也是客戶需求強的訊號。","sources":["tsmc-4q25-pr","tsmc-3q26-call"]}
+          ]
+        }
+      ]
+    },
+    {
       "id": "final",
       "name": "章末對局",
       "sections": [
