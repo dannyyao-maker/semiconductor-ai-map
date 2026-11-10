@@ -216,12 +216,12 @@ body.focus #toast { bottom: 24px; }
 
 /* ---------- 練習 ---------- */
 .pr { display: grid; gap: 14px; padding-top: 8px; }
-.pr-start, .pr-miss {
+.pr-start, .pr-miss, .pr-due {
   display: flex; align-items: center; gap: 16px; width: 100%; padding: 18px 20px; border: 0; border-radius: 24px; color: #fff; cursor: pointer; text-align: left;
   background: linear-gradient(135deg, var(--rank, var(--semi)), color-mix(in srgb, var(--rank, var(--semi)) 60%, #12202a));
   box-shadow: 0 7px 0 color-mix(in srgb, var(--rank, var(--semi)) 55%, #000);
 }
-.pr-start:active, .pr-miss:active { transform: translateY(5px); box-shadow: 0 2px 0 color-mix(in srgb, var(--rank, var(--semi)) 55%, #000); }
+.pr-start:active, .pr-miss:active, .pr-due:active { transform: translateY(5px); box-shadow: 0 2px 0 color-mix(in srgb, var(--rank, var(--semi)) 55%, #000); }
 .pr-badge .rank-badge { --s: 88px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .3)); }
 .pr-meta { display: grid; gap: 6px; flex: 1; }
 .pr-meta span { display: flex; align-items: center; gap: 10px; font-size: 1.7rem; font-weight: 900; }
@@ -229,7 +229,14 @@ body.focus #toast { bottom: 24px; }
 .pr-go { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 50%; background: #fff; color: var(--rank, #333); flex: none; }
 .pr-go .ic { --ic: 26px; }
 .pr-miss { --rank: #c4584f; padding: 12px 20px; }
-.pr-miss b { flex: 1; font-size: 2rem; font-weight: 900; }
+.pr-due { --rank: #d9863f; padding: 12px 20px; }
+.pr-miss b, .pr-due b { flex: 1; font-size: 2rem; font-weight: 900; }
+.pr-ahead { list-style: none; margin: -2px 0 2px; padding: 0 6px; display: flex; align-items: flex-end; gap: 8px; height: 56px; }
+.pr-ahead li { position: relative; flex: 1; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+.pr-ahead i { display: block; width: 100%; max-width: 34px; border-radius: 8px 8px 3px 3px; background: color-mix(in srgb, #4f7bad 55%, #f7efdc); }
+.pr-ahead .is-today i { background: #d9863f; }
+.pr-ahead span { position: absolute; bottom: -16px; font-size: .7rem; font-weight: 800; color: #7a7466; }
+.pr-ahead { margin-bottom: 14px; }
 .pr-ic { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .22); }
 .pr-ic .ic { --ic: 28px; }
 .pr-stale { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }

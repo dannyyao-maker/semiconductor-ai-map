@@ -122,7 +122,7 @@ function renderDock(active) {
   const stale = ctx.staleNodes().length;
   const ev = pendingEvents();
   dockEl.innerHTML = TABS.map((t) => {
-    const badge = t.id === "hq" && ev ? `<i class="dot"></i>` : t.id === "practice" && stale ? `<i class="dot"></i>` : "";
+    const badge = t.id === "hq" && ev ? `<i class="dot"></i>` : t.id === "practice" && (stale || ctx.game.dueIds().length) ? `<i class="dot"></i>` : "";
     return `<a href="#/${t.id}" data-tab="${t.id}" aria-label="${t.label}"${t.id === active ? ' aria-current="page"' : ""}>
       <span class="dock-ic">${ic(t.icon)}${badge}</span><span class="dock-label">${t.label}</span></a>`;
   }).join("");

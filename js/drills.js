@@ -28,14 +28,32 @@ export function makeDrills(ctx, n) {
   return [...fresh, ...old].slice(0, n).map((c) => makeDrill(ctx, c));
 }
 
-/** 答錯過的題目代碼 */
-export function wrongIds() {
-  return Object.entries(state().answers).filter(([, a]) => !a.ok).map(([id]) => id);
+/** 目前答錯、還沒答對過的題目代碼 */
+export const wrongIds = (ctx) => ctx.game.missedIds();
+
+/** 每天複習最多幾題 */
+export const DAILY_MAX = 10;
+
+/**
+ * 今天的複習清單（題目代碼）：
+ * ① 答錯、還沒答對過的　② 「快忘了」環節裡答過的題（每個環節最多 2 題）　③ 其他到期的題（逾期最久的先）
+ */
+export function dailyIds(ctx, max = DAILY_MAX) {
+  const game = ctx.game;
+  const due = game.dueIds();
+  const wrong = due.filter((id) => game.reviewEntry(id).box === 0);
+  const rest = due.filter((id) => game.reviewEntry(id).box !== 0);
+  const extras = [];
+  for (const { n } of ctx.staleNodes()) {
+    const mine = Object.keys(state().answers).filter((id) => id.startsWith(n.id + ".") && !due.includes(id))
+      .sort((a, b) => (game.reviewEntry(a).due < game.reviewEntry(b).due ? -1 : 1));
+    extras.push(...mine.slice(0, 2));
+  }
+  return [...new Set([...wrong, ...extras, ...rest])].slice(0, max);
 }
 
-/** 把答錯過的題目找回來（公司題重新產生；章節題和事件題從資料檔找） */
-export async function wrongQuestions(ctx) {
-  const ids = wrongIds();
+/** 把題目代碼變回題目（公司題重新產生；章節題和事件題從資料檔找）。找不到的略過 */
+export async function questionsByIds(ctx, ids) {
   if (!ids.length) return [];
   const byId = {};
   for (const ev of ctx.events) for (const q of ev.questions || []) byId[q.id] = q;
@@ -54,3 +72,6 @@ export async function wrongQuestions(ctx) {
   }
   return out;
 }
+
+export const wrongQuestions = (ctx) => questionsByIds(ctx, wrongIds(ctx));
+export const dailyQuestions = (ctx) => questionsByIds(ctx, dailyIds(ctx));

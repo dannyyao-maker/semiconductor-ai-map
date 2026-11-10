@@ -38,7 +38,7 @@ export function mountMe(root, ctx) {
         ${DEV ? `
         <div class="me-dev">
           <p>${[0, 300, 750, 1350, 2100, 3000, 4200, 5700].map((n) => `<button type="button" data-dev-trophies="${n}">${n}</button>`).join("")}</p>
-          <p><button type="button" data-dev="yesterday">昨天有學習</button><button type="button" data-dev="clear-answers">清除作答</button><button type="button" data-dev="stale">快忘了</button></p>
+          <p><button type="button" data-dev="yesterday">昨天有學習</button><button type="button" data-dev="clear-answers">清除作答</button><button type="button" data-dev="stale">快忘了</button><button type="button" data-dev="day+1">快轉 +1 天</button><button type="button" data-dev="day0">回到今天</button></p>
         </div>` : ""}
         <p class="me-foot">學習用途・附來源・不構成投資建議　<a href="https://github.com/dannyyao-maker/semiconductor-ai-map">GitHub</a></p>
       </div>`;
@@ -93,6 +93,10 @@ export function mountMe(root, ctx) {
     } else if (b.dataset.dev === "clear-answers") {
       state().answers = {};
       save();
+    } else if (b.dataset.dev === "day+1" || b.dataset.dev === "day0") {
+      ctx.game.setDevShift(b.dataset.dev === "day0" ? 0 : ctx.game.devShift() + 1);
+      save();
+      toast(`測試日期：今天 +${ctx.game.devShift()} 天（${ctx.game.dayKey()}）`);
     } else if (b.dataset.dev === "stale") {
       const s = state();
       s.chapters["ic-design"] = { sections: { "know.what": true, "know.money": true, "know.market": true }, parts: { know: true }, at: Date.now() - 9 * 864e5 };

@@ -8,6 +8,7 @@ const blank = () => ({
   v: 1,
   trophies: 0,          // 目前盃數
   peak: 0,              // 曾經達到的最高盃數（決定「不會掉出的大段位」）
+  reviews: {},          // 間隔複習：{ 題目代碼: { box（第幾格）, due（下次複習日）, last, lapses（答錯次數） } }
   answers: {},          // 計分題的第一次作答：{ 題目代碼: { ok, at, d（加減的盃數） } }
   history: [],          // 每次加減盃數的紀錄：{ at, qid, d, t（之後的盃數） }
   streak: { count: 0, last: null, doubleDay: null }, // 連續天數；doubleDay＝盃數加倍的那一天

@@ -6,7 +6,7 @@
 // - 盃數不會掉出已經達到的大段位
 // 連續天數仿 Duolingo：當天完成至少一題計分題才算，斷一天就歸零。
 import { state, save } from "./state.js";
-import { esc } from "./util.js";
+import { esc, store } from "./util.js";
 import { rankGlyph } from "./icons.js";
 
 const ROMAN = ["I", "II", "III"];
@@ -34,7 +34,9 @@ export function makeGame(cfg) {
   const rankIndex = (id) => ranks.findIndex((r) => r.id === id);
 
   // ---- 連續天數 ----
-  const dayKey = (date = new Date()) =>
+  // 測試用：網址有 ?dev 時，可以把「今天」往後快轉幾天，檢查間隔複習
+  const devShift = () => (new URLSearchParams(location.search).has("dev") ? Number(store.get("semimap.devshift", 0)) || 0 : 0);
+  const dayKey = (date = new Date(Date.now() + devShift() * 864e5)) =>
     new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).format(date);
   const addDays = (key, n) => {
     const d = new Date(key + "T00:00:00Z");
@@ -62,6 +64,52 @@ export function makeGame(cfg) {
     return { milestone: m };
   }
 
+  // ---- 間隔複習（Leitner 盒子法）----
+  // 每一題有一個「盒子」：答對就往上一格，下次複習的間隔變長；答錯回到第 0 格，今天就要再練。
+  // 格子對應的間隔天數：第 0 格＝今天、第 1 格＝1 天後、3 天、7 天、14 天、30 天。
+  const INTERVALS = cfg.review?.intervals || [0, 1, 3, 7, 14, 30];
+  /** 一題目前的複習狀態；舊的進度只有「第一次作答」的紀錄，就用它推算 */
+  function reviewEntry(qid) {
+    const s = state();
+    if (s.reviews[qid]) return s.reviews[qid];
+    const a = s.answers[qid];
+    if (!a) return null;
+    const last = dayKey(new Date(a.at));
+    const box = a.ok ? 1 : 0;
+    return { box, last, due: addDays(last, INTERVALS[box]), lapses: a.ok ? 0 : 1 };
+  }
+  /** 作答後更新這一題的複習時間，同時把這個環節的「快忘了」計時歸零 */
+  function recordReview(qid, correct) {
+    const s = state();
+    const old = reviewEntry(qid);
+    const today = dayKey();
+    const box = correct ? Math.min((old?.box ?? 0) + 1, INTERVALS.length - 1) : 0;
+    s.reviews[qid] = { box, last: today, due: addDays(today, INTERVALS[box]), lapses: (old?.lapses || 0) + (correct ? 0 : 1) };
+    const node = qid.split(".")[0];
+    if (correct && s.chapters[node]) s.chapters[node].reviewAt = Date.now();
+  }
+  /** 今天（含以前）到期的題目代碼：答錯的排最前面，其次是逾期最久的 */
+  function dueIds() {
+    const s = state();
+    const today = dayKey();
+    const ids = new Set([...Object.keys(s.answers), ...Object.keys(s.reviews)]);
+    return [...ids].map((id) => [id, reviewEntry(id)]).filter(([, e]) => e && e.due <= today)
+      .sort((a, b) => (a[1].box === 0) !== (b[1].box === 0) ? (a[1].box === 0 ? -1 : 1) : a[1].due < b[1].due ? -1 : a[1].due > b[1].due ? 1 : 0)
+      .map(([id]) => id);
+  }
+  /** 目前「答錯、還沒答對過」的題目（第 0 格） */
+  const missedIds = () => [...new Set([...Object.keys(state().answers), ...Object.keys(state().reviews)])].filter((id) => reviewEntry(id)?.box === 0);
+  /** 接下來幾天各有幾題到期（給練習頁的小預告用） */
+  function upcoming(days = 7) {
+    const today = dayKey();
+    const out = Array(days).fill(0);
+    for (const id of new Set([...Object.keys(state().answers), ...Object.keys(state().reviews)])) {
+      const e = reviewEntry(id);
+      for (let i = 0; i < days; i++) if (e.due <= addDays(today, i)) { out[i]++; break; }
+    }
+    return out;
+  }
+
   // ---- 作答 ----
   /** 這個難度的題目，目前的段位能不能出 */
   function difficultyUnlocked(level) {
@@ -87,7 +135,8 @@ export function makeGame(cfg) {
    */
   function answer(qid, correct, mult = 1) {
     const s = state();
-    if (s.answers[qid]) return { practice: true, correct };
+    recordReview(qid, correct);
+    if (s.answers[qid]) { save(); return { practice: true, correct }; }
     const before = tierOf(s.trophies);
     const streakBefore = streakNow().count;
     const { milestone } = bumpStreak();
@@ -129,7 +178,7 @@ export function makeGame(cfg) {
     };
   }
 
-  return { ranks, tiers, tierOf, floorOf, standing, preview, answer, streakNow, difficultyUnlocked, dayKey };
+  return { ranks, tiers, tierOf, floorOf, standing, preview, answer, streakNow, difficultyUnlocked, dayKey, dueIds, missedIds, reviewEntry, upcoming, setDevShift: (n) => store.set("semimap.devshift", n), devShift };
 }
 
 /** 段位徽章：盾牌形狀，顏色依段位 */
