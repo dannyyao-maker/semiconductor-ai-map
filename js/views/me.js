@@ -38,6 +38,7 @@ export function mountMe(root, ctx) {
           <p class="muted small">暫時的練習區，先感受對局的節奏。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？最後一題盃數加倍，結束後有本局複習。</p>
           <div class="drill"></div>
         </section>
+        <section class="panel wide install-panel">${installHTML()}</section>
         <section class="panel wide">
           <h2 class="panel-title">進度備份</h2>
           <p class="actions">
@@ -72,7 +73,7 @@ export function mountMe(root, ctx) {
       runMatch(box, ctx, { key: "drill.seg", title: "練習對局：公司歸位", make: (n) => makeDrills(ctx, n), onExit: () => render() }));
   }
 
-  root.addEventListener("click", (e) => {
+  root.addEventListener("click", async (e) => {
     const b = e.target.closest("button");
     if (!b) return;
     if (b.dataset.act === "export") {
@@ -82,6 +83,9 @@ export function mountMe(root, ctx) {
       a.download = `semimap-progress-${ctx.game.dayKey()}.json`;
       a.click();
       URL.revokeObjectURL(a.href);
+    } else if (b.dataset.act === "install") {
+      const p = window.__installPrompt;
+      if (p) { p.prompt(); await p.userChoice.catch(() => {}); window.__installPrompt = null; render(); }
     } else if (b.dataset.act === "reset") {
       if (confirm("確定要清除所有進度嗎？盃數、連續天數、章節進度都會歸零，而且無法復原。")) { reset(); toast("已清除所有進度"); }
     } else if (b.dataset.devTrophies) {
@@ -108,6 +112,8 @@ export function mountMe(root, ctx) {
     catch (err) { toast(`匯入失敗：${err.message}`); }
   });
 
+  const onInstall = () => { const p = root.querySelector(".install-panel"); if (p) p.innerHTML = installHTML(); };
+  window.addEventListener("installready", onInstall);
   render();
   const off = ctx.onState(() => {
     // 對局進行中不要重畫，只更新段位卡和連續天數卡
@@ -119,7 +125,7 @@ export function mountMe(root, ctx) {
     panels[0].innerHTML = rankCardHTML(ctx);
     panels[1].innerHTML = streakCardHTML(ctx);
   }
-  return { unmount: off };
+  return { unmount: () => { off(); window.removeEventListener("installready", onInstall); } };
 }
 
 /** 出 n 題「這家公司屬於哪個環節」，優先出還沒答過的公司，同一局不重複 */
@@ -145,4 +151,20 @@ function makeDrill(ctx, c) {
 所屬環節：${segs}。`,
     sources: c.sources,
   };
+}
+
+/** 安裝到手機：依裝置顯示步驟；Android Chrome 可以一鍵安裝 */
+function installHTML() {
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const secure = location.protocol === "https:" || location.hostname === "localhost";
+  let body;
+  if (standalone) body = `<p class="ok-note">✓ 你正在用 App 模式。第一次連線時，內容會存進手機，之後沒網路也能用。</p>`;
+  else if (window.__installPrompt) body = `<p>可以直接安裝：像 App 一樣有自己的圖示、全螢幕打開。</p><p class="actions"><button class="btn primary" data-act="install">📲 安裝 App</button></p>`;
+  else if (ios) body = `<ol class="install-steps"><li>用 <b>Safari</b> 打開這個網址（用 Chrome 或 LINE 內建瀏覽器不行）。</li><li>點畫面下方的「分享」按鈕（方框加向上箭頭）。</li><li>往下找到「<b>加入主畫面</b>」，按「新增」。</li></ol>`;
+  else body = `<ol class="install-steps"><li>用 <b>Chrome</b> 打開這個網址。</li><li>點右上角的「⋮」選單。</li><li>選「<b>安裝應用程式</b>」或「<b>加到主畫面</b>」。</li></ol>`;
+  return `<h2 class="panel-title">📲 安裝到手機</h2>
+    ${body}
+    <p class="muted small">${secure ? "" : "目前不是 https 網址，瀏覽器可能不提供安裝。"}安裝後第一次連線會把內容存進手機，沒網路也能學習；事件和內容更新需要連線才會取得最新版。<br>
+    <b>注意：</b>加到主畫面後是一個全新的空間，原本在瀏覽器裡的進度不會自動帶過去，請先在瀏覽器「匯出進度檔」，再到 App 裡「匯入」。</p>`;
 }

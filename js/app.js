@@ -192,3 +192,11 @@ async function main() {
 }
 
 main();
+
+// ---- 可安裝的網頁 App（PWA）----
+// 瀏覽器（Android Chrome）覺得可以安裝時會丟出這個事件；先存起來，等使用者在「我的」按安裝
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); window.__installPrompt = e; window.dispatchEvent(new Event("installready")); });
+window.addEventListener("appinstalled", () => { window.__installPrompt = null; window.dispatchEvent(new Event("installready")); });
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch((err) => console.warn("離線功能沒有啟用：", err)));
+}

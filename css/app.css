@@ -517,3 +517,8 @@ p.up { color: var(--up); }
 .impact-list .impact-pos .imp-dot { color: #2a78d6; }
 .impact-list .impact-neg .imp-dot { color: #eb6834; }
 .impact-list .impact-zero .imp-dot { color: #9ca3af; }
+
+/* ===== 安裝到手機 ===== */
+.install-steps { margin: 6px 0 10px; padding-left: 1.3em; }
+.install-steps li { margin: 4px 0; }
+.ok-note { color: var(--up); font-weight: 700; }
