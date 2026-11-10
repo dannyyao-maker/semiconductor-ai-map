@@ -4,6 +4,7 @@
 import { esc } from "./util.js";
 import { rankBadge } from "./game.js";
 import { sourceLinks } from "./card.js";
+import { chartHTML, bindCharts } from "./charts.js";
 
 const LETTERS = ["A", "B", "C", "D", "E"];
 const TICKS = 24; // 時鐘的刻度數量：時間一格一格熄掉
@@ -31,7 +32,7 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
   const prior = ctx.state().answers[q.id];
   const pv = ctx.game.preview(mult);
   const rm = ctx.config.readMs || { perChar: 60, min: 1200, max: 3500 };
-  const readMs = Math.max(rm.min, Math.min(rm.max, String(q.prompt).length * rm.perChar));
+  const readMs = Math.max(rm.min, Math.min(rm.max, String(q.prompt).length * rm.perChar)) + (q.visual ? 2500 : 0); // 看圖題多留時間看圖
 
   const stake = prior
     ? `<span class="stake practice">練習：已作答過，不計盃數</span>`
@@ -46,6 +47,7 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
       </div>`}
       ${mult > 1 ? `<p class="final-banner">🔥 最後一題・最難的題目・分數和盃數 ×${mult}</p>` : ""}
       <p class="quiz-prompt">${T(q.prompt)}</p>
+      ${q.visual ? `<div class="quiz-visual">${chartHTML(q.visual, T)}</div>` : ""}
       <div class="quiz-read" aria-hidden="true"><span></span></div>
       <div class="quiz-options" role="group" aria-label="選項">
         ${q.options.map((o, i) => `<button class="quiz-opt" data-i="${i}" disabled style="--d:${i * 70}ms">
@@ -55,6 +57,7 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
     </div>`;
 
   const box = container.querySelector(".quiz");
+  if (q.visual) bindCharts(box);
   const readBar = box.querySelector(".quiz-read span");
   if (clockHost) clockHost.innerHTML = clockHTML(seconds);
   const clockEl = (clockHost || box).querySelector(".clock");

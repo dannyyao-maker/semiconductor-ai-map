@@ -67,6 +67,11 @@
 | `choice` | 探索選擇，選了看說明 | `prompt`、`options: [{ label, reveal }]` | 否 |
 | `stat` | 數字重點 | `title`、`items: [{ label, value, note }]`、`sources` | 否 |
 | `bars` | 排名長條圖 | `title`、`unit`、`items: [{ label, value, note, tw（台灣公司標色） }]`、`sources` | 否 |
+| `kpi` | 重點數字卡 | `title`、`items: [{ label, value, delta, dir: up／down }]`、`sources` | 否 |
+| `line` | 折線圖 | `title`、`subtitle`、`x`（\n 換行）、`series: [{ label, values, range: {i, lo, hi}, labelPos }]`、`forecastFrom`（從第幾點起是財測，畫虛線＋空心點）、`yMin`／`yMax`／`yStep`、`dec`、`suffix`、`yLabel`、`sources` | 否 |
+| `dbars` | 正負長條圖（例如季增率） | `title`、`valueName`、`items: [{ label, value, share }]`、`sources` | 否 |
+| `segbar` | 堆疊條（一個整體分成幾塊） | `title`、`items: [{ label, value, other, note }]`（`other: true` 用灰色）、`footnote`、`sources` | 否 |
+| `matrix` | 影響矩陣 | `title`、`columns`、`rows: [{ node, label, sub, cells: [{ d: +／-／0 或省略, text, infer }] }]`、`sources` | 否 |
 | `compare` | 公司對比表 | `title`、`companies: [公司代碼]`、`rows: [{ label, values: [] }]`、`sources` | 否 |
 | `flow` | 錢怎麼流 | `title`、`steps: [{ label, node, note }]` | 否 |
 | `quiz` | 計分題 | 見下方「題目」 | 是 |
@@ -93,7 +98,8 @@
 | `nodes` | 需要先懂的環節（沒學過的會附 30 秒速覽） |
 | `impacts` | `[{ node, effect: "+" / "-" / "0", reason }]`：地圖上的綠燈（受惠）、紅燈（受害）、灰色（影響不大） |
 | `briefing` | 狀況簡報，格式同章節的 `screens`（不含 quiz） |
-| `questions` | 3 題，格式同「題目」 |
+| `matrix` | 影響矩陣（畫面格式見上表，`type: "matrix"`），在地圖導覽之後顯示 |
+| `questions` | 3 題，格式同「題目」；題目可以加 `visual`（一個圖表畫面，例如折線圖），做成「看圖題」 |
 | `conclusion` | 結案時的一句話局勢總結 |
 | `sources` | 來源代碼 |
 | `activeDays` | 在首頁顯示幾天（預設 30），之後移到事件檔案 |
@@ -127,3 +133,10 @@
 ## 學習進度存在哪裡
 
 全部存在瀏覽器的 localStorage（`semimap.game`），不需要帳號。換電腦或清除瀏覽資料會消失，所以「我的」頁面可以匯出、匯入進度。
+
+## 圖表的規則
+
+- 數字只用官方來源；從官方數字推算出來的，要在 `note` 或 `footnote` 寫明（例如「由 100% 減去 79% 推得」）。
+- 財測（公司預估）不是實績：折線圖用虛線和空心圓點標示，並附區間。
+- 顏色：受惠＝藍、受壓＝橘，都附 ▲▼ 和文字。不用紅綠，因為台股紅漲綠跌，容易看反。
+- 每張圖都附「看數據表」，也能點／停留看每個數字。

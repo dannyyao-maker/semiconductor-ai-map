@@ -8,7 +8,7 @@ import { renderQuiz } from "../quiz.js";
 import { renderMap } from "../map.js";
 import { sourceLinks } from "../card.js";
 
-const EFFECT = { "+": { cls: "pos", label: "受惠", icon: "▲" }, "-": { cls: "neg", label: "受害", icon: "▼" }, "0": { cls: "zero", label: "影響不大", icon: "●" } };
+const EFFECT = { "+": { cls: "pos", label: "受惠", icon: "▲" }, "-": { cls: "neg", label: "受壓", icon: "▼" }, "0": { cls: "zero", label: "影響不大", icon: "●" } };
 
 export function mountEvents(root, ctx, initial) {
   const done = (id) => Boolean(state().events[id]?.done);
@@ -35,7 +35,7 @@ export function mountEvents(root, ctx, initial) {
         <p><span class="status status-${esc(ev.status.replace(/・.*/, ""))}">${esc(ev.status)}</span> <span class="muted small">${esc(ev.origin)}來源</span></p></div></div>
       <section class="panel">
         <p class="lead">${ctx.textify()(ev.summary)}</p>
-        <p class="muted small">任務流程：狀況簡報（${ev.briefing.length} 張）→ 地圖導覽 → ${ev.questions.length} 題 → 結案，大約 5 分鐘。</p>
+        <p class="muted small">任務流程：狀況簡報（${ev.briefing.length} 張，含圖表）→ 地圖導覽 → ${ev.matrix ? "影響矩陣 → " : ""}${ev.questions.length} 題（含看圖題）→ 結案，大約 5–8 分鐘。</p>
         <h2 class="panel-title">需要先懂的環節</h2>
         <ul class="prereq">${pre.map(({ n, known }) => `<li>${known ? "✓" : "○"} ${esc(n.name)}
           ${known ? `<span class="muted small">學過了</span>` : `<a class="btn" href="#/explore/${esc(n.id)}/review">30 秒速覽</a>`}</li>`).join("")}</ul>
@@ -49,6 +49,7 @@ export function mountEvents(root, ctx, initial) {
     const steps = [
       ...ev.briefing.map((s) => ({ kind: "screen", s, label: "狀況簡報" })),
       { kind: "map", label: "地圖導覽" },
+      ...(ev.matrix ? [{ kind: "screen", s: ev.matrix, label: "影響矩陣" }] : []),
       ...ev.questions.map((q) => ({ kind: "quiz", q, label: "考考你" })),
       { kind: "end", label: "結案" },
     ];
@@ -108,7 +109,7 @@ export function mountEvents(root, ctx, initial) {
   function mapStep(el, ev) {
     el.innerHTML = `
       <p class="scr-title">這件事影響了哪些環節？</p>
-      <p class="hint">綠色是受惠、紅色是受害、灰色是影響不大。點地圖或下方的項目，看原因。</p>
+      <p class="hint">藍色（▲）是受惠、橘色（▼）是受壓、灰色（●）是影響不大。點地圖或下方的項目，看原因。</p>
       <div class="event-map"></div>
       <div class="impact-reason" aria-live="polite"></div>
       ${impactList(ev, true)}`;

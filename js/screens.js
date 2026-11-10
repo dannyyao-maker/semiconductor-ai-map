@@ -2,6 +2,7 @@
 // 公司對比（compare）、上下游（flow）。格式見 data/README.md。計分題（quiz）由 quiz.js 處理。
 import { esc } from "./util.js";
 import { sourceLinks } from "./card.js";
+import { chartHTML, bindCharts, CHART_TYPES } from "./charts.js";
 
 // 全景開場的路線順序：從設計一路走到 AI 應用
 export const JOURNEY = ["ic-design", "equipment", "foundry", "memory", "packaging", "ai-chip", "ai-server", "datacenter", "cloud", "model", "ai-app"];
@@ -45,7 +46,9 @@ export function renderScreen(el, s, ctx, ready) {
         <b>${esc(st.label)}</b><span>${T(st.note || "")}</span></li>`).join("")}</ol>
       <p class="hint">東西由上往下做出來，錢由下往上付回去。</p>`;
   }
+  if (CHART_TYPES.includes(s.type)) html = chartHTML(s, T) + src;
   el.innerHTML = `<div class="scr scr-type-${esc(s.type)}">${html}</div>`;
+  if (CHART_TYPES.includes(s.type)) bindCharts(el);
 
   if (s.type === "choice") {
     const rev = el.querySelector(".scr-reveal");

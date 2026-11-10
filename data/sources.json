@@ -678,5 +678,21 @@
     "url": "https://ec.ltn.com.tw/article/paper/1755027",
     "asOf": "2026-05",
     "type": "研究機構"
+  },
+  {
+    "id": "tsmc-4q25-pr",
+    "publisher": "台積電 TSMC",
+    "title": "2026 年 1 月：2025 年第四季營運結果新聞稿",
+    "url": "https://pr.tsmc.com/english/news/3281",
+    "asOf": "2026-01",
+    "type": "官方"
+  },
+  {
+    "id": "tsmc-1q26",
+    "publisher": "台積電 TSMC",
+    "title": "2026 年第一季財報簡報（Form 6-K）",
+    "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000199/a1q26e_withguidancexfinal.htm",
+    "asOf": "2026-04",
+    "type": "官方"
   }
 ]
