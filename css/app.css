@@ -485,3 +485,35 @@ p.up { color: var(--up); }
 .stale-list { list-style: none; margin: 0; padding: 0; }
 .stale-list li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .stale-list li:last-child { border-bottom: 0; }
+
+/* ===== 事件任務 ===== */
+.event-list li { padding: 0; }
+.event-item a { display: grid; gap: 2px; padding: 10px 4px; color: var(--text); text-decoration: none; }
+.event-item a:hover b { text-decoration: underline; }
+.event-item.is-done b { color: var(--muted); }
+.ev-date { font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ev-alert { margin: 6px 0 2px; font-weight: 800; color: #dc2626; letter-spacing: .04em; }
+.prereq { list-style: none; margin: 6px 0 12px; padding: 0; }
+.prereq li { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.prereq .btn { min-height: 34px; padding: 4px 12px; font-size: .85rem; margin-left: auto; }
+.step-label { margin: 0 0 6px; }
+.event-map { margin: 8px 0; }
+.event-map .map-svg { max-height: 360px; }
+.has-impacts .node.impact-none { opacity: .35; }
+.has-impacts .node.impact-pos .node-box { fill: #dcfce7; stroke: #16a34a; stroke-width: 3; stroke-dasharray: none; }
+.has-impacts .node.impact-neg .node-box { fill: #fee2e2; stroke: #dc2626; stroke-width: 3; stroke-dasharray: none; }
+.has-impacts .node.impact-zero .node-box { fill: #f3f4f6; stroke: #9ca3af; stroke-width: 3; stroke-dasharray: none; }
+.has-impacts .node.is-picked .node-box { stroke-width: 5; }
+.has-impacts .node-check, .has-impacts .node-stale { display: none; }
+.impact-reason .reveal-box { border-left-color: var(--muted); }
+.reveal-box.impact-pos { border-left-color: #16a34a; background: #f0fdf4; }
+.reveal-box.impact-neg { border-left-color: #dc2626; background: #fef2f2; }
+.impact-list { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.impact-list li { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); font-size: .85rem; background: var(--surface); }
+.impact-list.is-clickable li { cursor: pointer; }
+.impact-list li.is-picked { outline: 2px solid var(--text); }
+.impact-list li span:last-child { color: var(--muted); }
+.imp-dot { font-size: .7rem; }
+.impact-list .impact-pos .imp-dot { color: #16a34a; }
+.impact-list .impact-neg .imp-dot { color: #dc2626; }
+.impact-list .impact-zero .imp-dot { color: #9ca3af; }

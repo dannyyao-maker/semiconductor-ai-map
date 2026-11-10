@@ -94,6 +94,7 @@
 | `impacts` | `[{ node, effect: "+" / "-" / "0", reason }]`：地圖上的綠燈（受惠）、紅燈（受害）、灰色（影響不大） |
 | `briefing` | 狀況簡報，格式同章節的 `screens`（不含 quiz） |
 | `questions` | 3 題，格式同「題目」 |
+| `conclusion` | 結案時的一句話局勢總結 |
 | `sources` | 來源代碼 |
 | `activeDays` | 在首頁顯示幾天（預設 30），之後移到事件檔案 |
 
