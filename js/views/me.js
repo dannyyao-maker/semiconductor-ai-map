@@ -35,7 +35,7 @@ export function mountMe(root, ctx) {
         </section>
         <section class="panel wide drill-panel">
           <h2 class="panel-title">練習對局：公司歸位</h2>
-          <p class="muted small">暫時的練習區，先感受對局的節奏。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？越早答對分數越高，最後一題分數和盃數加倍。</p>
+          <p class="muted small">暫時的練習區，先感受對局的節奏。題目從現有的 41 家公司自動產生：這家公司屬於哪個環節？最後一題盃數加倍，結束後有本局複習。</p>
           <div class="drill"></div>
         </section>
         <section class="panel wide">

@@ -102,7 +102,11 @@ export function renderQuiz(container, raw, ctx, opts = {}) {
     box.classList.remove("is-reading", "is-open", "is-hurry");
     clockEl.classList.remove("is-hurry");
     box.classList.add("is-answered", correct ? "was-right" : "was-wrong");
-    const res = { ...ctx.game.answer(q.id, correct, mult), timeout, timeLeft, seconds, mult };
+    const res = {
+      ...ctx.game.answer(q.id, correct, mult), timeout, timeLeft, seconds, mult,
+      // 給「本局複習」用：題目、你的答案、正確答案、解析
+      q: raw, prompt: q.prompt, picked: pick >= 0 ? q.options[pick] : null, correctText: q.options[q.answer],
+    };
     box.querySelectorAll(".quiz-opt").forEach((b, i) => {
       b.disabled = true;
       if (i === q.answer) { b.classList.add("is-correct"); b.querySelector(".opt-mark").textContent = "✓"; }
